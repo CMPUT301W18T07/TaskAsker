@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         taskList = new ArrayList<Task>();
     }
 
-    public ArrayList<Task> getTasks(){
+    public ArrayList<Task> getTasks() {
         return this.taskList;
     }
 }

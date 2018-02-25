@@ -21,7 +21,14 @@ public class TaskTest {
 
     @Test
     public void testTaskGetters(){
+        //GetName
         Task task = new Task("Test Name");
         assertEquals("Test Name",task.getName());
+        //SetName
+        task.setName("New Name");
+        assertEquals("New Name",task.getName());
+        //SetDescription
+        task.setDescription("Description");
+        assertEquals("Description",task.getDescription());
     }
 }

@@ -7,11 +7,16 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ArrayList<Task> taskList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        taskList = new ArrayList<Task>();
+    }
+
+    public ArrayList<Task> getTasks(){
+        return this.taskList;
     }
 }

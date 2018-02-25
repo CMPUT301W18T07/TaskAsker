@@ -31,5 +31,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2 {
         activity.getTasks().add(task);
         assertEquals(1,activity.getTasks().size());
         assertEquals("Hello!",activity.getTasks().get(0).getName());
+
+        //Test modifying a Task
+        activity.getTasks().get(0).setName("Example");
+        activity.getTasks().get(0).setDescription("Placeholder");
+        assertEquals(1,activity.getTasks().size());
+        assertEquals("Example",activity.getTasks().get(0).getName());
+        assertEquals("Placeholder",activity.getTasks().get(0).getDescription());
+
+        //Test removing a Task
+        activity.getTasks().clear();
+        assertEquals(0,activity.getTasks().size());
     }
 }

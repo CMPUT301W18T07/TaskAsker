@@ -26,10 +26,10 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2 {
         MainActivity activity = (MainActivity) getActivity();
         activity.getTasks().clear();
 
-        //Test addign a Task
+        //Test adding a Task
         Task task = new Task("Hello!");
         activity.getTasks().add(task);
-
         assertEquals(1,activity.getTasks().size());
+        assertEquals("Hello!",activity.getTasks().get(0).getName());
     }
 }

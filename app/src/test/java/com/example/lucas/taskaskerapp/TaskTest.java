@@ -30,5 +30,11 @@ public class TaskTest {
         //SetDescription
         task.setDescription("Description");
         assertEquals("Description",task.getDescription());
+        //EmptyDescription
+        task.setDescription("");
+        assertEquals("",task.getDescription());
+        //EmptyName
+        task.setName("");
+        assertEquals("",task.getName());
     }
 }

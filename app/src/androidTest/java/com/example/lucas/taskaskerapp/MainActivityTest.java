@@ -38,9 +38,5 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2 {
         assertEquals(1,activity.getTasks().size());
         assertEquals("Example",activity.getTasks().get(0).getName());
         assertEquals("Placeholder",activity.getTasks().get(0).getDescription());
-
-        //Test removing a Task
-        activity.getTasks().clear();
-        assertEquals(0,activity.getTasks().size());
     }
 }

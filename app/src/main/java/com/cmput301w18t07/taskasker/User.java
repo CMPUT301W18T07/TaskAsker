@@ -13,7 +13,7 @@ public class User {
     private String firstName;
     private String lastName;
     Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
-    Pattern emailPattern = Pattern.compile("^.+@.+\\\\..+$");
+    Pattern emailPattern = Pattern.compile("\\S+@\\S+[.]{1}[a-z]{2,}");
 
     public User(String username, String email, String phoneNumber, String firstName, String lastName) throws Exception {
         this.username = username;

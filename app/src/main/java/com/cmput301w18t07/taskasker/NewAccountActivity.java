@@ -1,5 +1,6 @@
 package com.cmput301w18t07.taskasker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.EditText;
 
 public class NewAccountActivity extends AppCompatActivity {
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07"; //URL for elasticsearch??
+
+    private NewAccountActivity activity = this;
     private EditText firstName;
     private EditText lastName;
     private EditText username;
@@ -39,6 +42,8 @@ public class NewAccountActivity extends AppCompatActivity {
                 try{
                     User user = new User(usernameText,emailText,phoneNumber,firstNameText,lastNameText);
                     sc.saveUser(user);
+                    Intent intent = new Intent(activity, LoginActivity.class);
+                    startActivity(intent);
                 }
                 catch(Exception e){}
             }
@@ -49,6 +54,8 @@ public class NewAccountActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Todo: Exit back to login
                 setResult(RESULT_OK);
+                Intent intent = new Intent(activity, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

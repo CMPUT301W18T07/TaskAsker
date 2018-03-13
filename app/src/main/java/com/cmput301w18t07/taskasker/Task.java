@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class Task {
     private String name;
+    private String description;
     private int taskID;
     private User requester;
     private Location location;
@@ -20,30 +21,51 @@ public class Task {
     private Bid bid;
     private Date time;
 
-    public Task(String name){
-        this.name = name;
+    public Task(String name, String description) throws Exception {
+        if(name.length() > 30){
+            throw new Exception("Task name too long");
+        } else {
+            this.name = name;
+        }
+        if(description.length() > 300){
+            throw new Exception("Task description too long");
+        } else{
+            this.description = description;
+        }
     }
+
     public String getName() {
         return name;
     }
+
+    public String getDescription(){
+        return description;
+    }
+
     public int getTaskID(){
         return taskID;
     }
+
     public ArrayList<ContactsContract.CommonDataKinds.Photo> getPhotolist() {
         return photolist;
     }
+
     public Bid getBid() {
         return bid;
     }
+
     public User getRequester() {
         return requester;
     }
+
     public Date getTime() {
         return time;
     }
+
     public double getMinPrice() {
         return minPrice;
     }
+
     public Location getLocation() {
         return location;
     }

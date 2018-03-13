@@ -20,7 +20,9 @@ public class Task {
     private Bid bid;
     private Date time;
 
-
+    public Task(String name){
+        this.name = name;
+    }
     public String getName() {
         return name;
     }

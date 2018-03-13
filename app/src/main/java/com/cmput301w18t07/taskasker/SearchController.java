@@ -4,6 +4,9 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,6 +18,8 @@ import java.net.URL;
 
 /**
  * Created by lucasgauk on 2018-03-12.
+ * Ask me questions on slack for now, ill fill in more comments later.
+ * Please do not modify, I barely have a grasp of it right now and I wrote it all
  */
 
 public class SearchController {
@@ -28,6 +33,8 @@ public class SearchController {
         this.url = url;
     }
 
+    /* SEARCH CONTROLLER FUNCTIONS */
+
     /*
     Put a task into the elasticsearch cloud.
     Takes: Task
@@ -37,9 +44,7 @@ public class SearchController {
         String stringTask = gson.toJson(task);
         this.rc.putRequest(this.url+"/task/",stringTask);
     }
-    public void getTaskByName(String name){
-        this.rc.getRequest(this.url+"/task/"+"_search?size=10&q="+name);
-    }
+
     /*
     Put a new user into the elasticsearch cloud
     Takes: User
@@ -47,7 +52,40 @@ public class SearchController {
      */
     public void saveUser(User user){
         String stringUser = gson.toJson(user);
+        this.rc.putRequest(this.url+"/user/",stringUser);
     }
+
+    /*
+    Return a user that matches the username
+    Takes: String username
+    Returns: User that matches name or null
+
+    NOTE:
+    Remember that usernames should be unique, we will need to
+    check that we arent adding two users with the same username. There may
+    exist more than one user with this username in the system, this function will only
+    return ONE. All bets are off as to which one.
+     */
+    public User getUserByUsername(String name){
+        // Send request to search by name
+        String response = this.rc.getRequest(this.url+"/user/"+"_search?size=10&q="+name);
+        User responseUser = null;
+        // Parse Response
+        try {
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            JSONObject jsonUser = hitArray.getJSONObject(0);
+            String jsonString = jsonUser.getJSONObject("_source").toString();
+            responseUser = gson.fromJson(jsonString,User.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return responseUser;
+    }
+
+
+    /* SEARCH CONTROLLER HELPER CLASSES */
 
     /*
     Class to help facilitate HTTP requests.
@@ -139,12 +177,5 @@ public class SearchController {
             String response = this.doInBackground(request);
             return response;
         }
-    }
-    /*
-    Class to parse response - Takes form of responses.
-     */
-    private class HttpResponse {
-        public String _source;
-        public String _index;
     }
 }

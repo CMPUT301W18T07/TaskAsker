@@ -17,13 +17,20 @@ public class SearchControllerTest {
     @Test
     public void putTaskTest(){
         SearchController controller = new SearchController(url);
-        Task task = new Task();
+        Task task = new Task("Test");
         controller.saveTask(task);
     }
     @Test
     public void putUserTest(){
         SearchController controller = new SearchController(url);
-        User user = new User();
+        User user = new User("Test");
         controller.saveUser(user);
+    }
+    @Test
+    public void getUserTest(){
+        SearchController controller = new SearchController(url);
+        User user = new User("Test2");
+        controller.saveUser(user);
+        assertEquals(user.getUsername(),controller.getUserByUsername("Test2").getUsername());
     }
 }

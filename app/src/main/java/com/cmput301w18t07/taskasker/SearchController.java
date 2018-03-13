@@ -42,7 +42,7 @@ public class SearchController {
      */
     public void saveTask(Task task){
         String stringTask = gson.toJson(task);
-        this.rc.putRequest(this.url+"/task/",stringTask);
+        this.rc.postRequest(this.url+"/task/",stringTask);
     }
 
     /*
@@ -52,7 +52,7 @@ public class SearchController {
      */
     public void saveUser(User user){
         String stringUser = gson.toJson(user);
-        this.rc.putRequest(this.url+"/user/",stringUser);
+        this.rc.postRequest(this.url+"/user/",stringUser);
     }
 
     /*
@@ -75,13 +75,25 @@ public class SearchController {
             JSONObject reader = new JSONObject(response);
             JSONObject hits = reader.getJSONObject("hits");
             JSONArray hitArray = hits.getJSONArray("hits");
-            JSONObject jsonUser = hitArray.getJSONObject(0);
-            String jsonString = jsonUser.getJSONObject("_source").toString();
-            responseUser = gson.fromJson(jsonString,User.class);
+            if(hitArray.length() > 0) {
+                JSONObject jsonUser = hitArray.getJSONObject(0);
+                String jsonString = jsonUser.getJSONObject("_source").toString();
+                responseUser = gson.fromJson(jsonString,User.class);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return responseUser;
+    }
+    
+    /*
+    Delete a user that matches the username
+    Takes: String username
+    Returns: void
+     */
+    public void deleteUserByUsername(String name){
+        String query = "{\"query\":{\"match\":{\"username\":\""+name+"\"}}}";
+        this.rc.deleteRequest(this.url+"/user/_query",query);
     }
 
 
@@ -124,7 +136,7 @@ public class SearchController {
                 e.printStackTrace();
             }
             // If we are making a post request
-            if(surl[1].equals("POST")) {
+            if(surl[1].equals("POST") || surl[1].equals("DELETE")) {
                 OutputStreamWriter out = null;
                 try {
                     out = new OutputStreamWriter(
@@ -168,8 +180,12 @@ public class SearchController {
         @Override
         protected void onPostExecute(String result) {
         }
-        private void putRequest(String url, String json){
+        private void postRequest(String url, String json){
             String[] request = {url,"POST",json};
+            String response = this.doInBackground(request);
+        }
+        private void deleteRequest(String url, String json){
+            String[] request = {url,"DELETE",json};
             String response = this.doInBackground(request);
         }
         private String getRequest(String url){

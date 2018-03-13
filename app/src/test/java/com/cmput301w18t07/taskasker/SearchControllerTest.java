@@ -31,6 +31,20 @@ public class SearchControllerTest {
         SearchController controller = new SearchController(url);
         User user = new User("Test2");
         controller.saveUser(user);
+        sleep2();
         assertEquals(user.getUsername(),controller.getUserByUsername("Test2").getUsername());
+        controller.deleteUserByUsername("Test2");
+        sleep2();
+        assertEquals(null,controller.getUserByUsername("Test2"));
     }
+
+    /*Helper function*/
+    private void sleep2(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

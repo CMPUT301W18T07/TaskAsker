@@ -15,6 +15,11 @@ public class User {
     Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
     Pattern emailPattern = Pattern.compile("\\S+@\\S+[.]{1}\\S{2,}");
 
+    //Basic constructor, mostly for use in the testing of other classes
+    public User(String username){
+        this.username = username;
+    }
+
     public User(String username, String email, String phoneNumber, String firstName, String lastName) throws Exception {
         this.username = username;
         this.firstName = firstName;

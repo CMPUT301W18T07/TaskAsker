@@ -21,6 +21,11 @@ public class Task {
     private Bid bid;
     private Date time;
 
+    //Basic constructor, mostly for use in the testing of other classes
+    public Task(String name){
+        this.name = name;
+    }
+
     public Task(String name, String description) throws Exception {
         if(name.length() > 30){
             throw new Exception("Task name too long");

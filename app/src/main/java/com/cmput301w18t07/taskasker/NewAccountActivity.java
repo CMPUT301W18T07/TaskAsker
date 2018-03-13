@@ -7,10 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class NewAccountActivity extends AppCompatActivity {
+    private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07"; //URL for elasticsearch??
     private EditText firstName;
     private EditText lastName;
     private EditText username;
     private EditText email;
+    private SearchController sc = new SearchController(url);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,10 @@ public class NewAccountActivity extends AppCompatActivity {
                 String lastNameText = lastName.getText().toString();
                 String usernameText = username.getText().toString();
                 String emailText = email.getText().toString();
-                String phoneNumber = "000-000-0000";
+                String phoneNumber = "000-000-0000"; //Filler phone number
                 try{
                     User user = new User(usernameText,emailText,phoneNumber,firstNameText,lastNameText);
+                    sc.saveUser(user);
                 }
                 catch(Exception e){}
             }

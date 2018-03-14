@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TaskAsker.iml" filepath="$PROJECT_DIR$/TaskAsker.iml" />
-      <module fileurl="file://C:\Users\Owner\Documents\GitHub\TaskAsker\TaskAsker.iml" filepath="C:\Users\Owner\Documents\GitHub\TaskAsker\TaskAsker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Owner\Documents\GitHub\TaskAsker\app\app.iml" filepath="C:\Users\Owner\Documents\GitHub\TaskAsker\app\app.iml" />
     </modules>
   </component>
 </project>

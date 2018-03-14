@@ -66,11 +66,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, NewAccountActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
-
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
 
     }
 

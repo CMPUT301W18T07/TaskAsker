@@ -21,6 +21,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".NewAccountActivity" />
         <activity android:name=".AllTasksActivity" />
+        <activity android:name=".ViewTaskDetailsActivity"
+	</activity>
+
         <activity android:name=".ProfileActivity"></activity>
     </application>
 

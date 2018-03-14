@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 public class LoginActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
@@ -51,8 +53,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (check != null && user.getUsername().equals(check.getUsername())) {
 
-                            Intent intent = new Intent(activity, MainActivity.class);
-                            startActivity(intent);
+                        Intent intent = new Intent(activity, MainActivity.class);
+                        Gson gson = new Gson();
+                        intent.putExtra("user",gson.toJson(user));
+                        startActivity(intent);
                         
                     }
                     else {errorMessage.setVisibility(View.VISIBLE);}
@@ -65,14 +69,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, NewAccountActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
-
-
-
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                username.setText(data.getStringExtra("username"));
+            }
+        }
+    }
 
 }

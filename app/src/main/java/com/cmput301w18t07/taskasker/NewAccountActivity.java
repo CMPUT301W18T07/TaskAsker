@@ -43,7 +43,9 @@ public class NewAccountActivity extends AppCompatActivity {
                     User user = new User(usernameText,emailText,phoneNumber,firstNameText,lastNameText);
                     sc.saveUser(user);
                     Intent intent = new Intent(activity, LoginActivity.class);
-                    startActivity(intent);
+                    intent.putExtra("username",user.getUsername());
+                    setResult(RESULT_OK, intent);
+                    finish();
                 }
                 catch(Exception e){}
             }
@@ -53,9 +55,8 @@ public class NewAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Todo: Exit back to login
-                setResult(RESULT_OK);
-                Intent intent = new Intent(activity, LoginActivity.class);
-                startActivity(intent);
+                setResult(RESULT_CANCELED);
+                finish();
             }
         });
     }

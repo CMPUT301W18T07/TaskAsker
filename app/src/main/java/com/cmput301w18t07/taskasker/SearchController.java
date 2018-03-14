@@ -25,15 +25,13 @@ import java.net.URL;
 public class SearchController {
     private String url;
     private Gson gson;
-    private RequestController rc;
 
     public SearchController(String url){
         this.gson = new Gson();
-        this.rc = new RequestController();
         this.url = url;
     }
 
-    /* SEARCH CONTROLLER FUNCTIONS */
+    /* SEARCH CONTROLLER METHODS */
 
     /*
     Put a task into the elasticsearch cloud.
@@ -42,7 +40,7 @@ public class SearchController {
      */
     public void saveTask(Task task){
         String stringTask = gson.toJson(task);
-        this.rc.postRequest(this.url+"/task/",stringTask);
+        this.postRequest(this.url+"/task/",stringTask);
     }
 
     /*
@@ -52,7 +50,7 @@ public class SearchController {
      */
     public void saveUser(User user){
         String stringUser = gson.toJson(user);
-        this.rc.postRequest(this.url+"/user/",stringUser);
+        this.postRequest(this.url+"/user/",stringUser);
     }
 
     /*
@@ -68,7 +66,7 @@ public class SearchController {
      */
     public User getUserByUsername(String name){
         // Send request to search by name
-        String response = this.rc.getRequest(this.url+"/user/"+"_search?size=10&q="+name);
+        String response = this.getRequest(this.url+"/user/"+"_search?size=10&q="+name);
         User responseUser = null;
         // Parse Response
         try {
@@ -93,19 +91,51 @@ public class SearchController {
      */
     public void deleteUserByUsername(String name){
         String query = "{\"query\":{\"match\":{\"username\":\""+name+"\"}}}";
-        this.rc.deleteRequest(this.url+"/user/_query",query);
+        this.deleteRequest(this.url+"/user/_query",query);
     }
 
 
     /* SEARCH CONTROLLER HELPER CLASSES */
 
+    private void postRequest(String url, String json){
+        String[] request = {url,"POST",json};
+        try {
+            new RequestController().execute(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void deleteRequest(String url, String json){
+        String[] request = {url,"DELETE",json};
+        try {
+            new RequestController().execute(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private String getRequest(String url){
+        String[] request = {url,"GET",""};
+        String response = null;
+        try {
+            System.out.println(new RequestController().execute(request).get());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
     /*
     Class to help facilitate HTTP requests.
      */
-    private class RequestController extends AsyncTask<String, Integer, String> {
+    private class RequestController extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
         @Override
         // surl convention 0: url 1: method 2: json object
         protected String doInBackground(String... surl){
+            System.out.println("HELLO");
             // Set URL
             URL url = null;
             try {
@@ -175,23 +205,7 @@ public class SearchController {
             return content;
         }
         @Override
-        protected void onProgressUpdate(Integer... progress) {
-        }
-        @Override
         protected void onPostExecute(String result) {
-        }
-        private void postRequest(String url, String json){
-            String[] request = {url,"POST",json};
-            String response = this.doInBackground(request);
-        }
-        private void deleteRequest(String url, String json){
-            String[] request = {url,"DELETE",json};
-            String response = this.doInBackground(request);
-        }
-        private String getRequest(String url){
-            String[] request = {url,"GET",null};
-            String response = this.doInBackground(request);
-            return response;
         }
     }
 }

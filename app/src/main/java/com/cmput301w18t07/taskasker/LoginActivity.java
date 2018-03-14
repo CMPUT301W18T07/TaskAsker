@@ -66,14 +66,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, NewAccountActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
-
-
-
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                username.setText(data.getStringExtra("username"));
+            }
+        }
+    }
 
 }

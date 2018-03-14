@@ -52,8 +52,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (check != null && user.getUsername().toString().equals(check.getUsername())) {
 
-                            Intent intent = new Intent(activity, MainActivity.class);
-                            startActivity(intent);
+                        Intent intent = new Intent(activity, MainActivity.class);
+                        Gson gson = new Gson();
+                        intent.putExtra("user",gson.toJson(user));
+                        startActivity(intent);
                         
                     }
                     else {errorMessage.setVisibility(View.VISIBLE);}

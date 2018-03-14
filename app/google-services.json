@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "75193690586",
+    "firebase_url": "https://taskasker-6c2d8.firebaseio.com",
+    "project_id": "taskasker-6c2d8",
+    "storage_bucket": "taskasker-6c2d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75193690586:android:06076617d9a7ecef",
+        "android_client_info": {
+          "package_name": "com.cmput301w18t07.taskasker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75193690586-vif6kmasl1ldag8vqvsn1rl963e448b5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAOk1smWo27VS3QcZ0-yyb5rVU1V8Sn5U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

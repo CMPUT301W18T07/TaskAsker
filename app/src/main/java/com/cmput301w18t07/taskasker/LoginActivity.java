@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginActivity activity = this;
     private Button loginButton;
     private Button createNewAccount;
-    private String check = null;
+    private User check = null;
     private ConnectivityManager cm;
 
 
@@ -45,21 +45,18 @@ public class LoginActivity extends AppCompatActivity {
                 boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
                 if (isConnected) {
                     setResult(RESULT_OK);
-                    String usernameString = username.getText().toString();
+                    User user = new User(username.getText().toString());
                     try {
-                        check = controller.getUserByUsername(usernameString).getUsername();
-                    } catch (Exception NetworkError) {
+                        check = controller.getUserByUsername(username.getText().toString());
+                    } catch (Exception e) {e.printStackTrace();}
+
+                    if (check != null && user.getUsername().toString().equals(check.getUsername())) {
+
+                            Intent intent = new Intent(activity, MainActivity.class);
+                            startActivity(intent);
+                        
                     }
-
-
-                    if (username.getText().toString().equals(check)) {
-
-                        Intent intent = new Intent(activity, MainActivity.class);
-                        startActivity(intent);
-
-                    } else {
-                        errorMessage.setVisibility(View.VISIBLE);
-                    }
+                    else {errorMessage.setVisibility(View.VISIBLE);}
                 }
 
             }

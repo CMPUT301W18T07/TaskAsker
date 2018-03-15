@@ -11,16 +11,79 @@ import static junit.framework.Assert.*;
 public class UserTest {
     private String basicName = "test";
     private String basicEmail = "test@example.com";
-    private String basicPhone = "";
+    private String basicPhone = "000-000-0000";
+    private String basicFirst = "Test";
+    private String basicLast = "Example";
 
     @Test
-    public void basicCreateTest(){
+    public void CreateTest(){
         User user = new User(basicName);
         assertNotNull(user);
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertNotNull(user);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void complexCreateTest(){
-        //User user = new User(basicName, basicEmail, basicPhone)
+    public void getUsernameTest(){
+        User user = new User(basicName);
+        assertEquals(basicName,user.getUsername());
+        try{
+            user = new User("test2",basicEmail,basicPhone,basicFirst,basicLast);
+            assertEquals("test2",user.getUsername());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getEmailTest(){
+        User user = new User(basicName);
+        assertNotSame(basicEmail, user.getEmail());
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(basicEmail, user.getEmail());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getPhoneNumberTest(){
+        User user = new User(basicName);
+        assertNotSame(basicPhone, user.getPhoneNumber());
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(basicPhone, user.getPhoneNumber());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getFirstNameTest(){
+        User user = new User(basicName);
+        assertNotSame(basicFirst, user.getFirstName());
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(basicFirst, user.getFirstName());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getLastNameTest(){
+        User user = new User(basicName);
+        assertNotSame(basicLast, user.getLastName());
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(basicLast, user.getLastName());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

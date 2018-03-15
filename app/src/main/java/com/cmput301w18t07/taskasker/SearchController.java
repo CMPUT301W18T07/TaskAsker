@@ -60,7 +60,7 @@ public class SearchController {
             for(int i = 0; i < hitArray.length(); i++) {
                 JSONObject jsonUser = hitArray.getJSONObject(i);
                 String jsonString = jsonUser.getJSONObject("_source").toString();
-                taskList.add(gson.fromJson(jsonString,User.class));
+                taskList.add(gson.fromJson(jsonString,Task.class));
             }
         }catch(Exception e){
             e.printStackTrace();

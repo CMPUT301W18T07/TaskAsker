@@ -117,7 +117,7 @@ public class SearchController {
         String[] request = {url,"GET",""};
         String response = null;
         try {
-            System.out.println(new RequestController().execute(request).get());
+            response = new RequestController().execute(request).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,7 +135,6 @@ public class SearchController {
         @Override
         // surl convention 0: url 1: method 2: json object
         protected String doInBackground(String... surl){
-            System.out.println("HELLO");
             // Set URL
             URL url = null;
             try {

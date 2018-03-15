@@ -46,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
                 boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
                 if (isConnected) {
                     setResult(RESULT_OK);
-                    User user = new User(username.getText().toString());
+                    User user = new User("Test");
                     try {
-                        check = controller.getUserByUsername(username.getText().toString());
+                        check = controller.getUserByUsername("Test");
                     } catch (Exception e) {e.printStackTrace();}
 
                     if (check != null && user.getUsername().equals(check.getUsername())) {

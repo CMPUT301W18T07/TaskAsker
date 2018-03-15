@@ -12,8 +12,9 @@ public class User {
     private String phoneNumber;
     private String firstName;
     private String lastName;
-    Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
-    Pattern emailPattern = Pattern.compile("\\S+@\\S+[.]{1}\\S{2,}");
+    private final Pattern usernamePattern = Pattern.compile("[a-z&&[0-9&&[_]]]{8,}");
+    private final Pattern emailPattern = Pattern.compile("\\S+@\\S+[.]\\S{2,}");
+    private final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
 
     //Basic constructor, mostly for use in the testing of other classes
     public User(String username){
@@ -21,10 +22,12 @@ public class User {
     }
 
     public User(String username, String email, String phoneNumber, String firstName, String lastName) throws Exception {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
 
+        if(!usernamePattern.matcher(username).matches()){
+            throw new Exception("Username is of invalid format");
+        } else{
+            this.username = username;
+        }
         if(!emailPattern.matcher(email).matches()){
             throw new Exception("Email is of invalid format");
         } else{
@@ -36,6 +39,9 @@ public class User {
         else{
             this.phoneNumber = phoneNumber;
         }
+
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public String getUsername() {

@@ -115,7 +115,7 @@ public class SearchController {
     Returns Void
      */
     public void deleteAllUsers(){
-        this.deleteRequest(this.url+"/user","");
+        this.deleteRequest(this.url+"/user",null);
     }
 
     /*
@@ -129,7 +129,7 @@ public class SearchController {
     }
 
 
-    /* SEARCH CONTROLLER HELPER CLASSES */
+    /* SEARCH CONTROLLER HELPER CLASSES & METHODS*/
 
     private void postRequest(String url, String json){
         String[] request = {url,"POST",json};
@@ -199,7 +199,7 @@ public class SearchController {
                 e.printStackTrace();
             }
             // If we are making a post request
-            if(surl[1].equals("POST") || surl[1].equals("DELETE")) {
+            if(surl[1].equals("POST") || surl[1].equals("DELETE") && surl[2] != null) {
                 OutputStreamWriter out = null;
                 try {
                     out = new OutputStreamWriter(
@@ -208,15 +208,17 @@ public class SearchController {
                     e.printStackTrace();
                 }
                 // Write json if necessary
-                try {
-                    out.write(surl[2]);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (out != null) {
+                    try {
+                        out.write(surl[2]);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             // Create input reader
@@ -228,12 +230,14 @@ public class SearchController {
             }
             // Read response from server and return full response
             String content = "", line;
-            try {
-                while ((line = in.readLine()) != null) {
-                    content += line + "\n";
+            if (in != null) {
+                try {
+                    while ((line = in.readLine()) != null) {
+                        content += line + "\n";
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
             return content;
         }

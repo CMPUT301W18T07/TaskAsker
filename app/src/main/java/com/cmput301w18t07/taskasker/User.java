@@ -12,7 +12,7 @@ public class User {
     private String phoneNumber;
     private String firstName;
     private String lastName;
-    private final Pattern usernamePattern = Pattern.compile("[a-z&&[0-9&&[_]]]{8,}");
+    private final Pattern usernamePattern = Pattern.compile("[a-z&&[0-9&&[_]]]{1,}");
     private final Pattern emailPattern = Pattern.compile("\\S+@\\S+[.]\\S{2,}");
     private final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
 

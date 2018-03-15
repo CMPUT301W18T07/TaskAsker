@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
-        username = findViewById(R.id.usernameEditText);
+
         errorMessage = findViewById(R.id.noUserFound);
 
         loginButton = findViewById(R.id.loginButton);
@@ -43,12 +43,13 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                username = findViewById(R.id.usernameEditText);
                 boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
                 if (isConnected) {
                     setResult(RESULT_OK);
-                    User user = new User("Test");
+                    User user = new User(username.getText().toString());
                     try {
-                        check = controller.getUserByUsername("Test");
+                        check = controller.getUserByUsername(username.getText().toString());
                     } catch (Exception e) {e.printStackTrace();}
 
                     if (check != null && user.getUsername().equals(check.getUsername())) {

@@ -14,7 +14,7 @@ public class Task {
     private String name;
     private String description;
     private int taskID;
-    private User requester;
+    private String requesterUsername;
     private Location location;
     private ArrayList<ContactsContract.CommonDataKinds.Photo> photolist;
     private double minPrice;
@@ -39,6 +39,10 @@ public class Task {
         }
     }
 
+    public void setRequesterUsername(String requester){
+        this.requesterUsername = requester;
+    }
+    
     public String getName() {
         return name;
     }
@@ -59,8 +63,8 @@ public class Task {
         return bid;
     }
 
-    public User getRequester() {
-        return requester;
+    public String getRequester() {
+        return requesterUsername;
     }
 
     public Date getTime() {

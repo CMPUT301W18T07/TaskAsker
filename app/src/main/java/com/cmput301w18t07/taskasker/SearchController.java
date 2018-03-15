@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by lucasgauk on 2018-03-12.
@@ -41,6 +42,30 @@ public class SearchController {
     public void saveTask(Task task){
         String stringTask = gson.toJson(task);
         this.postRequest(this.url+"/task/",stringTask);
+    }
+
+    /*
+    Return a list of all tasks requested by a user with a specific
+    username
+    Takes: String username
+    Returns: ArrayList of Task objects
+     */
+    public ArrayList<Task> getTaskByRequester(String username){
+        String response = this.getRequest(this.url+"/task/"+"_search?q=requesterUsername:"+username);
+        ArrayList taskList = new ArrayList<Task>();
+        try{
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            for(int i = 0; i < hitArray.length(); i++) {
+                JSONObject jsonUser = hitArray.getJSONObject(i);
+                String jsonString = jsonUser.getJSONObject("_source").toString();
+                taskList.add(gson.fromJson(jsonString,User.class));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return taskList;
     }
 
     /*
@@ -84,10 +109,15 @@ public class SearchController {
         return responseUser;
     }
 
-
+    /*
+    Clear all users from system. Be careful using this.
+    Takes: Void
+    Returns Void
+     */
     public void deleteAllUsers(){
         this.deleteRequest(this.url+"/user","");
     }
+
     /*
     Delete a user that matches the username
     Takes: String username

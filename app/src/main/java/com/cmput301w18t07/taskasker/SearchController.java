@@ -66,7 +66,7 @@ public class SearchController {
      */
     public User getUserByUsername(String name){
         // Send request to search by name
-        String response = this.getRequest(this.url+"/user/"+"_search?size=10&q="+name);
+        String response = this.getRequest(this.url+"/user/"+"_search?size=10&q=username:"+name);
         User responseUser = null;
         // Parse Response
         try {

@@ -91,6 +91,8 @@ public class UserTest {
     public void usernameFormatTest(){
         boolean thrown = false;
         User user = new User(basicName);
+        assertFalse(thrown);
+
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
         } catch(Exception e){
@@ -99,6 +101,7 @@ public class UserTest {
         }
         assertFalse(thrown);
 
+        thrown = false;
         try{
             user = new User("", basicEmail, basicPhone, basicFirst, basicLast);
         } catch(Exception e){
@@ -116,7 +119,80 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User("//", basicEmail, basicPhone, basicFirst, basicLast);
+            user = new User(".", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
+
+    @Test
+    public void emailFormatTest(){
+        boolean thrown = false;
+        User user = new User(basicName);
+        assertFalse(thrown);
+
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, "a@b.cd", basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, "a.b@c.de", basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, "a.@b.cd", basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, "a@b.c", basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, "", basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, " ", basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, ".", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
             thrown = true;
         }

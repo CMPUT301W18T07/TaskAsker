@@ -86,4 +86,40 @@ public class UserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void usernameFormatTest(){
+        boolean thrown = false;
+        User user = new User(basicName);
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        try{
+            user = new User("", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(" ", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User("//", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
 }

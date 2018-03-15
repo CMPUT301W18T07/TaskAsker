@@ -83,7 +83,11 @@ public class SearchController {
         }
         return responseUser;
     }
-    
+
+
+    public void deleteAllUsers(){
+        this.deleteRequest(this.url+"/user","");
+    }
     /*
     Delete a user that matches the username
     Takes: String username

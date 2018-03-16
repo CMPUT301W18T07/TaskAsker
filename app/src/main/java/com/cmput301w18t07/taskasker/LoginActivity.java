@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(activity, MainActivity.class);
                         Gson gson = new Gson();
                         intent.putExtra("user",gson.toJson(user));
+                        intent.putExtra("username", username.getText().toString());
                         startActivity(intent);
                         
                     }

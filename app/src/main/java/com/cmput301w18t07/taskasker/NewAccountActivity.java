@@ -47,7 +47,9 @@ public class NewAccountActivity extends AppCompatActivity {
                     setResult(RESULT_OK, intent);
                     finish();
                 }
-                catch(Exception e){}
+                catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         });
 

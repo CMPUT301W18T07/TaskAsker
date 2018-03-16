@@ -20,6 +20,7 @@ public class Task {
     private double minPrice;
     private Bid bid;
     private Date time;
+    private String status;
 
     //Basic constructor, mostly for use in the testing of other classes
     public Task(String name){
@@ -78,4 +79,6 @@ public class Task {
     public Location getLocation() {
         return location;
     }
+
+    public String getStatus() { return status; }
 }

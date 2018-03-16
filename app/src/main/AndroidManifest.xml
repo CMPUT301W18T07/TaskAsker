@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cmput301w18t07.taskasker">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -21,9 +22,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".NewAccountActivity" />
         <activity android:name=".AllTasksActivity" />
-        <activity android:name=".TaskDetailsActivity"></activity>
-
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".TaskDetailsActivity" />
+        <activity android:name=".EditProfileActivity" android:parentActivityName=".ProfileActivity" />
+        <activity android:name=".ProfileActivity" android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

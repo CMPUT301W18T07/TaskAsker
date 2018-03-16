@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -13,9 +12,11 @@ public class ProfileActivity extends AppCompatActivity {
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
     private ProfileActivity activity = this;
-    private EditText firstName;
-    private EditText lastName;
-    private EditText email;
+    private TextView firstName;
+    private TextView lastName;
+    private TextView email;
+    private TextView phone;
+    private TextView userNameTextView;
     private User user;
     private String username;
 
@@ -24,36 +25,48 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        firstName = findViewById(R.id.firstnameEditText);
-        lastName = findViewById(R.id.lastnameEditText);
-        email = findViewById(R.id.emailEditText);
+        firstName = findViewById(R.id.firstnameTextView);
+        lastName = findViewById(R.id.lastnameTextView);
+        email = findViewById(R.id.emailTextView);
+        phone = findViewById(R.id.phoneTextView);
+        userNameTextView = findViewById(R.id.profileusernameTextView);
+
         username = getIntent().getStringExtra("username");
         user = controller.getUserByUsername(username);
 
-        final Button cancelButton = findViewById(R.id.cancelButton);
-        final Button confirmButton = findViewById(R.id.confirmButton);
+        final Button editButton = findViewById(R.id.editButton);
+        final Button backButton = findViewById(R.id.backButton);
+        final Button logOutButton = findViewById(R.id.logOutButton);
 
+        userNameTextView.setText(username);
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
         email.setText(user.getEmail());
+        phone.setText(user.getPhoneNumber());
 
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
-        confirmButton.setOnClickListener(new View.OnClickListener() {
+        editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO add check for changed profile as well as commiting it to database
-                Intent intent = new Intent(activity, MainActivity.class);
+                Intent intent = new Intent(activity, EditProfileActivity.class);
+                intent.putExtra("username",username);
                 startActivity(intent);
+                finish();
             }
         });
-
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 }

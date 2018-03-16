@@ -12,8 +12,8 @@ public class User {
     private String phoneNumber = "";
     private String firstName = "";
     private String lastName = "";
-    private String emailPatternString = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@"+"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
-    private final Pattern usernamePattern = Pattern.compile("\\w{1,}");
+    private String emailPatternString = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
+    private final Pattern usernamePattern = Pattern.compile("[A-Za-z0-9-]+([_A-Za-z0-9-]){0,19}");
     private final Pattern emailPattern = Pattern.compile(emailPatternString);
     private final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
 

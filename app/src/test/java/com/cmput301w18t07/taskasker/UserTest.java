@@ -9,7 +9,7 @@ import static junit.framework.Assert.*;
  */
 
 public class UserTest {
-    private String basicName = "test";
+    private String basicName = "testing1";
     private String basicEmail = "test@example.com";
     private String basicPhone = "000-000-0000";
     private String basicFirst = "Test";
@@ -119,7 +119,23 @@ public class UserTest {
 
         thrown = false;
         try{
+            user = new User("        ", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
             user = new User(".", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User("........", basicEmail, basicPhone, basicFirst, basicLast);
         } catch(Exception e){
             thrown = true;
         }

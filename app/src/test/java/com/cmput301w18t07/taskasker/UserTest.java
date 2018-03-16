@@ -140,6 +140,86 @@ public class UserTest {
             thrown = true;
         }
         assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User("-", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User("--", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User("-a", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User("a-", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User("a", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User("a-_", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User("a_", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User("._", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User("__", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User("_a", basicEmail, basicPhone, basicFirst, basicLast);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
     }
 
     @Test

@@ -61,6 +61,8 @@ public class NewAccountActivity extends AppCompatActivity {
                         finish();
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
                     }
                 }
                 else {

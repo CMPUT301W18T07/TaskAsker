@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -57,15 +58,23 @@ public class EditProfileActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO add check for changed profile
-                controller.deleteUserByUsername(username);
-                user.setEmail(email.getText().toString());
-                user.setFirstName(firstName.getText().toString());
-                user.setLastName(lastName.getText().toString());
-                user.setPhoneNumber(phone.getText().toString());
 
-                controller.saveUser(user);
-                finish();
+                String firstNameText = firstName.getText().toString();
+                String lastNameText = lastName.getText().toString();
+                String emailText = email.getText().toString();
+                String phoneNumber = phone.getText().toString();
+                //TODO add check for changed profile
+                try {
+                    User user = new User(username, emailText, phoneNumber, firstNameText, lastNameText);
+                    controller.deleteUserByUsername(username);
+                    controller.saveUser(user);
+                    finish();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

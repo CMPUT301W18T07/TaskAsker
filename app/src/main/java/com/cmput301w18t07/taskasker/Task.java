@@ -42,8 +42,9 @@ public class Task {
             throw new Exception("Task description too long");
         } else{
             this.description = description;
-            this.requester = req;
         }
+        this.requesterUsername = req.getUsername();
+        this.requester = req;
         this.time = new Date();
         this.status = "Requested";
     }

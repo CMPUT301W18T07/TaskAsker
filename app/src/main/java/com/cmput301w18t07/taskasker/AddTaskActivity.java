@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -52,6 +53,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     controller.saveTask(task);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
                 finish();
             }

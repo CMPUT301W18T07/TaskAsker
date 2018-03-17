@@ -19,6 +19,7 @@ public class NewAccountActivity extends AppCompatActivity {
     private EditText lastName;
     private EditText username;
     private EditText email;
+    private EditText phone;
     private SearchController sc = new SearchController(url);
     private User check = null;
     private User user;
@@ -32,6 +33,7 @@ public class NewAccountActivity extends AppCompatActivity {
         lastName = (EditText) findViewById(R.id.lastNameEditText);
         username = (EditText) findViewById(R.id.usernameEditText);
         email = (EditText) findViewById(R.id.emailEditText);
+        phone = (EditText) findViewById(R.id.phoneEditText);
 
         Button signupButton = (Button) findViewById(R.id.signupButton);
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
@@ -44,7 +46,7 @@ public class NewAccountActivity extends AppCompatActivity {
                 String lastNameText = lastName.getText().toString();
                 String usernameText = username.getText().toString();
                 String emailText = email.getText().toString();
-                String phoneNumber = "000-000-0000"; //Filler phone number
+                String phoneNumber = phone.getText().toString();
 
 
                 try {

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
@@ -33,6 +35,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         username = getIntent().getStringExtra("username");
         user = controller.getUserByUsername(username);
+        //Gson gson = new Gson();
+        //user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
         final Button editButton = findViewById(R.id.editButton);
         final Button backButton = findViewById(R.id.backButton);
@@ -54,6 +58,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, EditProfileActivity.class);
+                //Gson gson = new Gson();
+                //intent.putExtra("user",gson.toJson(user));
                 intent.putExtra("username",username);
                 startActivity(intent);
                 finish();

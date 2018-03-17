@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 public class EditProfileActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
@@ -34,6 +36,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         username = getIntent().getStringExtra("username");
         user = controller.getUserByUsername(username);
+        //Gson gson = new Gson();
+        //user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
         final Button cancelButton = findViewById(R.id.cancelButton);
         final Button confirmButton = findViewById(R.id.confirmButton);

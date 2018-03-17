@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -22,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private MainActivity activity = this;
     private User check = null;
     private User user;
+    private ArrayList<Task> acceptedTaskList = new ArrayList<Task>();
+    private ArrayList<Task> requestedTaskList = new ArrayList<Task>();
+    private ArrayAdapter<Task> requestedAdapter;
+    private ArrayAdapter<Task> acceptedAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,23 @@ public class MainActivity extends AppCompatActivity {
 
         acceptedTaskListView = findViewById(R.id.acceptedListView);
         requestedTaskListView = findViewById(R.id.acceptedListView);
+
+
+        acceptedTaskList = controller.getTaskByTaker(user.getUsername());
+        requestedTaskList = controller.getTaskByRequester(user.getUsername());
+
+        //Toast.makeText(getApplicationContext(),"TEST", Toast.LENGTH_SHORT).show();
+        //for (Task task : requestedTaskList)
+        //{
+        //    Toast.makeText(getApplicationContext(),"TEST", Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(getApplicationContext(),task.getName(), Toast.LENGTH_SHORT).show();
+        //}
+
+        acceptedAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, acceptedTaskList);
+        requestedAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, requestedTaskList);
+
+        acceptedTaskListView.setAdapter(acceptedAdapter);
+        requestedTaskListView.setAdapter(acceptedAdapter);
 
         acceptedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,7 +83,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void profileClick(View view){
         Intent intent = new Intent(activity, ProfileActivity.class);
+        //Gson gson = new Gson();
+        //intent.putExtra("user",gson.toJson(user));
         intent.putExtra("username",user.getUsername());
+        startActivity(intent);
+    }
+
+    public void addTaskClick(View view) {
+        Intent intent = new Intent(activity, AddTaskActivity.class);
+        intent.putExtra("username", user.getUsername());
         startActivity(intent);
     }
 }

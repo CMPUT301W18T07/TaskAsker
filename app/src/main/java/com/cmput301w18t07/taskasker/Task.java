@@ -21,7 +21,7 @@ public class Task {
     private String requesterUsername;
     private String takerUsername;
     private Location location;
-    private ArrayList<ContactsContract.CommonDataKinds.Photo> photolist;
+    private ArrayList<ContactsContract.CommonDataKinds.Photo> photoList;
     private double minPrice;
     private Bid bid;
     private Date time;
@@ -32,7 +32,7 @@ public class Task {
         this.name = name;
     }
 
-    public Task(String name, String description) throws Exception {
+    public Task(String name, String description, User req) throws Exception {
         if(name.length() > 30){
             throw new Exception("Task name too long");
         } else {
@@ -42,7 +42,10 @@ public class Task {
             throw new Exception("Task description too long");
         } else{
             this.description = description;
+            this.requester = req;
         }
+        this.time = new Date();
+        this.status = "Requested";
     }
 
     public void setTaker(User user){
@@ -68,7 +71,7 @@ public class Task {
     }
 
     public ArrayList<ContactsContract.CommonDataKinds.Photo> getPhotolist() {
-        return photolist;
+        return photoList;
     }
 
     public Bid getBid() {
@@ -96,4 +99,12 @@ public class Task {
     }
 
     public String getStatus() { return status; }
+
+    public void setRequesterUsername(String requesterUsername) {
+        this.requesterUsername = requesterUsername;
+    }
+
+    public void setTakerUsername(String takerUsername) {
+        this.takerUsername = takerUsername;
+    }
 }

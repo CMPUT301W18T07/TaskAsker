@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -51,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (user != null) {
                         Intent intent = new Intent(activity, MainActivity.class);
                         Gson gson = new Gson();
+
                         intent.putExtra("user",gson.toJson(user));
                         //intent.putExtra("username", username.getText().toString());
                         //I think this line is unnecessary... -Thomas
@@ -58,7 +60,12 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         
                     }
-                    else {errorMessage.setVisibility(View.VISIBLE);}
+                    else {
+                        Toast.makeText(getApplicationContext(), "No User Found", Toast.LENGTH_LONG).show();
+                        //errorMessage.setVisibility(View.VISIBLE);
+                        //wait(1000);
+                        //errorMessage.setVisibility(View.INVISIBLE);
+                    }
                 } else {
                     //TODO: HANDLE OFFLINE ERROR MESSAGES FOR LOGIN SCREEN
                 }

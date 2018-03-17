@@ -105,4 +105,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_search_black_24dp" />
 
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="49dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/transparent"
+        android:onClick="addTaskClick"
+        android:scaleX="1.75"
+        android:scaleY="1.75"
+        android:tint="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
 </android.support.constraint.ConstraintLayout>

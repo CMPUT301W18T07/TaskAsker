@@ -68,6 +68,12 @@ public class SearchController {
         return taskList;
     }
 
+    public ArrayList<Task> getTaskByTaker(String username){
+        String response = this.getRequest(this.url+"/task/"+"_search?q=takerUsername:"+username);
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        return taskList;
+    }
+
     /*
     Put a new user into the elasticsearch cloud
     Takes: User

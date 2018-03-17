@@ -16,6 +16,10 @@ public class Task {
     private int taskID;
     private User requester;
     private User taker; // TEMPORARY - WILL BE REPLACED WITH BID
+    /* These are necessary because of the way elasticsearch handles searching,
+       I can explain more in person if necessary. */
+    private String requesterUsername;
+    private String takerUsername;
     private Location location;
     private ArrayList<ContactsContract.CommonDataKinds.Photo> photolist;
     private double minPrice;
@@ -43,9 +47,12 @@ public class Task {
 
     public void setTaker(User user){
         this.taker = user;
+        this.takerUsername = user.getUsername();
     }
+
     public void setRequester(User user){
         this.requester = user;
+        this.requesterUsername = user.getUsername();
     }
 
     public String getName() {

@@ -70,6 +70,23 @@ public class InstrumentedSCTest {
         assertEquals("Task 2",taskList.get(1).getName());
         assertNotSame("Task 3",taskList.get(2).getName());
     }
+    @Test
+    public void getTasksByTaker(){
+        SearchController controller = new SearchController(url);
+        User user1 = new User("Bill");
+        Task task1 = new Task("Task 1");
+        Task task2 = new Task("Task 2");
+        Task task3 = new Task("Task 3");
+        task3.setRequester(user1);
+        task1.setRequester(user1);
+        controller.saveTask(task1);
+        controller.saveTask(task2);
+        controller.saveTask(task3);
+        ArrayList<Task> taskList = controller.getTaskByTaker(user1.getUsername());
+        assertEquals("Task 1",taskList.get(0).getName());
+        assertEquals("Task 3",taskList.get(1).getName());
+        assertNotSame("Task 2",taskList.get(2).getName());
+    }
 
     /*Helper function*/
     private void sleep2(){

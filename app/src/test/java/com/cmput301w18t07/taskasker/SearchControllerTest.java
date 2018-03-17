@@ -2,7 +2,11 @@ package com.cmput301w18t07.taskasker;
 
 import org.junit.Test;
 
-import static junit.framework.Assert.*;
+import java.util.ArrayList;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNotSame;
 
 /**
  * Created by lucasgauk on 2018-03-12.
@@ -42,6 +46,43 @@ public class SearchControllerTest {
         controller.deleteAllUsers();
         assertEquals(null,controller.getUserByUsername("Bill"));
         assertEquals(null,controller.getUserByUsername("Jill"));
+    }
+    @Test
+    public void getTasksByRequester(){
+        System.out.println("RUNNING FUNCTION");
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        User user1 = new User("Bill");
+        Task task1 = new Task("Task 1");
+        Task task2 = new Task("Task 2");
+        Task task3 = new Task("Task 3");
+        task1.setRequester(user1);
+        task2.setRequester(user1);
+        controller.saveTask(task1);
+        controller.saveTask(task2);
+        controller.saveTask(task3);
+        ArrayList<Task> taskList = controller.getTaskByRequester(user1.getUsername());
+        assertEquals("Task 1",taskList.get(0).getName());
+        assertEquals("Task 2",taskList.get(1).getName());
+        assertNotSame("Task 3",taskList.get(2).getName());
+    }
+    @Test
+    public void getTasksByTaker(){
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        User user1 = new User("Bill");
+        Task task1 = new Task("Task 1");
+        Task task2 = new Task("Task 2");
+        Task task3 = new Task("Task 3");
+        task3.setTaker(user1);
+        task1.setTaker(user1);
+        controller.saveTask(task1);
+        controller.saveTask(task2);
+        controller.saveTask(task3);
+        ArrayList<Task> taskList = controller.getTaskByTaker(user1.getUsername());
+        assertEquals("Task 1",taskList.get(0).getName());
+        assertEquals("Task 3",taskList.get(1).getName());
+        assertNotSame("Task 2",taskList.get(2).getName());
     }
 
     /*Helper function*/

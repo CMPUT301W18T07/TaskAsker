@@ -58,11 +58,11 @@ public class SearchController {
             JSONObject hits = reader.getJSONObject("hits");
             JSONArray hitArray = hits.getJSONArray("hits");
             for(int i = 0; i < hitArray.length(); i++) {
-                JSONObject jsonUser = hitArray.getJSONObject(i);
-                String jsonString = jsonUser.getJSONObject("_source").toString();
+                JSONObject jsonTask = hitArray.getJSONObject(i);
+                String jsonString = jsonTask.getJSONObject("_source").toString();
                 taskList.add(gson.fromJson(jsonString,Task.class));
             }
-        }catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
         }
         return taskList;
@@ -71,6 +71,18 @@ public class SearchController {
     public ArrayList<Task> getTaskByTaker(String username){
         String response = this.getRequest(this.url+"/task/"+"_search?q=takerUsername:"+username);
         ArrayList<Task> taskList = new ArrayList<Task>();
+        try{
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            for(int i = 0; i < hitArray.length(); i++){
+                JSONObject jsonTask = hitArray.getJSONObject(i);
+                String jsonString = jsonTask.getJSONObject("_source").toString();
+                taskList.add(gson.fromJson(jsonString,Task.class));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         return taskList;
     }
 
@@ -88,8 +100,6 @@ public class SearchController {
     Return a user that matches the username
     Takes: String username
     Returns: User that matches name or null
-
-    NOTE:
     Remember that usernames should be unique, we will need to
     check that we arent adding two users with the same username. There may
     exist more than one user with this username in the system, this function will only
@@ -122,6 +132,10 @@ public class SearchController {
      */
     public void deleteAllUsers(){
         this.deleteRequest(this.url+"/user",null);
+    }
+
+    public void deleteAllTasks() {
+        this.deleteRequest(this.url+"/task/",null);
     }
 
     /*

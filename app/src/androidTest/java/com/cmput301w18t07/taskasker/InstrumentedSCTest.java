@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNotSame;
 
 /**
  * Created by lucasgauk on 2018-03-14.
@@ -39,6 +38,7 @@ public class InstrumentedSCTest {
         SearchController controller = new SearchController(url);
         User user = new User("Test2");
         controller.saveUser(user);
+        sleep2();
         assertEquals("Test2",controller.getUserByUsername("Test2").getUsername());
         controller.deleteUserByUsername("Test2");
         sleep2();
@@ -49,6 +49,9 @@ public class InstrumentedSCTest {
         SearchController controller = new SearchController(url);
         User user1 = new User("Bill");
         User user2 = new User("Jill");
+        controller.saveUser(user1);
+        controller.saveUser(user2);
+        sleep2();
         controller.deleteAllUsers();
         assertEquals(null,controller.getUserByUsername("Bill"));
         assertEquals(null,controller.getUserByUsername("Jill"));
@@ -56,6 +59,8 @@ public class InstrumentedSCTest {
     @Test
     public void getTasksByRequester(){
         SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
         User user1 = new User("Bill");
         Task task1 = new Task("Task 1");
         Task task2 = new Task("Task 2");
@@ -65,33 +70,35 @@ public class InstrumentedSCTest {
         controller.saveTask(task1);
         controller.saveTask(task2);
         controller.saveTask(task3);
+        sleep2();
         ArrayList<Task> taskList = controller.getTaskByRequester(user1.getUsername());
         assertEquals("Task 1",taskList.get(0).getName());
         assertEquals("Task 2",taskList.get(1).getName());
-        assertNotSame("Task 3",taskList.get(2).getName());
     }
     @Test
     public void getTasksByTaker(){
         SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
         User user1 = new User("Bill");
         Task task1 = new Task("Task 1");
         Task task2 = new Task("Task 2");
         Task task3 = new Task("Task 3");
-        task3.setRequester(user1);
-        task1.setRequester(user1);
+        task3.setTaker(user1);
+        task1.setTaker(user1);
         controller.saveTask(task1);
         controller.saveTask(task2);
         controller.saveTask(task3);
+        sleep2();
         ArrayList<Task> taskList = controller.getTaskByTaker(user1.getUsername());
         assertEquals("Task 1",taskList.get(0).getName());
         assertEquals("Task 3",taskList.get(1).getName());
-        assertNotSame("Task 2",taskList.get(2).getName());
     }
 
     /*Helper function*/
     private void sleep2(){
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

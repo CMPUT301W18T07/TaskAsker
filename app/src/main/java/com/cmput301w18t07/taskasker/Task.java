@@ -15,6 +15,7 @@ public class Task {
     private String description;
     private int taskID;
     private User requester;
+    private User taker; // TEMPORARY - WILL BE REPLACED WITH BID
     private Location location;
     private ArrayList<ContactsContract.CommonDataKinds.Photo> photolist;
     private double minPrice;
@@ -40,6 +41,9 @@ public class Task {
         }
     }
 
+    public void setTaker(User user){
+        this.taker = user;
+    }
     public void setRequester(User user){
         this.requester = user;
     }
@@ -66,6 +70,10 @@ public class Task {
 
     public User getRequester() {
         return requester;
+    }
+
+    public User getTaker(){
+        return taker;
     }
 
     public Date getTime() {

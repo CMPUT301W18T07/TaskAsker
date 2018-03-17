@@ -7,27 +7,33 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
-    private ListView acceptedTaskList;
-    private ListView requestedTaskList;
+    private ArrayList<Task> AcceptedTaskList;
+    private ArrayList<Task> RequestedTaskList;
+    private ListView acceptedTaskListView;
+    private ListView requestedTaskListView;
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
     private MainActivity activity = this;
     private User check = null;
-    private String username;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Gson gson = new Gson();
+        user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
-        username = getIntent().getStringExtra("username");
+        acceptedTaskListView = findViewById(R.id.acceptedListView);
+        requestedTaskListView = findViewById(R.id.acceptedListView);
 
-        acceptedTaskList = findViewById(R.id.acceptedListView);
-        requestedTaskList = findViewById(R.id.acceptedListView);
-
-        acceptedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        acceptedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Task task = (Task) parent.getItemAtPosition(position);
@@ -39,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        requestedTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        requestedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Task task = (Task) parent.getItemAtPosition(position);
@@ -54,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void profileClick(View view){
         Intent intent = new Intent(activity, ProfileActivity.class);
-        intent.putExtra("username",username);
+        intent.putExtra("username",user.getUsername());
         startActivity(intent);
     }
 }

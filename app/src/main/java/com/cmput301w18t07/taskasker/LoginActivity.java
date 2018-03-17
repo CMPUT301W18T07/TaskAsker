@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginActivity activity = this;
     private Button loginButton;
     private Button createNewAccount;
-    private User check = null;
+    private User user;
     private ConnectivityManager cm;
 
 
@@ -36,32 +36,31 @@ public class LoginActivity extends AppCompatActivity {
 
 
         errorMessage = findViewById(R.id.noUserFound);
-
+        username = findViewById(R.id.usernameEditText);
         loginButton = findViewById(R.id.loginButton);
         createNewAccount = findViewById(R.id.createAccountButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                username = findViewById(R.id.usernameEditText);
                 boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
                 if (isConnected) {
-                    setResult(RESULT_OK);
-                    User user = new User(username.getText().toString());
                     try {
-                        check = controller.getUserByUsername(username.getText().toString());
+                        user = controller.getUserByUsername(username.getText().toString());
                     } catch (Exception e) {e.printStackTrace();}
-
-                    if (check != null && user.getUsername().equals(check.getUsername())) {
-
+                    if (user != null) {
                         Intent intent = new Intent(activity, MainActivity.class);
                         Gson gson = new Gson();
                         intent.putExtra("user",gson.toJson(user));
-                        intent.putExtra("username", username.getText().toString());
+                        //intent.putExtra("username", username.getText().toString());
+                        //I think this line is unnecessary... -Thomas
+                        setResult(RESULT_OK);
                         startActivity(intent);
                         
                     }
                     else {errorMessage.setVisibility(View.VISIBLE);}
+                } else {
+                    //TODO: HANDLE OFFLINE ERROR MESSAGES FOR LOGIN SCREEN
                 }
 
             }

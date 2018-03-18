@@ -116,10 +116,8 @@ public class SearchController {
     return ONE. All bets are off as to which one.
      */
     public User getUserByUsername(String name){
-        // Send request to search by name
         String response = this.getRequest(this.url+"/user/"+"_search?q=username:"+name);
         User responseUser = null;
-        // Parse Response
         try {
             JSONObject reader = new JSONObject(response);
             JSONObject hits = reader.getJSONObject("hits");
@@ -133,6 +131,25 @@ public class SearchController {
             e.printStackTrace();
         }
         return responseUser;
+    }
+
+    public Task getTaskById(int taskId){
+        String response = this.getRequest(this.url+"/task/"+"_search?q=taskID:"+Integer.toString(taskId));
+        Task responseTask = null;
+        try {
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            if(hitArray.length() > 0) {
+                JSONObject jsonTask = hitArray.getJSONObject(0);
+                String jsonString = jsonTask.getJSONObject("_source").toString();
+                responseTask = gson.fromJson(jsonString,Task.class);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return responseTask;
     }
 
     /*

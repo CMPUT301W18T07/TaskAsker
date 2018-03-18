@@ -95,8 +95,23 @@ public class InstrumentedSCTest {
         assertEquals("Task 3",taskList.get(1).getName());
     }
     @Test
-    public void getTaskByID(int taskID){
-
+    public void getTaskByID(){
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
+        Task task1 = new Task("Task 1");
+        Task task2 = new Task("Task 2");
+        Task task3 = new Task("Task 3");
+        task1.setTaskID(1);
+        task2.setTaskID(2);
+        task3.setTaskID(3);
+        controller.saveTask(task1);
+        controller.saveTask(task2);
+        controller.saveTask(task3);
+        sleep2();
+        assertEquals("Task 1",controller.getTaskById(1).getName());
+        assertEquals("Task 3",controller.getTaskById(3).getName());
+        assertEquals("Task 2",controller.getTaskById(2).getName());
     }
 
     /*Helper function*/

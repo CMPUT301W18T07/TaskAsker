@@ -11,6 +11,7 @@
 package com.cmput301w18t07.taskasker;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -174,6 +175,7 @@ public class SearchController {
             JSONArray hitArray = hits.getJSONArray("hits");
             for(int i = 0; i < hitArray.length(); i++){
                 JSONObject hit = hitArray.getJSONObject(i).getJSONObject("_source");
+                Log.i("HIT ------------------>",hit.toString());
                 temp = Integer.parseInt(hit.get("taskID").toString());
                 if (temp > max){
                     max = temp;

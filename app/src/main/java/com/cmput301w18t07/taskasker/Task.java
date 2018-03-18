@@ -96,6 +96,10 @@ public class Task {
         this.takerUsername = user.getUsername();
     }
 
+    public void setTaskID(int taskID){
+        this.taskID = taskID;
+    }
+
     /**
      * Purpose:
      * Sets the requester of the task

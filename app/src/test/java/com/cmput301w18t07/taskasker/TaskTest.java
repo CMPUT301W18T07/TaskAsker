@@ -9,7 +9,18 @@ import static junit.framework.Assert.*;
  */
 
 public class TaskTest {
-    User requester;
+    User firstUser;
+    User secondUser;
+
+    public TaskTest(){
+        try{
+            firstUser = new User("req", "req@fake.com", "000-000-0000", "Requester", "Fake");
+            secondUser = new User("take","take@fake.com","000-000-0000","Taker","Fake");
+        } catch(Exception e) {
+            e.printStackTrace();
+            assertTrue(false);
+        }
+    }
 
     @Test
     public void createTest(){
@@ -17,17 +28,81 @@ public class TaskTest {
         assertNotNull(task);
         boolean thrown = false;
         try{
-            try{
-                requester = new User("req", "req@fake.com", "000-000-0000", "Requester", "Fake");
-            } catch(Exception e){
-                e.printStackTrace();
-            }
-            task = new Task("","",requester);
+            task = new Task("","",firstUser);
             assertNotNull(task);
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
         }
         assertFalse(thrown);
+    }
+
+    @Test
+    public void changeTakerTest(){
+        Task task = new Task("");
+        try{
+            task = new Task("","",firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertNull(task.getTaker());
+        task.setTaker(secondUser);
+        assertEquals(secondUser,task.getTaker());
+    }
+
+    @Test
+    public void changeRequesterTest(){
+        Task task = new Task("");
+        try{
+            task = new Task("","",firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertEquals(firstUser,task.getRequester());
+        task.setRequester(secondUser);
+        assertEquals(secondUser,task.getRequester());
+        assertNull(task.getTaker());
+    }
+
+    @Test
+    public void getNameTest(){
+        Task task = new Task("");
+        try{
+            task = new Task("", "", firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertEquals("", task.getName());
+
+        try{
+            task = new Task("Primary", "", firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertEquals("Primary", task.getName());
+    }
+
+    @Test
+    public void getDescriptionTest(){
+        Task task = new Task("");
+        try{
+            task = new Task("","",firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertEquals("",task.getDescription());
+
+        try{
+            task = new Task("","First Task",firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertEquals("First Task",task.getDescription());
     }
 }

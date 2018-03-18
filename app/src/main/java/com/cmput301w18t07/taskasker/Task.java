@@ -47,6 +47,7 @@ public class Task {
     private Bid bid;
     private Date time;
     private String status;
+    private SearchController controller;
 
 
     /**
@@ -83,6 +84,8 @@ public class Task {
         this.requester = req;
         this.time = new Date();
         this.status = "Requested";
+        this.controller = new SearchController("http://cmput301.softwareprocess.es:8080/cmput301w18t07");
+        this.taskID = this.controller.getMaxTaskId();
     }
 
     /**

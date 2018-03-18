@@ -118,17 +118,17 @@ public class InstrumentedSCTest {
         SearchController controller = new SearchController(url);
         controller.deleteAllTasks();
         sleep2();
-        assertEquals(0,controller.getMaxTaskId());
+        assertEquals(1,controller.getMaxTaskId());
         controller.saveTask(new Task("Test 1"));
         sleep2();
-        assertEquals(1,controller.getMaxTaskId());
+        assertEquals(2,controller.getMaxTaskId());
         controller.saveTask(new Task("Test 2"));
         sleep2();
-        assertEquals(2,controller.getMaxTaskId());
+        assertEquals(3,controller.getMaxTaskId());
         controller.saveTask(new Task("Test 3"));
         controller.saveTask(new Task("Test 4"));
         sleep2();
-        assertEquals(4,controller.getMaxTaskId());
+        assertEquals(5,controller.getMaxTaskId());
     }
     /*Helper function*/
     private void sleep2(){

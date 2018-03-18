@@ -11,7 +11,6 @@
 package com.cmput301w18t07.taskasker;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -163,22 +162,27 @@ public class SearchController {
 
     /*
     Returns the value of what the next task ID should be.
-    Simply looks to see how many tasks are currently saved in the system
-    and returns that value+1.
     Returns: Int ID
      */
     public int getMaxTaskId(){
         String response = this.getRequest(this.url+"/task/"+"_search?q=*");
         int max = 0;
+        int temp;
         try {
             JSONObject reader = new JSONObject(response);
             JSONObject hits = reader.getJSONObject("hits");
-            Log.i("MAX",hits.get("total").toString());
-            max = Integer.parseInt(hits.get("total").toString());
+            JSONArray hitArray = hits.getJSONArray("hits");
+            for(int i = 0; i < hitArray.length(); i++){
+                JSONObject hit = hitArray.getJSONObject(i).getJSONObject("_source");
+                temp = Integer.parseInt(hit.get("taskID").toString());
+                if (temp > max){
+                    max = temp;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return max;
+        return max + 1;
     }
 
     /*

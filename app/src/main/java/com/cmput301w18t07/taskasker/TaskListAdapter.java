@@ -1,3 +1,13 @@
+/* Task List Adapter
+ *
+ * March 2018
+ *
+ * Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
+ * Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
+ * distribute, or modify this code under terms and conditions of the Code of Student Behaviour
+ *  at University of Alberta. You can find a copy of the license on this project.
+ */
+
 package com.cmput301w18t07.taskasker;
 
 import android.content.Context;
@@ -9,9 +19,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Dylan's Compooter on 2018-03-17.
+ * Purpose:
+ * Represents a task object.
+ *
+ * Design Rationale:
+ * Needed to represent a task with its title and status
+ *
+ * @author Dylan
+ * @version 1.5
+ * @see MainActivity
+ * @see Task
  */
-
 public class TaskListAdapter extends BaseAdapter{
     private Context mContext;
     private ArrayList<Task> taskArrayList;
@@ -19,7 +37,7 @@ public class TaskListAdapter extends BaseAdapter{
 
     /**
      * Purpose:
-     *
+     * Changes how a task is represented in a list view.
      *
      * @param mContext
      * @param taskArrayList

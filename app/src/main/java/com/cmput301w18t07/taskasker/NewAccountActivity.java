@@ -1,3 +1,13 @@
+/* New Account
+ *
+ * March 2018
+ *
+ * Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
+ * Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
+ * distribute, or modify this code under terms and conditions of the Code of Student Behaviour
+ *  at University of Alberta. You can find a copy of the license on this project.
+ */
+
 package com.cmput301w18t07.taskasker;
 
 import android.content.Intent;
@@ -10,6 +20,18 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+
+/**
+ * Purpose:
+ * Activity that creates a new user
+ *
+ * Design Rationale:
+ * separate activity where all info of a user could be entered
+ *
+ * @author
+ * @version 1.5
+ * @see User
+ */
 public class NewAccountActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07"; //URL for elasticsearch??
@@ -24,6 +46,13 @@ public class NewAccountActivity extends AppCompatActivity {
     private User check = null;
     private User user;
 
+
+    /**
+     * Purpose:
+     * Sets up the view when the new account activity is started
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +76,6 @@ public class NewAccountActivity extends AppCompatActivity {
                 String usernameText = username.getText().toString();
                 String emailText = email.getText().toString();
                 String phoneNumber = phone.getText().toString();
-
 
                 try {
                     check = controller.getUserByUsername(usernameText);

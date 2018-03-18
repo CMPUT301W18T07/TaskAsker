@@ -1,3 +1,13 @@
+/* Login
+ *
+ * March 2018
+ *
+ * Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
+ * Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
+ * distribute, or modify this code under terms and conditions of the Code of Student Behaviour
+ *  at University of Alberta. You can find a copy of the license on this project.
+ */
+
 package com.cmput301w18t07.taskasker;
 
 import android.content.Context;
@@ -14,6 +24,18 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+
+/**
+ * Purpose:
+ * Activity that allows a user to login
+ *
+ * Design Rationale:
+ * First screen of the app that has the user specify who they are.
+ *
+ * @author
+ * @version 1.5
+ * @see User
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
@@ -27,6 +49,12 @@ public class LoginActivity extends AppCompatActivity {
     private ConnectivityManager cm;
 
 
+    /**
+     * Purpose:
+     * Sets the view when login activity is started.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +110,15 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Purpose:
+     * When an new account activity sends back a result set the username edit text to the new username
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

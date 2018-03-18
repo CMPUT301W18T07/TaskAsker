@@ -1,3 +1,13 @@
+/* Main Activity
+ *
+ * March 2018
+ *
+ * Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
+ * Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
+ * distribute, or modify this code under terms and conditions of the Code of Student Behaviour
+ *  at University of Alberta. You can find a copy of the license on this project.
+ */
+
 package com.cmput301w18t07.taskasker;
 
 import android.content.Intent;
@@ -13,6 +23,20 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+/**
+ * Purpose:
+ * Shows the list of takss the user has requested and accepted. Can request more tasks from this
+ * activity or view user profile.
+ *
+ * Design Rationale:
+ * Have an informative main screen that shows a user their most important tasks that they have
+ * requested or accepted.
+ *
+ * @author
+ * @version 1.5
+ * @see Task
+ * @see User
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Task> AcceptedTaskList;
@@ -29,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
     private TaskListAdapter requestedAdapter;
     private TaskListAdapter acceptedAdapter;
 
+
+    /**
+     * Purpose:
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Purpose:
+     * Starts the profile activity when the profile icon is clicked
+     *
+     * @param view
+     */
     public void profileClick(View view){
         Intent intent = new Intent(activity, ProfileActivity.class);
         //Gson gson = new Gson();
@@ -89,6 +126,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Purpose:
+     * Starts the add task activity when the plus icon is clicked
+     *
+     * @param view
+     */
     public void addTaskClick(View view) {
         Intent intent = new Intent(activity, AddTaskActivity.class);
         intent.putExtra("username", user.getUsername());

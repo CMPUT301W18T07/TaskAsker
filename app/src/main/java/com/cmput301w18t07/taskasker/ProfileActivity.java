@@ -1,3 +1,13 @@
+/* Profile
+ *
+ * March 2018
+ *
+ * Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
+ * Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
+ * distribute, or modify this code under terms and conditions of the Code of Student Behaviour
+ *  at University of Alberta. You can find a copy of the license on this project.
+ */
+
 package com.cmput301w18t07.taskasker;
 
 import android.content.Intent;
@@ -9,6 +19,18 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+/**
+ * Purpose:
+ * Activity that displays the information of a user
+ *
+ * Design Rationale:
+ * Have an activity to display the users info and where a user can decide if they want to edit
+ * their profile or logout
+ *
+ * @author
+ * @version 1.5
+ * @see User
+ */
 public class ProfileActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
@@ -22,6 +44,13 @@ public class ProfileActivity extends AppCompatActivity {
     private User user;
     private String username;
 
+
+    /**
+     * Purpose:
+     * Sets up the view when the profile activity is started
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

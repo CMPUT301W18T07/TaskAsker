@@ -1,3 +1,13 @@
+/* Add Task
+ *
+ * March 2018
+ *
+ * Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
+ * Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
+ * distribute, or modify this code under terms and conditions of the Code of Student Behaviour
+ *  at University of Alberta. You can find a copy of the license on this project.
+ */
+
 package com.cmput301w18t07.taskasker;
 
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +18,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+/**
+ * Purpose:
+ * Activity that gets the user to add a task.
+ *
+ * Design Rationale:
+ * Having a separate activity for the user to enter the information allowed for a task and
+ * then save that task.
+ *
+ * @author Dylan
+ * @version 1.5
+ * @see Task
+ */
 public class AddTaskActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
@@ -19,6 +42,13 @@ public class AddTaskActivity extends AppCompatActivity {
     private String username;
     private Task task;
 
+
+    /**
+     * Purpose:
+     * Sets the view when Add task activity is started.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +65,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
         final Button cancelButton = findViewById(R.id.cancelTaskButton);
         final Button addTaskButton = findViewById(R.id.addTaskButton);
-
-
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

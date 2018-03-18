@@ -1,3 +1,13 @@
+/* Task Details
+ *
+ * March 2018
+ *
+ * Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
+ * Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
+ * distribute, or modify this code under terms and conditions of the Code of Student Behaviour
+ *  at University of Alberta. You can find a copy of the license on this project.
+ */
+
 package com.cmput301w18t07.taskasker;
 
 import android.content.Intent;
@@ -9,6 +19,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
+/**
+ * Purpose:
+ * Activity that displays the details of a task
+ *
+ * Design Rationale:
+ * Having a way to display the information from a task in a user friendly way.
+ *
+ * @author Dylan
+ * @version 1.5
+ * @see Task
+ */
 public class TaskDetailsActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
@@ -20,6 +42,12 @@ public class TaskDetailsActivity extends AppCompatActivity {
     private ConnectivityManager cm;
 
 
+    /**
+     * Purpose:
+     * Sets up the view when the task details activity is started
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

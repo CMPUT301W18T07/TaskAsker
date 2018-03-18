@@ -19,12 +19,14 @@ public class UserTest {
     public void CreateTest(){
         User user = new User(basicName);
         assertNotNull(user);
+        boolean thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
-            assertNotNull(user);
         } catch(Exception e){
             e.printStackTrace();
+            thrown = true;
         }
+        assertFalse(thrown);
     }
 
     @Test

@@ -113,11 +113,27 @@ public class InstrumentedSCTest {
         assertEquals("Task 3",controller.getTaskById(3).getName());
         assertEquals("Task 2",controller.getTaskById(2).getName());
     }
-
+    @Test
+    public void getMaxTaskID(){
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
+        assertEquals(0,controller.getMaxTaskId());
+        controller.saveTask(new Task("Test 1"));
+        sleep2();
+        assertEquals(1,controller.getMaxTaskId());
+        controller.saveTask(new Task("Test 2"));
+        sleep2();
+        assertEquals(2,controller.getMaxTaskId());
+        controller.saveTask(new Task("Test 3"));
+        controller.saveTask(new Task("Test 4"));
+        sleep2();
+        assertEquals(4,controller.getMaxTaskId());
+    }
     /*Helper function*/
     private void sleep2(){
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

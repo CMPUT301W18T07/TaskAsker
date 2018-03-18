@@ -11,6 +11,7 @@
 package com.cmput301w18t07.taskasker;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -133,6 +134,14 @@ public class SearchController {
         return responseUser;
     }
 
+    /*
+    Return a task with a matching task ID.
+    Takes: Int TaskId
+    Returns: A task with that ID or null
+    Remember that there should only be ONE task with a certain TaskID
+    this method will only return 1 Task even if multiple tasks are found
+    in elasticsearch.
+     */
     public Task getTaskById(int taskId){
         String response = this.getRequest(this.url+"/task/"+"_search?q=taskID:"+Integer.toString(taskId));
         Task responseTask = null;
@@ -150,6 +159,26 @@ public class SearchController {
             e.printStackTrace();
         }
         return responseTask;
+    }
+
+    /*
+    Returns the value of what the next task ID should be.
+    Simply looks to see how many tasks are currently saved in the system
+    and returns that value+1.
+    Returns: Int ID
+     */
+    public int getMaxTaskId(){
+        String response = this.getRequest(this.url+"/task/"+"_search?q=*");
+        int max = 0;
+        try {
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            Log.i("MAX",hits.get("total").toString());
+            max = Integer.parseInt(hits.get("total").toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return max;
     }
 
     /*

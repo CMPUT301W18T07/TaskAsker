@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private MainActivity activity = this;
     private User check = null;
     private User user;
-    private ArrayList<Task> acceptedTaskList = new ArrayList<Task>();
-    private ArrayList<Task> requestedTaskList = new ArrayList<Task>();
-    private ArrayAdapter<Task> requestedAdapter;
-    private ArrayAdapter<Task> acceptedAdapter;
+    private ArrayList<Task> acceptedTaskList;
+    private ArrayList<Task> requestedTaskList;
+    private TaskListAdapter requestedAdapter;
+    private TaskListAdapter acceptedAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +37,24 @@ public class MainActivity extends AppCompatActivity {
         user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
         acceptedTaskListView = findViewById(R.id.acceptedListView);
-        requestedTaskListView = findViewById(R.id.acceptedListView);
-
+        requestedTaskListView = findViewById(R.id.requestedListView);
 
         acceptedTaskList = controller.getTaskByTaker(user.getUsername());
         requestedTaskList = controller.getTaskByRequester(user.getUsername());
 
-        //Toast.makeText(getApplicationContext(),"TEST", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"TEST OUT", Toast.LENGTH_SHORT).show();
         //for (Task task : requestedTaskList)
         //{
-        //    Toast.makeText(getApplicationContext(),"TEST", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"TEST IN", Toast.LENGTH_SHORT).show();
         //    Toast.makeText(getApplicationContext(),task.getName(), Toast.LENGTH_SHORT).show();
         //}
 
-        acceptedAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, acceptedTaskList);
-        requestedAdapter = new ArrayAdapter<Task>(this, android.R.layout.simple_list_item_1, requestedTaskList);
+        acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+        requestedAdapter = new TaskListAdapter(getApplicationContext(), requestedTaskList);
+        //adapter = new SubscriptionListAdapter(getApplicationContext(), requestedTaskList);
 
         acceptedTaskListView.setAdapter(acceptedAdapter);
-        requestedTaskListView.setAdapter(acceptedAdapter);
+        requestedTaskListView.setAdapter(requestedAdapter);
 
         acceptedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

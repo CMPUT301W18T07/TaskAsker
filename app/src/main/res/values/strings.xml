@@ -15,4 +15,5 @@
     <string name="description">Description</string>
     <string name="lowestbid">Lowest Bid</string>
     <string name="phoneNumber">Phone Number</string>
+    <string name="deleteTask">Delete Task</string>
 </resources>

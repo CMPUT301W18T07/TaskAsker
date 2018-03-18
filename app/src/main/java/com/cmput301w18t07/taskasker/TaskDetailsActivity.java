@@ -1,8 +1,11 @@
 package com.cmput301w18t07.taskasker;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,10 +25,13 @@ public class TaskDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task_details);
 
-        int taskID = getIntent().getIntExtra("task ID", 0);
-        //Task task = controller.getTaskByTaskID(taskID);
+        final int taskID = getIntent().getIntExtra("task ID", 0);
 
-        //final int index = getIntent().getIntExtra("Index", -1);
+        //Task task = controller.getTaskByTaskID(taskID);
+        final int index = getIntent().getIntExtra("Index", -1);
+
+        final Button backButton = findViewById(R.id.backTaskButton);
+        final Button deleteButton = findViewById(R.id.deleteTaskButton);
 
         final TextView title = findViewById(R.id.title);
         final TextView status = findViewById(R.id.status);
@@ -33,10 +39,27 @@ public class TaskDetailsActivity extends AppCompatActivity {
         final TextView description = findViewById(R.id.description);
 
 
-        //title.setText(task.getName());
+       //title.setText(task.getName());
         //status.setText(task.getStatus());
         //lowestBid.setText("$" + String.format("%.2f", task.getMinPrice()));
         //description.setText(task.getDescription());
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Intent intent = new Intent(activity, EditProfileActivity.class);
+            //for when this method is implemented
+            //controller.deleteTask(taskID);
+            finish();
+            }
+        });
 
 
     }

@@ -79,6 +79,7 @@ public class Task {
         this.requester = req;
         this.time = new Date();
         this.status = "Requested";
+        this.takerUsername = "";
     }
 
     /**

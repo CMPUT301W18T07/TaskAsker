@@ -17,10 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by Thomas Mackay on 2018-03-12.
- */
-
-/**
  * Purpose:
  * Represents a Task object.
  *

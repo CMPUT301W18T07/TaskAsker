@@ -11,10 +11,6 @@
 package com.cmput301w18t07.taskasker;
 
 /**
- * Created by Thomas Mackay on 2018-03-12.
- */
-
-/**
  * Purpose:
  * Represents a bid object.
  *

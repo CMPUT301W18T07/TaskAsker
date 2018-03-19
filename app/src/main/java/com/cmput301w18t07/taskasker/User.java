@@ -1,6 +1,3 @@
-
-
-
 /* User
  *
  * March 2018
@@ -11,12 +8,9 @@
  *  at University of Alberta. You can find a copy of the license on this project.
  */
 
-
-
 package com.cmput301w18t07.taskasker;
 
 import java.util.regex.Pattern;
-
 
 /**
  * Purpose:

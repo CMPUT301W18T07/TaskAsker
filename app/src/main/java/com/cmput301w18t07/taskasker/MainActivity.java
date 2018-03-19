@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 10){
             if(resultCode == RESULT_OK){
+                requestedTaskList = controller.getTaskByRequester(user.getUsername());
                 requestedAdapter.notifyDataSetChanged();
             }
         }

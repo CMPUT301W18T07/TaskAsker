@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 int taskID = task.getTaskID();
                 Intent intent = new Intent(activity, MyTaskDetailsActivity.class);
                 intent.putExtra("task ID", taskID);
-                startActivity(intent);
+                startActivityForResult(intent, 11);
             }
         });
     }
@@ -152,6 +152,16 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 10){
             if(resultCode == RESULT_OK){
+                try {
+                    requestedTaskList = controller.getTaskByRequester(user.getUsername());
+                    Thread.sleep(500);
+                    requestedAdapter.notifyDataSetChanged();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } if(requestCode == 10){
+            if(resultCode == RESULT_OK) {
                 try {
                     requestedTaskList = controller.getTaskByRequester(user.getUsername());
                     Thread.sleep(500);

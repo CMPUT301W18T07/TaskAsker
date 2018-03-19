@@ -74,6 +74,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(RESULT_OK);
                 finish();
             }
         });
@@ -84,6 +85,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(activity, EditTask.class);
                 intent.putExtra("task ID", taskID);
                 startActivity(intent);
+                setResult(RESULT_OK);
                 finish();
             }
         });
@@ -92,6 +94,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
             controller.deleteTaskById(taskID);
+            setResult(RESULT_OK);
             finish();
             }
         });

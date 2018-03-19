@@ -56,6 +56,7 @@ public class EditTask extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(RESULT_OK);
                 finish();
             }
         });
@@ -76,6 +77,7 @@ public class EditTask extends AppCompatActivity {
                         //taskEdit.setTaker(task.getTaker());
 
                         controller.saveTask(taskEdit);
+                        setResult(RESULT_OK);
                         finish();
 
                     } catch (Exception e) {

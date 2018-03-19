@@ -143,6 +143,28 @@ public class InstrumentedSCTest {
         assertNull(controller.getTaskById(69));
     }
     @Test
+    public void getUnassignedTasks(){
+        SearchController controller = new SearchController(url);
+        User user1 = new User("Tom");
+        controller.deleteAllTasks();
+        sleep2();
+        controller.saveUser(user1);
+        Task task1 = new Task("Test task 1");
+        Task task2 = new Task("Test task 2");
+        Task task3 = new Task("Test task 3");
+        task1.setTaker(user1);
+        task2.setTaker(user1);
+        controller.saveTask(task1);
+        sleep2();
+        controller.saveTask(task2);
+        sleep2();
+        controller.saveTask(task3);
+        sleep2();
+        ArrayList<Task> openTasks = controller.getOpenTasks();
+        assertEquals(1, openTasks.size());
+        assertEquals(openTasks.get(0).getName(),"Test task 3");
+    }
+    @Test
     public void addExampleStuff(){
         SearchController controller = new SearchController(url);
         User user1 = new User("Lucas");

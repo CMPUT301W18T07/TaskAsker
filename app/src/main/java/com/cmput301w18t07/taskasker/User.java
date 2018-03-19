@@ -43,7 +43,7 @@ public class User {
      * Purpose:
      * Basic constructor, mostly for use in the testing of other classes
      *
-     * @param username
+     * @param username String of the user's username
      */
     public User(String username){
         this.username = username;
@@ -54,12 +54,12 @@ public class User {
      * Purpose:
      * Constructor for a User
      *
-     * @param username
-     * @param email
-     * @param phoneNumber
-     * @param firstName
-     * @param lastName
-     * @throws Exception
+     * @param username String of the user's username
+     * @param email String of the user's email
+     * @param phoneNumber String of the user's phone number
+     * @param firstName String of the user's first name
+     * @param lastName String of the user's last name
+     * @throws Exception Thrown when a username, email, or phone number does not match it's required format
      */
     public User(String username, String email, String phoneNumber, String firstName, String lastName) throws Exception {
 
@@ -88,7 +88,7 @@ public class User {
      * Purpose:
      * Gets the username of the user
      *
-     * @return string of the users username
+     * @return String of the user's username
      */
     public String getUsername() {
         return username;
@@ -98,7 +98,7 @@ public class User {
      * Purpose:
      * Gets the email of the user
      *
-     * @return string of users email
+     * @return String of user's email
      */
     public String getEmail() {
         return email;
@@ -108,7 +108,7 @@ public class User {
      * Purpose:
      * Gets the phone number of the user
      *
-     * @return string of users phone number
+     * @return String of user's phone number
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -118,7 +118,7 @@ public class User {
      * Purpose:
      * Gets the last name of the user
      *
-     * @return string of users last name
+     * @return String of user's last name
      */
     public String getLastName() {
         return lastName;
@@ -128,7 +128,7 @@ public class User {
      * Purpose:
      * Gets the first name of the user
      *
-     * @return string of users frost name
+     * @return String of user's first name
      */
     public String getFirstName() {
         return firstName;
@@ -138,7 +138,7 @@ public class User {
      * Purpose:
      * Sets the email of the user
      *
-     * @param email string of the users email
+     * @param email String of the user's new email
      */
     public void setEmail(String email) {
         this.email = email;
@@ -148,7 +148,7 @@ public class User {
      * Purpose:
      * Sets the phone number of the user
      *
-     * @param phoneNumber string of the users phone number
+     * @param phoneNumber String of the user's new phone number
      */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -158,7 +158,7 @@ public class User {
      * Purpose:
      * Sets the first name of the user
      *
-     * @param firstName string of the user first name
+     * @param firstName String of the user's new first name
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -168,7 +168,7 @@ public class User {
      * Purpose:
      * Sets the last name of the user
      *
-     * @param lastName string of the user last name
+     * @param lastName String of the user's new last name
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;

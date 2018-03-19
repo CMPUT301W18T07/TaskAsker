@@ -53,7 +53,7 @@ public class Task {
      * Purpose:
      * Basic constructor, mostly for use in the testing of other classes
      *
-     * @param name
+     * @param name String of the task's name
      */
     public Task(String name){
         this.name = name;
@@ -63,10 +63,10 @@ public class Task {
      * Purpose:
      * Constructor for a task
      *
-     * @param name
-     * @param description
-     * @param req
-     * @throws Exception
+     * @param name String of the task's name
+     * @param description String of the task's description
+     * @param req User object of the task requester
+     * @throws Exception Thrown when a name or descrition is longer than the maximum allowed
      */
     public Task(String name, String description, User req) throws Exception {
         if(name.length() > 30){
@@ -115,7 +115,7 @@ public class Task {
      * Purpose:
      * Gets the title of the task
      *
-     * @return string of the task title
+     * @return String of the task's title
      */
     public String getName() {
         return name;
@@ -125,7 +125,7 @@ public class Task {
      * Purpose:
      * Gets the description of the task
      *
-     * @return string of the task description
+     * @return String of the task's description
      */
     public String getDescription(){
         return description;
@@ -135,7 +135,7 @@ public class Task {
      * Purpose:
      * Gets the task ID of the task
      *
-     * @return int of the task ID
+     * @return int of the task's ID number
      */
     public int getTaskID(){
         return taskID;
@@ -145,7 +145,7 @@ public class Task {
      * Purpose:
      * Gets the photos of a task
      *
-     * @return array list of the task photos
+     * @return array list of the task's photos
      */
     public ArrayList<ContactsContract.CommonDataKinds.Photo> getPhotolist() {
         return photoList;
@@ -155,7 +155,7 @@ public class Task {
      * Purpose:
      * Gets the bid on the task
      *
-     * @return Bid object of the task bid
+     * @return Bid object of the task's bid
      */
     public Bid getBid() {
         return bid;
@@ -185,7 +185,7 @@ public class Task {
      * Purpose:
      * Gets the time of the task
      *
-     * @return Date object of the task time
+     * @return Date object of the task's time
      */
     public Date getTime() {
         return time;
@@ -195,7 +195,7 @@ public class Task {
      * Purpose:
      * Gets the minimum price of the task
      *
-     * @return double of the task minimum price
+     * @return double of the task's minimum price
      */
     public double getMinPrice() {
         return minPrice;
@@ -205,7 +205,7 @@ public class Task {
      * Purpose:
      * Gets the location of the task
      *
-     * @return Location object of the task location
+     * @return Location object of the task's location
      */
     public Location getLocation() {
         return location;
@@ -215,7 +215,7 @@ public class Task {
      * Purpose:
      * Gets the status of the task
      *
-     * @return string of the task status
+     * @return String of the task's status
      */
     public String getStatus() { return status; }
 
@@ -223,7 +223,7 @@ public class Task {
      * Purpose:
      * Sets the requester username of the task
      *
-     * @param requesterUsername String of the task requester username
+     * @param requesterUsername String of the task requester's username
      */
     public void setRequesterUsername(String requesterUsername) {
         this.requesterUsername = requesterUsername;
@@ -233,7 +233,7 @@ public class Task {
      * Purpose:
      * Sets the taker username of the task
      *
-     * @param takerUsername String object of the task taker username
+     * @param takerUsername String object of the task taker's username
      */
     public void setTakerUsername(String takerUsername) {
         this.takerUsername = takerUsername;

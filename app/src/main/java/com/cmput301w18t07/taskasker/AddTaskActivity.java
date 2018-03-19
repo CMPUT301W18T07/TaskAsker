@@ -78,7 +78,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 try {
                     task = new Task(title.getText().toString(),description.getText().toString(),controller.getUserByUsername(username));
-                    task.setTaskID(controller.getMaxTaskId()+1);
+                    task.setTaskID(controller.getMaxTaskId());
                     controller.saveTask(task);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -11,7 +11,7 @@
     <string name="noUserFound">No User Found</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="status">Status:</string>
-    <string name="title">Title</string>
+    <string name="title">Task Name</string>
     <string name="description">Description:</string>
     <string name="lowestbid">Lowest Bid:</string>
     <string name="phoneNumber">Phone Number</string>

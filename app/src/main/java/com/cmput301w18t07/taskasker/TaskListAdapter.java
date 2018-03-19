@@ -104,5 +104,10 @@ public class TaskListAdapter extends BaseAdapter{
         v.setTag(taskArrayList.get(position).getName());
         return v;
     }
+
+    public void swapItems(ArrayList<Task> tasks) {
+        this.taskArrayList = tasks;
+        notifyDataSetChanged();
+    }
 }
 

@@ -55,8 +55,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
         final int taskID = getIntent().getIntExtra("task ID", 0);
 
-        //Task task = controller.getTaskByTaskID(taskID);
-        final int index = getIntent().getIntExtra("Index", -1);
+        Task task = controller.getTaskById(taskID);
+        //final int index = getIntent().getIntExtra("Index", -1);
 
         final Button backButton = findViewById(R.id.backTaskButton);
         final Button deleteButton = findViewById(R.id.deleteTaskButton);
@@ -67,10 +67,10 @@ public class TaskDetailsActivity extends AppCompatActivity {
         final TextView description = findViewById(R.id.description);
 
 
-       //title.setText(task.getName());
-        //status.setText(task.getStatus());
-        //lowestBid.setText("$" + String.format("%.2f", task.getMinPrice()));
-        //description.setText(task.getDescription());
+        title.setText(task.getName());
+        status.setText(task.getStatus());
+        lowestBid.setText("$" + String.format("%.2f", task.getMinPrice()));
+        description.setText(task.getDescription());
 
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +79,11 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent intent = new Intent(activity, EditProfileActivity.class);
-            //for when this method is implemented
+            //@TODO for when this method is implemented
             //controller.deleteTask(taskID);
             finish();
             }

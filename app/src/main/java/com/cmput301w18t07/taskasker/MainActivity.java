@@ -73,16 +73,8 @@ public class MainActivity extends AppCompatActivity {
         acceptedTaskList = controller.getTaskByTaker(user.getUsername());
         requestedTaskList = controller.getTaskByRequester(user.getUsername());
 
-        //Toast.makeText(getApplicationContext(),"TEST OUT", Toast.LENGTH_SHORT).show();
-        //for (Task task : requestedTaskList)
-        //{
-            //Toast.makeText(getApplicationContext(),"TEST IN", Toast.LENGTH_SHORT).show();
-        //    Toast.makeText(getApplicationContext(),task.getName(), Toast.LENGTH_SHORT).show();
-        //}
-
         acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
         requestedAdapter = new TaskListAdapter(getApplicationContext(), requestedTaskList);
-        //adapter = new SubscriptionListAdapter(getApplicationContext(), requestedTaskList);
 
         acceptedTaskListView.setAdapter(acceptedAdapter);
         requestedTaskListView.setAdapter(requestedAdapter);
@@ -111,6 +103,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Toast.makeText(getApplicationContext(), "This is on Resume", Toast.LENGTH_LONG).show();
+
+        acceptedTaskList = controller.getTaskByTaker(user.getUsername());
+        requestedTaskList = controller.getTaskByRequester(user.getUsername());
+
+        acceptedAdapter.swapItems(acceptedTaskList);
+        requestedAdapter.swapItems(requestedTaskList);
+    }
 
     /**
      * Purpose:

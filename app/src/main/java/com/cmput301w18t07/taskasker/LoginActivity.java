@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
-
         errorMessage = findViewById(R.id.noUserFound);
         username = findViewById(R.id.usernameEditText);
         loginButton = findViewById(R.id.loginButton);

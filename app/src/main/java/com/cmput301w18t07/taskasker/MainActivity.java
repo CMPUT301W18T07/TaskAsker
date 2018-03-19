@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 /**
  * Purpose:
- * Shows the list of takss the user has requested and accepted. Can request more tasks from this
+ * Shows the list of tasks the user has requested and accepted. Can request more tasks from this
  * activity or view user profile.
  *
  * Design Rationale:
@@ -130,9 +130,9 @@ public class MainActivity extends AppCompatActivity {
      */
     public void profileClick(View view){
         Intent intent = new Intent(activity, ProfileActivity.class);
-        //Gson gson = new Gson();
-        //intent.putExtra("user",gson.toJson(user));
-        intent.putExtra("username",user.getUsername());
+        Gson gson = new Gson();
+        intent.putExtra("user",gson.toJson(user));
+        //intent.putExtra("username",user.getUsername());
         startActivity(intent);
     }
 

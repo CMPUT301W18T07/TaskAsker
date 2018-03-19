@@ -26,7 +26,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        //taskListView = findViewById(R.id.???);
+        taskListView = findViewById(R.id.SearchView);
 
         //openTaskList = controller.getOpenTasks();
 

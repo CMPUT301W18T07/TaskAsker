@@ -145,6 +145,16 @@ public class MainActivity extends AppCompatActivity {
     public void addTaskClick(View view) {
         Intent intent = new Intent(activity, AddTaskActivity.class);
         intent.putExtra("username", user.getUsername());
-        startActivity(intent);
+        startActivityForResult(intent, 10);
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 10){
+            if(resultCode == RESULT_OK){
+                requestedAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
 }

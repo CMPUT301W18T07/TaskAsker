@@ -84,6 +84,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
+                setResult(RESULT_OK);
                 finish();
             }
         });

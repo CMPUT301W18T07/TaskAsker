@@ -34,6 +34,7 @@
         <activity android:name=".AddTaskActivity" />
         <activity android:name=".EditTask"></activity>
         <activity android:name=".MyTaskDetailsActivity"></activity>
+        <activity android:name=".SearchActivity" />
     </application>
 
 </manifest>

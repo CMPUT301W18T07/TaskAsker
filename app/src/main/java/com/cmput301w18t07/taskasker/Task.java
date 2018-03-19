@@ -23,7 +23,7 @@ import java.util.Date;
  * Design Rationale:
  * Needed in app
  *
- * @author
+ * @author Chris, Thomas
  * @version 1.5
  * @see TaskListAdapter
  */

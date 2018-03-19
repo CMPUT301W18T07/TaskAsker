@@ -28,7 +28,7 @@ import com.google.gson.Gson;
  * Design Rationale:
  * separate activity where all info of a user could be entered
  *
- * @author
+ * @author Thomas, Brendan, Dylan
  * @version 1.5
  * @see User
  */

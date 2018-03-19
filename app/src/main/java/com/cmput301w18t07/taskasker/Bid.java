@@ -17,7 +17,7 @@ package com.cmput301w18t07.taskasker;
  * Design Rationale:
  * Needed to represent a bid placed on a task
  *
- * @author
+ * @author Chris
  * @version 1.5
  * @see Task
  */

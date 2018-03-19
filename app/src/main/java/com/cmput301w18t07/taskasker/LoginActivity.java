@@ -32,7 +32,7 @@ import com.google.gson.Gson;
  * Design Rationale:
  * First screen of the app that has the user specify who they are.
  *
- * @author
+ * @author Brendan, Thomas
  * @version 1.5
  * @see User
  */

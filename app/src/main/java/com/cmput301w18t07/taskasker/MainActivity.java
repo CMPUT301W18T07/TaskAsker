@@ -32,7 +32,7 @@ import java.util.ArrayList;
  * Have an informative main screen that shows a user their most important tasks that they have
  * requested or accepted.
  *
- * @author
+ * @author Dylan, Thomas, Brendan, Tyler
  * @version 1.5
  * @see Task
  * @see User
@@ -176,7 +176,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Purpose:
+     * after activity do certain action
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 10){

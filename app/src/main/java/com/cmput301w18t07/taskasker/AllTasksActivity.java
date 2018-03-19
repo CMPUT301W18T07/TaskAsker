@@ -19,7 +19,7 @@ import android.os.Bundle;
  *
  * Design Rationale:
  *
- * @author
+ * @author Tyler
  * @version 1.5
  * @see Task
  */

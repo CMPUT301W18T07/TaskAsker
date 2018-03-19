@@ -27,7 +27,7 @@ import com.google.gson.Gson;
  * Have an activity to display the users info and where a user can decide if they want to edit
  * their profile or logout
  *
- * @author
+ * @author Dylan, Brendan, Thomas
  * @version 1.5
  * @see User
  */

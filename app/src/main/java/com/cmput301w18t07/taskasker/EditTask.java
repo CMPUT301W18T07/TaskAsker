@@ -16,6 +16,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Purpose:
+ * Activity that edits a task
+ *
+ * Design Rationale:
+ * Needed simple layout for users to edit task info.
+ *
+ * @author Dylan
+ * @version 1.5
+ * @see User
+ */
 public class EditTask extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";

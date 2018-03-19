@@ -30,7 +30,7 @@ import com.google.gson.Gson;
  * Having a separate activity for the user to change the information they used to initially
  * create their account
  *
- * @author
+ * @author Dylan, Brendan, Thomas
  * @version 1.5
  * @see User
  */

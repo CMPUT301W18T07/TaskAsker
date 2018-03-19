@@ -45,21 +45,20 @@ public class SearchController {
 
     /* SEARCH CONTROLLER METHODS */
 
-    /*
-    Put a task into the elasticsearch cloud.
-    Takes: Task
-    Returns: void
+    /**
+     * Put a task into the elasticsearch cloud.
+     * @param task
      */
     public void saveTask(Task task){
         String stringTask = gson.toJson(task);
         this.postRequest(this.url+"/task/",stringTask);
     }
 
-    /*
-    Return a list of all tasks requested by a user with a specific
-    username
-    Takes: String username
-    Returns: ArrayList of Task objects
+    /**
+     * Return a list of all tasks requested
+     * by a user with a specific username
+     * @param username
+     * @return ArrayList of Tasks
      */
     public ArrayList<Task> getTaskByRequester(String username){
         String response = this.getRequest(this.url+"/task/"+"_search?q=requesterUsername:"+username);
@@ -79,6 +78,12 @@ public class SearchController {
         return taskList;
     }
 
+    /**
+     * Get all tasks that a user with a specific username
+     * has taken.
+     * @param username
+     * @return ArrayList of Tasks
+     */
     public ArrayList<Task> getTaskByTaker(String username){
         String response = this.getRequest(this.url+"/task/"+"_search?q=takerUsername:"+username);
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -97,24 +102,23 @@ public class SearchController {
         return taskList;
     }
 
-    /*
-    Put a new user into the elasticsearch cloud
-    Takes: User
-    Returns: void
+    /**
+     * Put a new user into the elasticsearch cloud.
+     * @param user
      */
     public void saveUser(User user){
         String stringUser = gson.toJson(user);
         this.postRequest(this.url+"/user/",stringUser);
     }
 
-    /*
-    Return a user that matches the username
-    Takes: String username
-    Returns: User that matches name or null
-    Remember that usernames should be unique, we will need to
-    check that we arent adding two users with the same username. There may
-    exist more than one user with this username in the system, this function will only
-    return ONE. All bets are off as to which one.
+    /**
+     * Return a user that matches the username. <br>
+     * Remember that usernames should be unique, we will need to
+     * check that we arent adding two users with the same username. There may
+     * exist more than one user with this username in the system, this function will only
+     * return ONE. All bets are off as to which one.
+     * @param name
+     * @return User
      */
     public User getUserByUsername(String name){
         String response = this.getRequest(this.url+"/user/"+"_search?q=username:"+name);
@@ -134,13 +138,12 @@ public class SearchController {
         return responseUser;
     }
 
-    /*
-    Return a task with a matching task ID.
-    Takes: Int TaskId
-    Returns: A task with that ID or null
-    Remember that there should only be ONE task with a certain TaskID
-    this method will only return 1 Task even if multiple tasks are found
-    in elasticsearch.
+    /**
+     * Return a task with a matching Task ID. <br>
+     * Remember that there should only be ONE task with a certain TaskID
+     * this method will only return 1 Task even if multiple tasks are found
+     * @param taskId
+     * @return Task
      */
     public Task getTaskById(int taskId){
         String response = this.getRequest(this.url+"/task/"+"_search?q=taskID:"+Integer.toString(taskId));
@@ -161,9 +164,9 @@ public class SearchController {
         return responseTask;
     }
 
-    /*
-    Returns the value of what the next task ID should be.
-    Returns: Int ID
+    /**
+     * Returns the value of what the next task ID should be.
+     * @return
      */
     public int getMaxTaskId(){
         String response = this.getRequest(this.url+"/task/"+"_search?q=*");
@@ -187,33 +190,32 @@ public class SearchController {
         return max + 1;
     }
 
-    /*
-    Clear all users from system. Be careful using this.
-    Takes: Void
-    Returns Void
+    /**
+     * Clear all users from the system.
      */
     public void deleteAllUsers(){
         this.deleteRequest(this.url+"/user",null);
     }
 
+    /**
+     * Delete all tasks from the system.
+     */
     public void deleteAllTasks() {
         this.deleteRequest(this.url+"/task/",null);
     }
 
-    /*
-    Delete a user that matches the username
-    Takes: String username
-    Returns: void
+    /**
+     * Delete a user that matches the username.
+     * @param name
      */
     public void deleteUserByUsername(String name){
         String query = "{\"query\":{\"match\":{\"username\":\""+name+"\"}}}";
         this.deleteRequest(this.url+"/user/_query",query);
     }
 
-    /*
-    Delete a task that has a matchin taskID
-    Takes: Int taskID
-    Returns: void
+    /**
+     * Delete a task that has a matching taskID.
+     * @param userID
      */
     public void deleteTaskById(int userID){
         String query = "{\"query\":{\"match\":{\"taskID\":\""+Integer.toString(userID)+"\"}}}";

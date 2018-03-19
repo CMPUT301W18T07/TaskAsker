@@ -152,8 +152,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 10){
             if(resultCode == RESULT_OK){
-                requestedTaskList = controller.getTaskByRequester(user.getUsername());
-                requestedAdapter.notifyDataSetChanged();
+                try {
+                    requestedTaskList = controller.getTaskByRequester(user.getUsername());
+                    Thread.sleep(500);
+                    requestedAdapter.notifyDataSetChanged();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 
 /**
  * Created by lucasgauk on 2018-03-14.
@@ -131,8 +132,17 @@ public class InstrumentedSCTest {
         assertEquals(15,controller.getMaxTaskId());
     }
     @Test
+    public void deleteTask(){
+        SearchController controller = new SearchController(url);
+        Task deleteTask1 = new Task("Delete Me");
+        deleteTask1.setTaskID(69);
+        controller.saveTask(deleteTask1);
+        sleep2();
+        assertNull(controller.getTaskById(69));
+    }
+    @Test
     public void addExampleStuff(){
-        SearchController controller = new SearchController(this.url);
+        SearchController controller = new SearchController(url);
         User user1 = new User("DemoUser");
         Task task1 = new Task("Wash my Cat");
         task1.setTaskID(controller.getMaxTaskId());

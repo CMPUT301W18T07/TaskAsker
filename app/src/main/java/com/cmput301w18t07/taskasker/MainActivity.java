@@ -98,10 +98,12 @@ public class MainActivity extends AppCompatActivity {
                 int taskID = task.getTaskID();
                 Intent intent = new Intent(activity, MyTaskDetailsActivity.class);
                 intent.putExtra("task ID", taskID);
+                //startActivity(intent);
                 startActivityForResult(intent, 11);
             }
         });
     }
+
 
     @Override
     public void onResume() {
@@ -109,18 +111,42 @@ public class MainActivity extends AppCompatActivity {
 
         //Toast.makeText(getApplicationContext(), "This is on Resume", Toast.LENGTH_LONG).show();
 
-        acceptedTaskList = controller.getTaskByTaker(user.getUsername());
-        requestedTaskList = controller.getTaskByRequester(user.getUsername());
+        try {
+            acceptedTaskList = controller.getTaskByTaker(user.getUsername());
+            requestedTaskList = controller.getTaskByRequester(user.getUsername());
 
-        acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
-        requestedAdapter = new TaskListAdapter(getApplicationContext(), requestedTaskList);
+            Thread.sleep(500);
 
-        acceptedTaskListView.setAdapter(acceptedAdapter);
-        requestedTaskListView.setAdapter(requestedAdapter);
+            acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+            requestedAdapter = new TaskListAdapter(getApplicationContext(), requestedTaskList);
+
+            acceptedTaskListView.setAdapter(acceptedAdapter);
+            requestedTaskListView.setAdapter(requestedAdapter);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        /*
+        try {
+            requestedTaskList = controller.getTaskByRequester(user.getUsername());
+            Thread.sleep(500);
+            requestedAdapter.notifyDataSetChanged();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        */
+
+        //acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+        //requestedAdapter = new TaskListAdapter(getApplicationContext(), requestedTaskList);
+
+        //acceptedTaskListView.setAdapter(acceptedAdapter);
+        //requestedTaskListView.setAdapter(requestedAdapter);
 
         //acceptedAdapter.swapItems(acceptedTaskList);
         //requestedAdapter.swapItems(requestedTaskList);
+        requestedAdapter.notifyDataSetChanged();
     }
+
 
     /**
      * Purpose:
@@ -131,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
     public void profileClick(View view){
         Intent intent = new Intent(activity, ProfileActivity.class);
         Gson gson = new Gson();
-        intent.putExtra("user",gson.toJson(user));
-        //intent.putExtra("username",user.getUsername());
+        //intent.putExtra("user",gson.toJson(user));
+        intent.putExtra("username",user.getUsername());
         startActivity(intent);
     }
 
@@ -145,8 +171,11 @@ public class MainActivity extends AppCompatActivity {
     public void addTaskClick(View view) {
         Intent intent = new Intent(activity, AddTaskActivity.class);
         intent.putExtra("username", user.getUsername());
+        //startActivity(intent);
         startActivityForResult(intent, 10);
+
     }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -160,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        } if(requestCode == 10){
+        } if(requestCode == 11){
             if(resultCode == RESULT_OK) {
                 try {
                     requestedTaskList = controller.getTaskByRequester(user.getUsername());
@@ -172,5 +201,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
 }

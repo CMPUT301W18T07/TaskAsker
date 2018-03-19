@@ -42,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView phone;
     private TextView userNameTextView;
     private User user;
-    //private String username;
+    private String username;
 
 
     /**
@@ -62,16 +62,16 @@ public class ProfileActivity extends AppCompatActivity {
         phone = findViewById(R.id.phoneTextView);
         userNameTextView = findViewById(R.id.profileusernameTextView);
 
-        //username = getIntent().getStringExtra("username");
-        //user = controller.getUserByUsername(username);
+        username = getIntent().getStringExtra("username");
+        user = controller.getUserByUsername(username);
         Gson gson = new Gson();
-        user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
+        //user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
         final Button editButton = findViewById(R.id.editButton);
         final Button backButton = findViewById(R.id.backButton);
         final Button logOutButton = findViewById(R.id.logOutButton);
 
-        userNameTextView.setText(user.getUsername());
+        userNameTextView.setText(username);
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
         email.setText(user.getEmail());
@@ -87,9 +87,9 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, EditProfileActivity.class);
-                Gson gson = new Gson();
-                intent.putExtra("user",gson.toJson(user));
-                //intent.putExtra("username",user.getUsername());
+                //Gson gson = new Gson();
+                //intent.putExtra("user",gson.toJson(user));
+                intent.putExtra("username",user.getUsername());
                 startActivity(intent);
                 finish();
             }

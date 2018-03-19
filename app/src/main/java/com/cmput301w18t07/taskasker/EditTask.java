@@ -69,8 +69,8 @@ public class EditTask extends AppCompatActivity {
                     //TODO add check for changed profile
                     try {
                         Task taskEdit = new Task(titleText, descriptionText, task.getRequester());
-                        // @TODO when delete task is implemented
-                        //controller.deleteTaskByTaskID(taskID);
+
+                        controller.deleteTaskById(taskID);
 
                         taskEdit.setTaskID(task.getTaskID());
                         //taskEdit.setTaker(task.getTaker());

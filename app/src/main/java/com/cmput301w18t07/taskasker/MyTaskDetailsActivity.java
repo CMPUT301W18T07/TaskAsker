@@ -91,8 +91,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //@TODO for when this method is implemented
-            //controller.deleteTask(taskID);
+            controller.deleteTaskById(taskID);
             finish();
             }
         });

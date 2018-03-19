@@ -130,6 +130,37 @@ public class InstrumentedSCTest {
         sleep2();
         assertEquals(15,controller.getMaxTaskId());
     }
+    @Test
+    public void addExampleStuff(){
+        SearchController controller = new SearchController(this.url);
+        User user1 = new User("DemoUser");
+        Task task1 = new Task("Wash my Cat");
+        task1.setTaskID(controller.getMaxTaskId());
+        Task task2 = new Task("Lick my windows");
+        task2.setTaskID(controller.getMaxTaskId());
+        Task task3 = new Task("Buy me drugs");
+        task3.setTaskID(controller.getMaxTaskId());
+        Task task4 = new Task("Sell those drugs");
+        task4.setTaskID(controller.getMaxTaskId());
+        Task task5 = new Task("Code my app");
+        task5.setTaskID(controller.getMaxTaskId());
+        task1.setRequester(user1);
+        task2.setRequester(user1);
+        task3.setRequester(user1);
+        task4.setTaker(user1);
+        task5.setTaker(user1);
+        controller.saveUser(user1);
+        sleep2();
+        controller.saveTask(task1);
+        sleep2();
+        controller.saveTask(task2);
+        sleep2();
+        controller.saveTask(task3);
+        sleep2();
+        controller.saveTask(task4);
+        sleep2();
+        controller.saveTask(task5);
+    }
     /*Helper function*/
     private void sleep2(){
         try {

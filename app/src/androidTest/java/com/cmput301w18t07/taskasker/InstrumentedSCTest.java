@@ -138,6 +138,8 @@ public class InstrumentedSCTest {
         deleteTask1.setTaskID(69);
         controller.saveTask(deleteTask1);
         sleep2();
+        controller.deleteTaskById(69);
+        sleep2();
         assertNull(controller.getTaskById(69));
     }
     @Test

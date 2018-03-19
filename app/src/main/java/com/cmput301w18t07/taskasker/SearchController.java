@@ -215,9 +215,9 @@ public class SearchController {
     Takes: Int taskID
     Returns: void
      */
-    public void deleteTaskByUsername(int userID){
+    public void deleteTaskById(int userID){
         String query = "{\"query\":{\"match\":{\"taskID\":\""+Integer.toString(userID)+"\"}}}";
-        this.deleteRequest(this.url+"/user/_query",query);
+        this.deleteRequest(this.url+"/task/_query",query);
     }
 
 

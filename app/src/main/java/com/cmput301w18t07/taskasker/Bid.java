@@ -30,6 +30,12 @@ public class Bid {
     private double bid;
     private Task task;
 
+    public Bid(User bidder, double bid, Task task){
+        this.bidder = bidder;
+        this.bid = bid;
+        this.task = task;
+    }
+
 
     /**
      * Purpose:

@@ -22,11 +22,10 @@
 
     <TextView
         android:id="@+id/textStatus"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="37dp"
-        android:layout_toEndOf="@+id/textTitle"
         android:text="Status"
         android:textColor="#ff8080"
         android:textSize="20dp" />

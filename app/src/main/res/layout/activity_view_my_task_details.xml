@@ -14,14 +14,13 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="36sp"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:text="@string/title" />
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="321dp"
+        android:layout_width="327dp"
         android:layout_height="86dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
@@ -33,7 +32,7 @@
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/status"
@@ -49,7 +48,6 @@
         android:layout_marginTop="16dp"
         android:text="@string/lowestbid"
         android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statusText" />
 
@@ -98,15 +96,41 @@
         app:srcCompat="@android:drawable/ic_menu_report_image" />
 
     <Button
-        android:id="@+id/backTaskButton"
-        android:layout_width="130dp"
+        android:id="@+id/deleteTaskButton"
+        android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginTop="8dp"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <Button
+        android:id="@+id/backTaskButton"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <Button
+        android:id="@+id/editTaskButton"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/deleteTaskButton"
+        app:layout_constraintStart_toEndOf="@+id/backTaskButton"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
 </android.support.constraint.ConstraintLayout>

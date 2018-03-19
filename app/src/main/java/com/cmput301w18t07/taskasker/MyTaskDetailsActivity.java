@@ -1,7 +1,4 @@
-/* Task Details
- *
- * March 2018
- *
+/*
  * Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
  * Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
  * distribute, or modify this code under terms and conditions of the Code of Student Behaviour
@@ -12,8 +9,8 @@ package com.cmput301w18t07.taskasker;
 
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,13 +28,13 @@ import android.widget.TextView;
  * @version 1.5
  * @see Task
  */
-public class TaskDetailsActivity extends AppCompatActivity {
+public class MyTaskDetailsActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
     private EditText username;
     private TextView errorMessage;
-    private TaskDetailsActivity activity = this;
+    private MyTaskDetailsActivity activity = this;
     private User check = null;
     private ConnectivityManager cm;
 
@@ -51,7 +48,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_task_details);
+        setContentView(R.layout.activity_view_my_task_details);
 
         final int taskID = getIntent().getIntExtra("task ID", 0);
 
@@ -59,6 +56,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
         //final int index = getIntent().getIntExtra("Index", -1);
 
         final Button backButton = findViewById(R.id.backTaskButton);
+        final Button deleteButton = findViewById(R.id.deleteTaskButton);
+        final Button editButton = findViewById(R.id.editTaskButton);
 
         final TextView title = findViewById(R.id.title);
         final TextView status = findViewById(R.id.status);
@@ -78,6 +77,26 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, EditTask.class);
+                intent.putExtra("task ID", taskID);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            //@TODO for when this method is implemented
+            //controller.deleteTask(taskID);
+            finish();
+            }
+        });
+
 
     }
 }

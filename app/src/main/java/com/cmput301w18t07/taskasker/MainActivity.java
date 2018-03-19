@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Task task = (Task) parent.getItemAtPosition(position);
                 int taskID = task.getTaskID();
-                Intent intent = new Intent(activity, TaskDetailsActivity.class);
+                Intent intent = new Intent(activity, MyTaskDetailsActivity.class);
                 intent.putExtra("task ID", taskID);
                 startActivity(intent);
             }
@@ -112,8 +112,14 @@ public class MainActivity extends AppCompatActivity {
         acceptedTaskList = controller.getTaskByTaker(user.getUsername());
         requestedTaskList = controller.getTaskByRequester(user.getUsername());
 
-        acceptedAdapter.swapItems(acceptedTaskList);
-        requestedAdapter.swapItems(requestedTaskList);
+        acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+        requestedAdapter = new TaskListAdapter(getApplicationContext(), requestedTaskList);
+
+        acceptedTaskListView.setAdapter(acceptedAdapter);
+        requestedTaskListView.setAdapter(requestedAdapter);
+
+        //acceptedAdapter.swapItems(acceptedTaskList);
+        //requestedAdapter.swapItems(requestedTaskList);
     }
 
     /**

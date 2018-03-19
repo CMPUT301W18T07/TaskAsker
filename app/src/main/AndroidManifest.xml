@@ -29,7 +29,9 @@
         <activity
             android:name=".ProfileActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".AddTaskActivity"></activity>
+        <activity android:name=".AddTaskActivity" />
+        <activity android:name=".EditTask"></activity>
+        <activity android:name=".MyTaskDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -210,6 +210,16 @@ public class SearchController {
         this.deleteRequest(this.url+"/user/_query",query);
     }
 
+    /*
+    Delete a task that has a matchin taskID
+    Takes: Int taskID
+    Returns: void
+     */
+    public void deleteTaskByUsername(int userID){
+        String query = "{\"query\":{\"match\":{\"taskID\":\""+Integer.toString(userID)+"\"}}}";
+        this.deleteRequest(this.url+"/user/_query",query);
+    }
+
 
     /* SEARCH CONTROLLER HELPER CLASSES & METHODS*/
 

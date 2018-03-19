@@ -102,10 +102,26 @@ public class SearchController {
         return taskList;
     }
 
+    /**
+     * Return all tasks that havent been assigned
+     * @return ArrayList of Tasks
+     */
     public ArrayList<Task> getOpenTasks(){
-        String response = this.getRequest(this.url+"/task/"+"_search?q=status:"+"Requested");
+        String query = "{\"query\":{\"bool\":{\"must_not\":{\"match\":{\"status\":\"Assigned\"}}}}}";
+        String response = this.getRequest(this.url+"/task/"+"_search",query);
         ArrayList<Task> taskList = new ArrayList<Task>();
-
+        try{
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            for(int i = 0; i < hitArray.length(); i++){
+                JSONObject jsonTask = hitArray.getJSONObject(i);
+                String jsonString = jsonTask.getJSONObject("_source").toString();
+                taskList.add(gson.fromJson(jsonString,Task.class));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         return taskList;
     }
 
@@ -258,6 +274,16 @@ public class SearchController {
         }
         return response;
     }
+    private String getRequest(String url,String query){
+        String[] request = {url,"GET",query};
+        String response = null;
+        try {
+            response = new RequestController().execute(request).get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
 
     /*
     Class to help facilitate HTTP requests.
@@ -300,7 +326,7 @@ public class SearchController {
                 e.printStackTrace();
             }
             // If we are making a post request
-            if(surl[1].equals("POST") || surl[1].equals("DELETE") && surl[2] != null) {
+            if(surl[2] != null) {
                 OutputStreamWriter out = null;
                 try {
                     out = new OutputStreamWriter(

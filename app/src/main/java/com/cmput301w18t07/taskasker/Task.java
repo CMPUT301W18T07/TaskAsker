@@ -77,8 +77,8 @@ public class Task {
         }
         this.requesterUsername = req.getUsername();
         this.requester = req;
-        this.time = new Date();
         this.status = "Requested";
+        this.time = new Date();;
     }
 
     /**
@@ -108,6 +108,9 @@ public class Task {
         this.requesterUsername = user.getUsername();
     }
 
+    public void setStatus(String status){
+        this.status = status;
+    }
     /**
      * Purpose:
      * Gets the title of the task

@@ -145,7 +145,7 @@ public class InstrumentedSCTest {
     @Test
     public void addExampleStuff(){
         SearchController controller = new SearchController(url);
-        User user1 = new User("DemoUser");
+        User user1 = new User("Lucas");
         Task task1 = new Task("Wash my Cat");
         task1.setTaskID(controller.getMaxTaskId());
         Task task2 = new Task("Lick my windows");

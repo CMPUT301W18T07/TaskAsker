@@ -102,6 +102,13 @@ public class SearchController {
         return taskList;
     }
 
+    public ArrayList<Task> getOpenTasks(){
+        String response = this.getRequest(this.url+"/task/"+"_search?q=status:"+"Requested");
+        ArrayList<Task> taskList = new ArrayList<Task>();
+
+        return taskList;
+    }
+
     /**
      * Put a new user into the elasticsearch cloud.
      * @param user

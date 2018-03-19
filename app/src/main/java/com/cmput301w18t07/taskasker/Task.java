@@ -79,7 +79,6 @@ public class Task {
         this.requester = req;
         this.time = new Date();
         this.status = "Requested";
-        this.takerUsername = "";
     }
 
     /**
@@ -91,6 +90,7 @@ public class Task {
     public void setTaker(User user){
         this.taker = user;
         this.takerUsername = user.getUsername();
+        this.status = "Assigned";
     }
 
     public void setTaskID(int taskID){

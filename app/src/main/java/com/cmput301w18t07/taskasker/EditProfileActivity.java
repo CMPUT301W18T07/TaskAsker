@@ -45,7 +45,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText phone;
     private TextView userNameTextView;
     private User user;
-    //private String username;
+    private String username;
 
 
     /**
@@ -65,15 +65,15 @@ public class EditProfileActivity extends AppCompatActivity {
         phone = findViewById(R.id.phoneEditText);
         userNameTextView = findViewById(R.id.usernameTextView);
 
-        //username = getIntent().getStringExtra("username");
-        //user = controller.getUserByUsername(username);
-        Gson gson = new Gson();
-        user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
+        username = getIntent().getStringExtra("username");
+        user = controller.getUserByUsername(username);
+        //Gson gson = new Gson();
+        //user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
         final Button cancelButton = findViewById(R.id.cancelButton);
         final Button confirmButton = findViewById(R.id.confirmButton);
 
-        userNameTextView.setText(user.getUsername());
+        userNameTextView.setText(username);
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
         email.setText(user.getEmail());
@@ -95,8 +95,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 String phoneNumber = phone.getText().toString();
                 //TODO add check for changed profile
                 try {
-                    User newUser = new User(user.getUsername(), emailText, phoneNumber, firstNameText, lastNameText);
-                    controller.deleteUserByUsername(user.getUsername());
+                    User newUser = new User(username, emailText, phoneNumber, firstNameText, lastNameText);
+                    controller.deleteUserByUsername(username);
                     controller.saveUser(newUser);
                     finish();
 

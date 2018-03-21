@@ -261,6 +261,7 @@ public class UserTest {
         try{
             user = new User(basicName, "a.@b.cd", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
+            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -269,6 +270,7 @@ public class UserTest {
         try{
             user = new User(basicName, "a@b.c", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
+            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -277,6 +279,7 @@ public class UserTest {
         try{
             user = new User(basicName, "", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
+            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -285,6 +288,7 @@ public class UserTest {
         try{
             user = new User(basicName, " ", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
+            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -293,6 +297,67 @@ public class UserTest {
         try{
             user = new User(basicName, ".", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
+
+    @Test
+    public void testPhoneNumberFormat(){
+        boolean thrown = false;
+        User user = new User(basicName);
+        assertFalse(thrown);
+
+        try{
+            user = new User(basicName, basicEmail, "000-000-0000", basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, "0000000000", basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, "", basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, "0", basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, "aaaaaaaaaa", basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, "aaa-aaa-aaaa", basicFirst, basicLast);
+        } catch(Exception e){
+            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);

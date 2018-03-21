@@ -11,6 +11,7 @@ import static junit.framework.Assert.*;
 public class TaskTest {
     User firstUser;
     User secondUser;
+    String tooLong = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
     public TaskTest(){
         try{
@@ -28,13 +29,53 @@ public class TaskTest {
         assertNotNull(task);
         boolean thrown = false;
         try{
-            task = new Task("","",firstUser);
-            assertNotNull(task);
+            Task newTask = new Task("","",firstUser);
+            assertNotNull(newTask);
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
         }
         assertFalse(thrown);
+
+        thrown = false;
+        try{
+            Task newTask = new Task("aaaaaaaaaa", "", firstUser);
+            assertNotNull(newTask);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            Task newTask = new Task("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "", firstUser);
+            assertNotNull(newTask);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            Task newTask = new Task("", "aaaaaaaaaa", firstUser);
+            assertNotNull(task);
+        }catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            Task newTask = new Task("", tooLong, firstUser);
+            assertNotNull(task);
+        }catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertTrue(thrown);
     }
 
     @Test

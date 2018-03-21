@@ -21,8 +21,8 @@ public class UserTest {
         assertNotNull(user);
         boolean thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
-            assertNotNull(user);
+            User newUser = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertNotNull(newUser);
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;

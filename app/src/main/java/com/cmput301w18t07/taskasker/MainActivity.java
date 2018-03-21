@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
-        final Button searchButton = findViewById(R.id.imageButton5);
-
         acceptedTaskListView = findViewById(R.id.acceptedListView);
         requestedTaskListView = findViewById(R.id.requestedListView);
 
@@ -106,13 +104,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, SearchActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -184,6 +175,14 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("username", user.getUsername());
         //startActivity(intent);
         startActivityForResult(intent, 10);
+
+    }
+
+    public void searchTaskClick(View view) {
+        Intent intent = new Intent(activity, SearchActivity.class);
+        //intent.putExtra("username", user.getUsername());
+        //startActivity(intent);
+        startActivity(intent);
 
     }
 

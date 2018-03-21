@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
+        final Button searchButton = findViewById(R.id.imageButton5);
+
         acceptedTaskListView = findViewById(R.id.acceptedListView);
         requestedTaskListView = findViewById(R.id.requestedListView);
 
@@ -100,6 +103,14 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("task ID", taskID);
                 //startActivity(intent);
                 startActivityForResult(intent, 11);
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, SearchActivity.class);
+                startActivity(intent);
             }
         });
     }

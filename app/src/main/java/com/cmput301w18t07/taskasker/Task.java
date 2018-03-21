@@ -12,6 +12,7 @@ package com.cmput301w18t07.taskasker;
 
 import android.location.Location;
 import android.provider.ContactsContract;
+import android.util.Base64;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +44,10 @@ public class Task {
     private Bid bid;
     private Date time;
     private String status;
+    private Base64[] imageFolder;
+
+
+
 
 
     /**
@@ -113,9 +118,18 @@ public class Task {
     }
     /**
      * Purpose:
-     * Gets the title of the task
+     * Sets the title of the task
      *
      * @return String of the task's title
+     */
+
+    public void setImage(Base64[] imageFolder){this.imageFolder = imageFolder;}
+
+    /**
+     * Purpose:
+     * Sets list of Images that have been converted to Base64
+     *
+     * @return
      */
     public String getName() {
         return name;
@@ -238,4 +252,12 @@ public class Task {
     public void setTakerUsername(String takerUsername) {
         this.takerUsername = takerUsername;
     }
+
+    public Base64[] getImageFolder(){return this.imageFolder;}
+    /**
+     * Gets a list of Images converted to Base64
+     *
+     * @return imageFolder
+     */
+
 }

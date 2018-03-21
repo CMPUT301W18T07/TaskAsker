@@ -28,7 +28,7 @@ public class SearchActivity extends AppCompatActivity {
 
         taskListView = findViewById(R.id.SearchView);
 
-        //openTaskList = controller.getOpenTasks();
+        openTaskList = controller.getOpenTasks();
 
         try {
             Thread.sleep(500);

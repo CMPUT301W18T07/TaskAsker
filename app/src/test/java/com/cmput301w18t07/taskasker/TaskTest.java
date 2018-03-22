@@ -55,7 +55,6 @@ public class TaskTest {
             Task newTask = new Task("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "", firstUser);
             assertNotNull(newTask);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -75,7 +74,6 @@ public class TaskTest {
             Task newTask = new Task("", tooLong, firstUser);
             assertNotNull(newTask);
         }catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);

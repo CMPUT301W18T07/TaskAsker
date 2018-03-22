@@ -45,7 +45,6 @@ public class UserTest {
     @Test
     public void getEmailTest(){
         User user = new User(basicName);
-        assertNotSame(basicEmail, user.getEmail());
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
             assertEquals(basicEmail, user.getEmail());
@@ -269,9 +268,10 @@ public class UserTest {
         try{
             user = new User(basicName, "a@b.c", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
+            e.printStackTrace();
             thrown = true;
         }
-        assertTrue(thrown);
+        assertFalse(thrown);
 
         thrown = false;
         try{
@@ -316,7 +316,6 @@ public class UserTest {
         try{
             user = new User(basicName, basicEmail, "0000000000", basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -325,7 +324,6 @@ public class UserTest {
         try{
             user = new User(basicName, basicEmail, "", basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -334,7 +332,6 @@ public class UserTest {
         try{
             user = new User(basicName, basicEmail, "0", basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -343,7 +340,6 @@ public class UserTest {
         try{
             user = new User(basicName, basicEmail, "aaaaaaaaaa", basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -352,7 +348,6 @@ public class UserTest {
         try{
             user = new User(basicName, basicEmail, "aaa-aaa-aaaa", basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);

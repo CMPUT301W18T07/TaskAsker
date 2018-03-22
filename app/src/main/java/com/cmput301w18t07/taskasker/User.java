@@ -13,6 +13,9 @@ package com.cmput301w18t07.taskasker;
 import java.util.regex.Pattern;
 import android.util.Patterns;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 /**
  * Purpose:
  * Represents a User object.
@@ -25,13 +28,11 @@ import android.util.Patterns;
  */
 public class User {
     private String username = "";
-    private String email = "";
+    private InternetAddress email;
     private String phoneNumber = "";
     private String firstName = "";
     private String lastName = "";
-    private String emailString = "[A-Za-z0-9][A-Za-z0-9\\+\\-\\_\\.]{0,}\\@[A-Za-z0-9][A-Za-z0-9\\.\\-\\_]{0,}\\.[A-Za-z0-9]{2,}";
     private final Pattern usernamePattern = Pattern.compile("[A-Za-z0-9]+([_A-Za-z0-9-]){0,19}");
-    private final Pattern emailPattern = Pattern.compile(emailString);
     private final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
 
     /**
@@ -63,11 +64,12 @@ public class User {
         } else{
             this.username = username;
         }
-        if(!emailPattern.matcher(email).matches()){
-            throw new Exception("Email is of invalid format");
-        } else{
-            this.email = email;
-        }
+        //if(!emailPattern.matcher(email).matches()){
+        //    throw new Exception("Email is of invalid format");
+        //} else{
+        //    this.email = email;
+        //}
+        this.email = new InternetAddress(email, true);
         if(!phoneNumberPattern.matcher(phoneNumber).matches()){
             throw new Exception("Phone number is of invalid format");
         }
@@ -96,7 +98,7 @@ public class User {
      * @return String of user's email
      */
     public String getEmail() {
-        return email;
+        return email.getAddress();
     }
 
     /**
@@ -136,7 +138,7 @@ public class User {
      * @param email String of the user's new email
      */
     public void setEmail(String email) {
-        this.email = email;
+        this.email.setAddress(email);
     }
 
     /**

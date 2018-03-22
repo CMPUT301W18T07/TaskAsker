@@ -11,6 +11,7 @@
 package com.cmput301w18t07.taskasker;
 
 import java.util.regex.Pattern;
+import android.util.Patterns;
 
 /**
  * Purpose:
@@ -28,8 +29,9 @@ public class User {
     private String phoneNumber = "";
     private String firstName = "";
     private String lastName = "";
+    private String emailString = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private final Pattern usernamePattern = Pattern.compile("[A-Za-z0-9]+([_A-Za-z0-9-]){0,19}");
-    private final Pattern emailPattern = android.util.Patterns.EMAIL_ADDRESS;
+    private final Pattern emailPattern = Pattern.compile(emailString);
     private final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
 
     /**

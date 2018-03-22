@@ -10,13 +10,13 @@ import static junit.framework.Assert.*;
 
 public class UserTest {
     private String basicName = "testing1";
-    private String basicEmail = "test@example.com";
+    private String basicEmail = "example@test.com";
     private String basicPhone = "000-000-0000";
     private String basicFirst = "Test";
     private String basicLast = "Example";
 
     @Test
-    public void CreateTest(){
+    public void createTest(){
         User user = new User(basicName);
         assertNotNull(user);
         boolean thrown = false;
@@ -227,10 +227,9 @@ public class UserTest {
 
     @Test
     public void emailFormatTest(){
-        boolean thrown = false;
         User user = new User(basicName);
-        assertFalse(thrown);
 
+        boolean thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
         } catch(Exception e){

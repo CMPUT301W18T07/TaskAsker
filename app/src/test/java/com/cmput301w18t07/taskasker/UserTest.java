@@ -263,13 +263,12 @@ public class UserTest {
             e.printStackTrace();
             thrown = true;
         }
-        assertTrue(thrown);
+        assertFalse(thrown);
 
         thrown = false;
         try{
             user = new User(basicName, "a@b.c", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -278,7 +277,6 @@ public class UserTest {
         try{
             user = new User(basicName, "", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -287,7 +285,6 @@ public class UserTest {
         try{
             user = new User(basicName, " ", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);
@@ -296,7 +293,6 @@ public class UserTest {
         try{
             user = new User(basicName, ".", basicPhone, basicFirst, basicLast);
         } catch(Exception e){
-            e.printStackTrace();
             thrown = true;
         }
         assertTrue(thrown);

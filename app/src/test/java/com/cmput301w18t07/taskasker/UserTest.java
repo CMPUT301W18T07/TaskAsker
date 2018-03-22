@@ -5,7 +5,14 @@ import org.junit.Test;
 import static junit.framework.Assert.*;
 
 /**
- * Created by critt on 2018-03-14.
+ * Purpose:
+ * Test a User object.
+ *
+ * Design Rationale:
+ * Needed to test the User class
+ *
+ * @author Chris
+ * @version 1.5
  */
 
 public class UserTest {
@@ -51,6 +58,7 @@ public class UserTest {
         } catch(Exception e) {
             e.printStackTrace();
         }
+        assertNotNull(user);
     }
 
     @Test
@@ -91,12 +99,13 @@ public class UserTest {
 
     @Test
     public void usernameFormatTest(){
-        boolean thrown = false;
         User user = new User(basicName);
-        assertFalse(thrown);
+        assertNotNull(user);
 
+        boolean thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(basicName, user.getUsername());
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
@@ -105,7 +114,26 @@ public class UserTest {
 
         thrown = false;
         try{
+            user = new User("a", basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals("a", user.getUsername());
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User("a-", basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals("a-", user.getUsername());
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
             user = new User("", basicEmail, basicPhone, basicFirst, basicLast);
+            assertNull(user.getUsername());
         } catch(Exception e){
             thrown = true;
         }
@@ -114,6 +142,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(" ", basicEmail, basicPhone, basicFirst, basicLast);
+            assertNull(user.getUsername());
         } catch(Exception e){
             thrown = true;
         }
@@ -122,6 +151,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User("        ", basicEmail, basicPhone, basicFirst, basicLast);
+            assertNull(user.getUsername());
         } catch(Exception e){
             thrown = true;
         }
@@ -130,6 +160,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(".", basicEmail, basicPhone, basicFirst, basicLast);
+            assertNull(user.getUsername());
         } catch(Exception e){
             thrown = true;
         }
@@ -138,22 +169,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User("........", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertTrue(thrown);
-
-        thrown = false;
-        try{
-            user = new User("-", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertTrue(thrown);
-
-        thrown = false;
-        try{
-            user = new User("--", basicEmail, basicPhone, basicFirst, basicLast);
+            assertNull(user.getUsername());
         } catch(Exception e){
             thrown = true;
         }
@@ -162,62 +178,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User("-a", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertTrue(thrown);
-
-        thrown = false;
-        try{
-            user = new User("a-", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertFalse(thrown);
-
-        thrown = false;
-        try{
-            user = new User("a", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertFalse(thrown);
-
-        thrown = false;
-        try{
-            user = new User("a-_", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertFalse(thrown);
-
-        thrown = false;
-        try{
-            user = new User("a_", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertFalse(thrown);
-
-        thrown = false;
-        try{
-            user = new User("._", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertTrue(thrown);
-
-        thrown = false;
-        try{
-            user = new User("__", basicEmail, basicPhone, basicFirst, basicLast);
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertTrue(thrown);
-
-        thrown = false;
-        try{
-            user = new User("_a", basicEmail, basicPhone, basicFirst, basicLast);
+            assertNull(user.getUsername());
         } catch(Exception e){
             thrown = true;
         }
@@ -227,10 +188,12 @@ public class UserTest {
     @Test
     public void emailFormatTest(){
         User user = new User(basicName);
+        assertNotNull(user);
 
         boolean thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(basicEmail, user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
@@ -240,6 +203,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, "a@b.cd", basicPhone, basicFirst, basicLast);
+            assertEquals("a@b.cd", user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
@@ -249,6 +213,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, "a.b@c.de", basicPhone, basicFirst, basicLast);
+            assertEquals("a.b@c.de", user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
@@ -258,6 +223,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, "a.@b.cd", basicPhone, basicFirst, basicLast);
+            assertEquals("a.@b.cd", user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
@@ -267,6 +233,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, "a@b.c", basicPhone, basicFirst, basicLast);
+            assertEquals("a@b.c", user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
@@ -276,6 +243,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, "", basicPhone, basicFirst, basicLast);
+            assertNull(user.getEmail());
         } catch(Exception e){
             thrown = true;
         }
@@ -284,6 +252,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, " ", basicPhone, basicFirst, basicLast);
+            assertNull(user.getEmail());
         } catch(Exception e){
             thrown = true;
         }
@@ -292,6 +261,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, ".", basicPhone, basicFirst, basicLast);
+            assertNull(user.getEmail());
         } catch(Exception e){
             thrown = true;
         }
@@ -302,10 +272,11 @@ public class UserTest {
     public void testPhoneNumberFormat(){
         boolean thrown = false;
         User user = new User(basicName);
-        assertFalse(thrown);
+        assertNotNull(user);
 
         try{
-            user = new User(basicName, basicEmail, "000-000-0000", basicFirst, basicLast);
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(basicPhone, user.getPhoneNumber());
         } catch(Exception e){
             e.printStackTrace();
             thrown = true;
@@ -315,6 +286,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, basicEmail, "0000000000", basicFirst, basicLast);
+            assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
         }
@@ -323,6 +295,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, basicEmail, "", basicFirst, basicLast);
+            assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
         }
@@ -331,6 +304,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, basicEmail, "0", basicFirst, basicLast);
+            assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
         }
@@ -339,6 +313,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, basicEmail, "aaaaaaaaaa", basicFirst, basicLast);
+            assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
         }
@@ -347,6 +322,7 @@ public class UserTest {
         thrown = false;
         try{
             user = new User(basicName, basicEmail, "aaa-aaa-aaaa", basicFirst, basicLast);
+            assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
         }

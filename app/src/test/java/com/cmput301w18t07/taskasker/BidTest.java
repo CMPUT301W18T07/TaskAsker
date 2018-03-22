@@ -12,14 +12,21 @@ import org.junit.Test;
 import static junit.framework.Assert.*;
 
 /**
- * Created by critt on 2018-03-19.
+ * Purpose:
+ * Test a Bid object.
+ *
+ * Design Rationale:
+ * Needed to test the Bid class
+ *
+ * @author Chris
+ * @version 1.5
  */
 
 public class BidTest {
-    User firstUser;
-    User secondUser;
-    Task firstTask;
-    Task secondTask;
+    private User firstUser;
+    private User secondUser;
+    private Task firstTask;
+    private Task secondTask;
 
     public BidTest(){
         try{

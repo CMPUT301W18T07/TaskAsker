@@ -5,16 +5,19 @@ import org.junit.Test;
 import static junit.framework.Assert.*;
 
 /**
- * Created by critt on 2018-03-17.
+ * Purpose:
+ * Test a Task object.
+ *
+ * Design Rationale:
+ * Needed to test the Task class
+ *
+ * @author Chris
+ * @version 1.5
  */
 
 public class TaskTest {
-    User firstUser;
-    User secondUser;
-    String tooLong = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    private User firstUser;
+    private User secondUser;
 
     public TaskTest(){
         try{
@@ -62,13 +65,17 @@ public class TaskTest {
         thrown = false;
         try{
             Task newTask = new Task("", "aaaaaaaaaa", firstUser);
-            assertNotNull(task);
+            assertNotNull(newTask);
         }catch(Exception e){
             e.printStackTrace();
             thrown = true;
         }
         assertFalse(thrown);
 
+        String tooLong = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
         thrown = false;
         try{
             Task newTask = new Task("", tooLong, firstUser);

@@ -83,7 +83,8 @@ public class UserTest {
     @Test
     public void getFirstNameTest(){
         User user = new User(basicName);
-        assertNotSame(basicFirst, user.getFirstName());
+        assertNotNull(user);
+        assertNull(user.getLastName());
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
             assertEquals(basicFirst, user.getFirstName());
@@ -95,7 +96,8 @@ public class UserTest {
     @Test
     public void getLastNameTest(){
         User user = new User(basicName);
-        assertNotSame(basicLast, user.getLastName());
+        assertNotNull(user);
+        assertNull(user.getLastName());
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
             assertEquals(basicLast, user.getLastName());
@@ -330,6 +332,99 @@ public class UserTest {
         try{
             user = new User(basicName, basicEmail, "aaa-aaa-aaaa", basicFirst, basicLast);
             assertNull(user.getPhoneNumber());
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
+
+    @Test
+    //First and Last name use the same formatter, no sense testing twice, all tests performed on first name
+    public void firstNameFormatTest(){
+        User user = new User(basicName);
+        assertNotNull(user);
+        assertNull(user.getFirstName());
+
+        boolean thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(basicFirst, user.getFirstName());
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, "a", basicLast);
+            assertEquals("a", user.getFirstName());
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, "a'a", basicLast);
+            assertEquals("a'a", user.getFirstName());
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, "a'", basicLast);
+            assertEquals("a'", user.getFirstName());
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, "'", basicLast);
+            assertNull(user.getFirstName());
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, "", basicLast);
+            assertNull(user.getFirstName());
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, " ", basicLast);
+            assertNull(user.getFirstName());
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, "a a", basicLast);
+            assertNull(user.getFirstName());
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, "a ", basicLast);
+            assertNull(user.getFirstName());
         } catch(Exception e){
             thrown = true;
         }

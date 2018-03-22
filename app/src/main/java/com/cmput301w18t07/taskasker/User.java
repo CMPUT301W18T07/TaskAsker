@@ -27,13 +27,14 @@ import javax.mail.internet.InternetAddress;
  * @version 1.5
  */
 public class User {
-    private String username = "";
+    private String username;
     private InternetAddress email;
-    private String phoneNumber = "";
-    private String firstName = "";
-    private String lastName = "";
+    private String phoneNumber;
+    private String firstName;
+    private String lastName;
     private final Pattern usernamePattern = Pattern.compile("[A-Za-z0-9][A-Za-z0-9\\-\\_]{0,19}");
     private final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
+    private final Pattern namePattern = Pattern.compile("[A-Za-z][A-Za-z\\'\\-]{0,}");
 
     /**
      * Purpose:
@@ -64,12 +65,9 @@ public class User {
         } else{
             this.username = username;
         }
-        //if(!emailPattern.matcher(email).matches()){
-        //    throw new Exception("Email is of invalid format");
-        //} else{
-        //    this.email = email;
-        //}
+
         this.email = new InternetAddress(email, true);
+
         if(!phoneNumberPattern.matcher(phoneNumber).matches()){
             throw new Exception("Phone number is of invalid format");
         }
@@ -77,8 +75,17 @@ public class User {
             this.phoneNumber = phoneNumber;
         }
 
-        this.firstName = firstName;
-        this.lastName = lastName;
+        if(!namePattern.matcher(firstName).matches()){
+            throw new Exception("Unrecognized first name");
+        } else{
+          this.firstName = firstName;
+        }
+
+        if(!namePattern.matcher(lastName).matches()){
+            throw new Exception("Unrecognized last name");
+        } else{
+            this.lastName = lastName;
+        }
     }
 
     /**
@@ -147,8 +154,13 @@ public class User {
      *
      * @param phoneNumber String of the user's new phone number
      */
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) throws Exception {
+        if(!phoneNumberPattern.matcher(phoneNumber).matches()){
+            throw new Exception("Phone number is of invalid format");
+        }
+        else{
+            this.phoneNumber = phoneNumber;
+        }
     }
 
     /**
@@ -157,8 +169,12 @@ public class User {
      *
      * @param firstName String of the user's new first name
      */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String firstName) throws Exception{
+        if(!namePattern.matcher(firstName).matches()){
+            throw new Exception("Unrecognized first name");
+        } else{
+            this.firstName = firstName;
+        }
     }
 
     /**
@@ -167,8 +183,12 @@ public class User {
      *
      * @param lastName String of the user's new last name
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String lastName) throws Exception {
+        if(!namePattern.matcher(lastName).matches()){
+            throw new Exception("Unrecognized last name");
+        } else{
+            this.lastName = lastName;
+        }
     }
 
 }

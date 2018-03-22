@@ -26,12 +26,19 @@ public class Bid {
     private double bid;
     private Task task;
 
+    /**
+     * Purpose:
+     * Constructor for a User
+     *
+     * @param bidder User who made the bid
+     * @param bid Double for the value of the bid
+     * @param task Task the bid was made on
+     */
     public Bid(User bidder, double bid, Task task){
         this.bidder = bidder;
         this.bid = bid;
         this.task = task;
     }
-
 
     /**
      * Purpose:
@@ -61,5 +68,15 @@ public class Bid {
      */
     public Task getTask() {
         return task;
+    }
+
+    /**
+     * Purpose:
+     * Sets the value of the bid
+     *
+     * @param bid New value of the bid
+     */
+    public void setBid(double bid){
+        this.bid = bid;
     }
 }

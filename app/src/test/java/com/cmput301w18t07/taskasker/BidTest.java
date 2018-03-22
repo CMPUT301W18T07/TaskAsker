@@ -73,4 +73,12 @@ public class BidTest {
         assertEquals(secondTask, bid.getTask());
     }
 
+    @Test
+    public void setBidTest(){
+        Bid bid = new Bid(secondUser, 100.0, firstTask);
+        assertNotNull(bid);
+        assertEquals(100.0, bid.getBid());
+        bid.setBid(200.9);
+        assertEquals(200.9, bid.getBid());
+    }
 }

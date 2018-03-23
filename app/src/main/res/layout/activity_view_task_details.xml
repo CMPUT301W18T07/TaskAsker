@@ -130,8 +130,8 @@
         android:layout_marginTop="16dp"
         android:text="My Bid:"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:layout_editor_absoluteX="209dp" />
+        app:layout_constraintTop_toBottomOf="@+id/statusText"
+        tools:layout_editor_absoluteX="234dp" />
 
     <TextView
         android:id="@+id/userBid"
@@ -144,7 +144,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/userBidText"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/statusText" />
 
 
 </android.support.constraint.ConstraintLayout>

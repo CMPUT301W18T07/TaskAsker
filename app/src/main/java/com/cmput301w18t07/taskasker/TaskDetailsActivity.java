@@ -65,6 +65,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         final TextView status = findViewById(R.id.status);
         final TextView lowestBid = findViewById(R.id.lowestbid);
         final TextView description = findViewById(R.id.description);
+        final TextView userBid = findViewById(R.id.userBid);
 
 
         title.setText(task.getName());

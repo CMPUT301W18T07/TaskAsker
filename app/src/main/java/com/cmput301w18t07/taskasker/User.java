@@ -32,6 +32,8 @@ public class User {
     private String phoneNumber;
     private String firstName;
     private String lastName;
+    private double rating;
+    private int numRatings;
     private final Pattern usernamePattern = Pattern.compile("[A-Za-z0-9][A-Za-z0-9\\-\\_]{0,19}");
     private final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
     private final Pattern namePattern = Pattern.compile("[A-Za-z][A-Za-z\\'\\-]{0,}");
@@ -86,6 +88,8 @@ public class User {
         } else{
             this.lastName = lastName;
         }
+        this.rating = 3.0;
+        this.numRatings = 1;
     }
 
     /**
@@ -140,6 +144,16 @@ public class User {
 
     /**
      * Purpose:
+     * Gets the current rating of the user
+     *
+     * @return Double of user's rating
+     */
+    public double getRating(){
+        return this.rating;
+    }
+
+    /**
+     * Purpose:
      * Sets the email of the user
      *
      * @param email String of the user's new email
@@ -189,6 +203,22 @@ public class User {
         } else{
             this.lastName = lastName;
         }
+    }
+
+    /**
+     * Purpose:
+     * Updates the rating of the user
+     *
+     * @param rating Double of the user's newest rating
+     */
+    public void addRating(double rating) throws Exception{
+        if(rating < 0.0 || rating > 5.0){
+            throw new Exception("Invalid rating");
+        }
+        double temp = this.rating * this.numRatings;
+        temp += rating;
+        this.numRatings += 1;
+        this.rating = temp / this.numRatings;
     }
 
 }

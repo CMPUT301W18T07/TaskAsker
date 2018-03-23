@@ -107,6 +107,19 @@ public class UserTest {
     }
 
     @Test
+    public void getRatingTest(){
+        User user = new User(basicName);
+        assertNotNull(user);
+        assertEquals(0.0, user.getRating());
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void usernameFormatTest(){
         User user = new User(basicName);
         assertNotNull(user);
@@ -211,7 +224,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, "a@b.cd", basicPhone, basicFirst, basicLast);
+            user.setEmail("a@b.cd");
             assertEquals("a@b.cd", user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
@@ -221,7 +234,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, "a.b@c.de", basicPhone, basicFirst, basicLast);
+            user.setEmail("a.b@c.de");
             assertEquals("a.b@c.de", user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
@@ -231,7 +244,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, "a.@b.cd", basicPhone, basicFirst, basicLast);
+            user.setEmail("a.@b.cd");
             assertEquals("a.@b.cd", user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
@@ -241,7 +254,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, "a@b.c", basicPhone, basicFirst, basicLast);
+            user.setEmail("a@b.c");
             assertEquals("a@b.c", user.getEmail());
         } catch(Exception e){
             e.printStackTrace();
@@ -251,7 +264,16 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, "", basicPhone, basicFirst, basicLast);
+            user.setEmail("");
+            assertEquals("", user.getEmail());
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user.setEmail(" ");
             assertNull(user.getEmail());
         } catch(Exception e){
             thrown = true;
@@ -260,16 +282,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, " ", basicPhone, basicFirst, basicLast);
-            assertNull(user.getEmail());
-        } catch(Exception e){
-            thrown = true;
-        }
-        assertTrue(thrown);
-
-        thrown = false;
-        try{
-            user = new User(basicName, ".", basicPhone, basicFirst, basicLast);
+            user.setEmail(".");
             assertNull(user.getEmail());
         } catch(Exception e){
             thrown = true;
@@ -294,7 +307,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, "0000000000", basicFirst, basicLast);
+            user.setPhoneNumber("0000000000");
             assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
@@ -303,7 +316,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, "", basicFirst, basicLast);
+            user.setPhoneNumber("");
             assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
@@ -312,7 +325,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, "0", basicFirst, basicLast);
+            user.setPhoneNumber("0");
             assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
@@ -321,7 +334,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, "aaaaaaaaaa", basicFirst, basicLast);
+            user.setPhoneNumber("aaaaaaaaaa");
             assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
@@ -330,7 +343,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, "aaa-aaa-aaaa", basicFirst, basicLast);
+            user.setPhoneNumber("aaa-aaa-aaaa");
             assertNull(user.getPhoneNumber());
         } catch(Exception e){
             thrown = true;
@@ -357,7 +370,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, "a", basicLast);
+            user.setFirstName("a");
             assertEquals("a", user.getFirstName());
         } catch(Exception e){
             e.printStackTrace();
@@ -367,7 +380,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, "a'a", basicLast);
+            user.setFirstName("a'a");
             assertEquals("a'a", user.getFirstName());
         } catch(Exception e){
             e.printStackTrace();
@@ -377,7 +390,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, "a'", basicLast);
+            user.setFirstName("a'");
             assertEquals("a'", user.getFirstName());
         } catch(Exception e){
             e.printStackTrace();
@@ -387,7 +400,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, "'", basicLast);
+            user.setFirstName("'");
             assertNull(user.getFirstName());
         } catch(Exception e){
             thrown = true;
@@ -396,7 +409,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, "", basicLast);
+            user.setFirstName("");
             assertNull(user.getFirstName());
         } catch(Exception e){
             thrown = true;
@@ -405,7 +418,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, " ", basicLast);
+            user.setFirstName(" ");
             assertNull(user.getFirstName());
         } catch(Exception e){
             thrown = true;
@@ -414,7 +427,7 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, "a a", basicLast);
+            user.setFirstName("a a");
             assertNull(user.getFirstName());
         } catch(Exception e){
             thrown = true;
@@ -423,11 +436,64 @@ public class UserTest {
 
         thrown = false;
         try{
-            user = new User(basicName, basicEmail, basicPhone, "a ", basicLast);
+            user.setFirstName("a ");
             assertNull(user.getFirstName());
         } catch(Exception e){
             thrown = true;
         }
         assertTrue(thrown);
+    }
+
+    @Test
+    public void addRatingTest(){
+        User user = new User(basicName);
+        assertNotNull(user);
+        assertEquals(0.0, user.getRating());
+
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+            user.addRating(3.0);
+            assertEquals(3.0, user.getRating());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+            user.addRating(4.0);
+            assertEquals(3.5, user.getRating());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+            user.addRating(5.0);
+            assertEquals(4.0, user.getRating());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+            user.addRating(3.0);
+            assertEquals(3.0, user.getRating());
+            user.addRating(4.0);
+            double temp = 10.0;
+            assertEquals(temp/3, user.getRating());
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

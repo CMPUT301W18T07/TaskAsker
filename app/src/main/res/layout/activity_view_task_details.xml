@@ -125,7 +125,7 @@
 
     <TextView
         android:id="@+id/userBidText"
-        android:layout_width="75"
+        android:layout_width="75dp"
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
         android:text="My Bid:"

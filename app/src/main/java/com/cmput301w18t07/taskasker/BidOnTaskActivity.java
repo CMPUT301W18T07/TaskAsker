@@ -60,7 +60,6 @@ public class BidOnTaskActivity extends AppCompatActivity {
                 finish();
             }
         });
-        
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -158,8 +158,8 @@ public class User {
      *
      * @param email String of the user's new email
      */
-    public void setEmail(String email) {
-        this.email.setAddress(email);
+    public void setEmail(String email) throws Exception{
+        this.email = new InternetAddress(email, true);
     }
 
     /**

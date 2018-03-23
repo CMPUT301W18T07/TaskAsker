@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -50,6 +51,8 @@ public class BidOnTaskActivity extends AppCompatActivity {
         final TextView title = findViewById(R.id.title);
         final TextView lowestBid = findViewById(R.id.lowestbid);
         final TextView lowestBidText = findViewById(R.id.lowestBidText);
+
+        final EditText bidEditText = findViewById(R.id.bidEditText);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -174,7 +174,6 @@ public class Task {
     public Bid getBid() {
         return bid;
     }
-
     /**
      * Purpose:
      * Gets the requester of the task

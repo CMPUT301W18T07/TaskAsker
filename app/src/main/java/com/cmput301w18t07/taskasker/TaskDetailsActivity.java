@@ -59,6 +59,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         //final int index = getIntent().getIntExtra("Index", -1);
 
         final Button backButton = findViewById(R.id.backTaskButton);
+        final Button bidButton = findViewById(R.id.bidButton);
 
         final TextView title = findViewById(R.id.title);
         final TextView status = findViewById(R.id.status);
@@ -79,5 +80,11 @@ public class TaskDetailsActivity extends AppCompatActivity {
             }
         });
 
+        bidButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }

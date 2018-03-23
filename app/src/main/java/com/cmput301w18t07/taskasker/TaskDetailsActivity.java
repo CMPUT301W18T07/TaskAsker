@@ -55,7 +55,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
         final int taskID = getIntent().getIntExtra("task ID", 0);
 
-        Task task = controller.getTaskById(taskID);
+        final Task task = controller.getTaskById(taskID);
         //final int index = getIntent().getIntExtra("Index", -1);
 
         final Button backButton = findViewById(R.id.backTaskButton);
@@ -87,6 +87,10 @@ public class TaskDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //@TODO: Switch to a bidding page
+                int taskID = task.getTaskID();
+                Intent intent = new Intent(activity, BidOnTaskActivity.class);
+                intent.putExtra("task ID", taskID);
+                startActivity(intent);
             }
         });
     }

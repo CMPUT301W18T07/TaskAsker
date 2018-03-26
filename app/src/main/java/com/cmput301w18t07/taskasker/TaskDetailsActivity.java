@@ -67,8 +67,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
         final TextView status = findViewById(R.id.status);
         final TextView lowestBid = findViewById(R.id.lowestbid);
         final TextView description = findViewById(R.id.description);
-        final TextView userBidText = findViewById(R.id.userBidText);
-        final TextView userBid = findViewById(R.id.userBid);
 
         //@TODO: Need to hide userBidText and userBid if the user hasn't placed a bid yet
 

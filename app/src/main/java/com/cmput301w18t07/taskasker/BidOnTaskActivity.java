@@ -30,7 +30,6 @@ import android.widget.TextView;
 public class BidOnTaskActivity extends AppCompatActivity {
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
-    private BidOnTaskActivity activity = this;
 
     /**
      * Purpose:
@@ -56,6 +55,16 @@ public class BidOnTaskActivity extends AppCompatActivity {
 
         final EditText bidEditText = findViewById(R.id.bidEditText);
 
+        title.setText(task.getName());
+        Bid low;
+        try{
+            low = task.getBid();
+            lowestBidText.setText("$" + String.format("%.2f", task.getMinPrice()));
+        } catch(Exception e){
+            lowestBid.setVisibility(View.GONE);
+            lowestBidText.setVisibility(View.GONE);
+        }
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +74,6 @@ public class BidOnTaskActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //@TODO: Get the current user
                 //@TODO: Add the new bid to the server
                 double bid = Double.parseDouble(bidEditText.getText().toString());
                 Bid newBid = new Bid(user, bid, task);

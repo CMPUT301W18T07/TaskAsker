@@ -43,7 +43,9 @@ public class BidOnTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bid_on_task);
         final int taskID = getIntent().getIntExtra("task ID", 0);
-        Task task = controller.getTaskById(taskID);
+        final String username = getIntent().getStringExtra("username");
+        final Task task = controller.getTaskById(taskID);
+        final User user = controller.getUserByUsername(username);
 
         final Button backButton = findViewById(R.id.backButton);
         final Button submitButton = findViewById(R.id.submitButton);
@@ -63,7 +65,11 @@ public class BidOnTaskActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //@TODO: Get the current user
                 //@TODO: Add the new bid to the server
+                double bid = Double.parseDouble(bidEditText.getText().toString());
+                Bid newBid = new Bid(user, bid, task);
+                finish();
             }
         });
     }

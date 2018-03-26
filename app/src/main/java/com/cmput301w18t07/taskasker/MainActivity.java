@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 int taskID = task.getTaskID();
                 Intent intent = new Intent(activity, TaskDetailsActivity.class);
                 intent.putExtra("task ID", taskID);
+                intent.putExtra("username", user.getUsername());
                 startActivity(intent);
             }
         });

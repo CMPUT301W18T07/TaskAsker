@@ -54,9 +54,11 @@ public class TaskDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_task_details);
 
         final int taskID = getIntent().getIntExtra("task ID", 0);
+        final String username = getIntent().getStringExtra("username");
 
         final Task task = controller.getTaskById(taskID);
         //final int index = getIntent().getIntExtra("Index", -1);
+        final User user = controller.getUserByUsername(username);
 
         final Button backButton = findViewById(R.id.backTaskButton);
         final Button bidButton = findViewById(R.id.bidButton);
@@ -86,10 +88,10 @@ public class TaskDetailsActivity extends AppCompatActivity {
         bidButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //@TODO: Switch to a bidding page
                 int taskID = task.getTaskID();
                 Intent intent = new Intent(activity, BidOnTaskActivity.class);
                 intent.putExtra("task ID", taskID);
+                intent.putExtra("username", user.getUsername());
                 startActivity(intent);
             }
         });

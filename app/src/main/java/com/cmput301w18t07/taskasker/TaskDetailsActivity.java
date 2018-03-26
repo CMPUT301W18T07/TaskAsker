@@ -67,13 +67,22 @@ public class TaskDetailsActivity extends AppCompatActivity {
         final TextView status = findViewById(R.id.status);
         final TextView lowestBid = findViewById(R.id.lowestbid);
         final TextView description = findViewById(R.id.description);
-
-        //@TODO: Need to hide userBidText and userBid if the user hasn't placed a bid yet
+        final TextView lowestBidText = findViewById(R.id.lowestBidText);
 
         title.setText(task.getName());
         status.setText(task.getStatus());
-        lowestBid.setText("$" + String.format("%.2f", task.getMinPrice()));
         description.setText(task.getDescription());
+
+        Bid low;
+        try{
+            low = task.getBid();
+            lowestBid.setVisibility(View.VISIBLE);
+            lowestBidText.setVisibility(View.VISIBLE);
+            lowestBid.setText("$" + String.format("%.2f", task.getMinPrice()));
+        } catch(Exception e){
+            lowestBid.setVisibility(View.GONE);
+            lowestBidText.setVisibility(View.GONE);
+        }
 
 
         backButton.setOnClickListener(new View.OnClickListener() {

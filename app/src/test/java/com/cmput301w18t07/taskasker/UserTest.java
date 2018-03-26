@@ -450,13 +450,17 @@ public class UserTest {
         assertNotNull(user);
         assertEquals(0.0, user.getRating());
 
+        boolean thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
             assertEquals(3.0, user.getRating());
         } catch(Exception e){
             e.printStackTrace();
+            thrown = true;
         }
+        assertFalse(thrown);
 
+        thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
             assertEquals(3.0, user.getRating());
@@ -464,8 +468,11 @@ public class UserTest {
             assertEquals(3.0, user.getRating());
         } catch(Exception e){
             e.printStackTrace();
+            thrown = true;
         }
+        assertFalse(thrown);
 
+        thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
             assertEquals(3.0, user.getRating());
@@ -473,8 +480,11 @@ public class UserTest {
             assertEquals(3.5, user.getRating());
         } catch(Exception e){
             e.printStackTrace();
+            thrown = true;
         }
+        assertFalse(thrown);
 
+        thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
             assertEquals(3.0, user.getRating());
@@ -482,18 +492,54 @@ public class UserTest {
             assertEquals(4.0, user.getRating());
         } catch(Exception e){
             e.printStackTrace();
+            thrown = true;
         }
+        assertFalse(thrown);
 
+        thrown = false;
         try{
             user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
             assertEquals(3.0, user.getRating());
             user.addRating(3.0);
             assertEquals(3.0, user.getRating());
             user.addRating(4.0);
-            double temp = 10.0;
-            assertEquals(temp/3, user.getRating());
+            double temp = 10.0/3;
+            assertEquals(temp, user.getRating());
         } catch(Exception e){
             e.printStackTrace();
+            thrown = true;
         }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+            user.addRating(6.0);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+            user.addRating(0.0);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user = new User(basicName, basicEmail, basicPhone, basicFirst, basicLast);
+            assertEquals(3.0, user.getRating());
+            user.addRating(-1.0);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
     }
 }

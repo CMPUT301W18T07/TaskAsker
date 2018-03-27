@@ -35,6 +35,7 @@
         <activity android:name=".EditTask"></activity>
         <activity android:name=".MyTaskDetailsActivity"></activity>
         <activity android:name=".SearchActivity" />
+        <activity android:name=".BidOnTaskActivity"></activity>
     </application>
 
 </manifest>

@@ -35,7 +35,7 @@ public class BidOnTaskActivity extends AppCompatActivity {
      * Purpose:
      * Sets up the view when the add a bid activity is started
      *
-     * @param savedInstanceState
+     * @param savedInstanceState Not entirely sure what this is
      */
     @Override
     protected void onCreate(Bundle savedInstanceState){

@@ -40,7 +40,7 @@ public class Task {
     private String takerUsername;
     private Location location;
     private ArrayList<ContactsContract.CommonDataKinds.Photo> photoList;
-    private double minPrice;
+    private double lowestBid;
     private Bid bid;
     private Date time;
     private String status;
@@ -210,8 +210,8 @@ public class Task {
      *
      * @return double of the task's minimum price
      */
-    public double getMinPrice() {
-        return minPrice;
+    public double getLowestBid() {
+        return lowestBid;
     }
 
     /**
@@ -258,5 +258,6 @@ public class Task {
      *
      * @return imageFolder
      */
+
 
 }

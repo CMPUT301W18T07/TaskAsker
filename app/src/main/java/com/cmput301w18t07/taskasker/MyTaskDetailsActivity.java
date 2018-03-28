@@ -67,7 +67,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
 
         title.setText(task.getName());
         status.setText(task.getStatus());
-        lowestBid.setText("$" + String.format("%.2f", task.getMinPrice()));
+        lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
         description.setText(task.getDescription());
 
 

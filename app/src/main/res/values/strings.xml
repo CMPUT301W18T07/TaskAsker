@@ -16,4 +16,5 @@
     <string name="lowestbid">Lowest Bid:</string>
     <string name="phoneNumber">Phone Number</string>
     <string name="deleteTask">Delete Task</string>
+    <string name="title_activity_accept_bid">AcceptBidActivity</string>
 </resources>

@@ -32,10 +32,11 @@
             android:name=".ProfileActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".AddTaskActivity" />
-        <activity android:name=".EditTask"></activity>
-        <activity android:name=".MyTaskDetailsActivity"></activity>
+        <activity android:name=".EditTask" />
+        <activity android:name=".MyTaskDetailsActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".BidOnTaskActivity"></activity>
+        <activity android:name=".BidOnTaskActivity" />
+        <activity android:name=".AcceptBidActivity"></activity>
     </application>
 
 </manifest>

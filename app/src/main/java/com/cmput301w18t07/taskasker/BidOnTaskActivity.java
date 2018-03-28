@@ -61,7 +61,7 @@ public class BidOnTaskActivity extends AppCompatActivity {
             low = task.getBid();
             lowestBid.setVisibility(View.VISIBLE);
             lowestBidText.setVisibility(View.VISIBLE);
-            lowestBidText.setText("$" + String.format("%.2f", task.getMinPrice()));
+            lowestBidText.setText("$" + String.format("%.2f", task.getLowestBid()));
         } catch(Exception e){
             lowestBid.setVisibility(View.GONE);
             lowestBidText.setVisibility(View.GONE);

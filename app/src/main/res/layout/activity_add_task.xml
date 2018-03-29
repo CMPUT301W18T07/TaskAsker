@@ -7,6 +7,24 @@
     android:background="#efefef"
     tools:context="com.cmput301w18t07.taskasker.AddTaskActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Scroll">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lnrImages"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"

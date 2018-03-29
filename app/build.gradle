@@ -32,4 +32,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     testCompile 'org.json:json:20080701'
     implementation files('javax.mail.jar')
+    implementation files('libs/glide-3.6.0.jar')
 }

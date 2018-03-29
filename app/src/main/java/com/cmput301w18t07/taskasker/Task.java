@@ -10,10 +10,16 @@
 
 package com.cmput301w18t07.taskasker;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.provider.ContactsContract;
 import android.util.Base64;
 
+import com.bumptech.glide.load.resource.bitmap.BitmapDecoder;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -44,7 +50,8 @@ public class Task {
     private Bid bid;
     private Date time;
     private String status;
-    private Base64[] imageFolder;
+    private ArrayList<Bitmap> imageFolder;
+    private ArrayList<String> base64Folder;
 
 
 
@@ -118,19 +125,34 @@ public class Task {
     }
     /**
      * Purpose:
+     * Sets list of Images that have been converted to Base64
+     *
+     * @return
+     */
+
+
+    public void setImage(ArrayList<Bitmap> imageList){
+
+        base64Folder.clear();
+        ArrayList<String> tempArray = new ArrayList<>();
+        for(int i= 0; i < imageList.size();i++){
+            Bitmap bitmap = imageList.get(i);
+            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
+            byte[] b = byteStream.toByteArray();
+            String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
+            tempArray.add(base64Image);
+        }
+
+        this.base64Folder = tempArray;}
+
+    /**
+     * Purpose:
      * Sets the title of the task
      *
      * @return String of the task's title
      */
 
-    public void setImage(Base64[] imageFolder){this.imageFolder = imageFolder;}
-
-    /**
-     * Purpose:
-     * Sets list of Images that have been converted to Base64
-     *
-     * @return
-     */
     public String getName() {
         return name;
     }
@@ -252,9 +274,16 @@ public class Task {
         this.takerUsername = takerUsername;
     }
 
-    public Base64[] getImageFolder(){return this.imageFolder;}
+    public ArrayList<Bitmap> getImageFolder(){
+        imageFolder.clear();
+        for(int i = 0; i < base64Folder.size();i++) {
+            byte[] decodedString = Base64.decode(base64Folder.get(i), Base64.DEFAULT);
+            Bitmap decodedbyte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageFolder.add(decodedbyte);
+        }
+        return this.imageFolder;}
     /**
-     * Gets a list of Images converted to Base64
+     * Gets a list of Images converted from Base64
      *
      * @return imageFolder
      */

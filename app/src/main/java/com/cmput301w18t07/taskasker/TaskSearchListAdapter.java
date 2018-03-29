@@ -112,11 +112,17 @@ public class TaskSearchListAdapter extends BaseAdapter{
             e.printStackTrace();
         }
 
-        v.setOnClickListener(new View.OnClickListener() {
+        taskRequester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "string: " + task.getName());
+                Toast.makeText(mContext, "username clicked: " + task.getRequester().getUsername(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Toast.makeText(mContext, "view clicked: " + task.getName(), Toast.LENGTH_SHORT).show();
             }
         });

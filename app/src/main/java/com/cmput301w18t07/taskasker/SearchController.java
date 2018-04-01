@@ -181,6 +181,22 @@ public class SearchController {
     }
 
     /**
+     * Remove bid from task with taskID
+     * @param bid
+     * @param taskID
+     */
+    public void removeBid(Bid bid, int taskID){
+        Task task = this.getTaskById(taskID);
+        task.removeBid(bid);
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.updateTask(task);
+    }
+
+    /**
      * Push updated task to elasticsearch
      * @param task
      */

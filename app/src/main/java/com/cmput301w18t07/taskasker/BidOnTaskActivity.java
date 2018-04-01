@@ -79,6 +79,7 @@ public class BidOnTaskActivity extends AppCompatActivity {
                 //@TODO: Add the new bid to the server
                 double bid = Double.parseDouble(bidEditText.getText().toString());
                 Bid newBid = new Bid(user, bid);
+                controller.setBid(newBid,taskID);
                 finish();
             }
         });

@@ -61,6 +61,7 @@ public class Task {
      */
     public Task(String name){
         this.name = name;
+        this.bidList = new ArrayList<Bid>();
     }
 
     /**

@@ -98,7 +98,7 @@ public class SearchController {
                 taskList.add(gson.fromJson(jsonString,Task.class));
             }
             for (Task t : taskList){
-                if (!t.getStatus().equals(status)){
+                if (!status.equals(t.getStatus())){
                     taskList.remove(t);
                 }
             }
@@ -162,6 +162,37 @@ public class SearchController {
     public void saveUser(User user){
         String stringUser = gson.toJson(user);
         this.postRequest(this.url+"/user/",stringUser);
+    }
+
+    /**
+     * Add bid to task with taskID
+     * @param bid
+     * @param taskID
+     */
+    public void setBid(Bid bid, int taskID){
+        Task task = this.getTaskById(taskID);
+        task.addBid(bid);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.updateTask(task);
+    }
+
+    /**
+     * Push updated task to elasticsearch
+     * @param task
+     */
+    public void updateTask(Task task){
+        String query = "{\"query\":{\"match\":{\"taskID\":\""+Integer.toString(task.getTaskID())+"\"}}}";
+        this.deleteRequest(this.url+"/task/_query",query);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.saveTask(task);
     }
 
     /**

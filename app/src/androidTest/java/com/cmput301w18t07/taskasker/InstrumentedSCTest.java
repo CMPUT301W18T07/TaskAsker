@@ -58,6 +58,35 @@ public class InstrumentedSCTest {
         assertEquals(null,controller.getUserByUsername("Jill"));
     }
     @Test
+    public void updateTaskTest(){
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
+        Task task1 = new Task("Task 1");
+        controller.saveTask(task1);
+        sleep2();
+        Task testTask = controller.getTaskById(task1.getTaskID());
+        assertEquals(testTask.getName(),"Task 1");
+        task1.addBid(new Bid(new User("Bill"),100));
+        controller.updateTask(task1);
+        sleep2();
+        testTask = controller.getTaskById(task1.getTaskID());
+        assertEquals(testTask.getBidList().get(0).getBid(),100.0);
+    }
+    @Test
+    public void addBidToTaskTest(){
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
+        Task task1 = new Task("Task 1");
+        controller.saveTask(task1);
+        sleep2();
+        Bid bid = new Bid(new User("Jimmy"),100);
+        controller.setBid(bid,task1.getTaskID());
+        sleep2();
+        assertEquals(controller.getTaskById(task1.getTaskID()).getBidList().get(0).getBid(),100.0);
+    }
+    @Test
     public void getTasksByRequester(){
         SearchController controller = new SearchController(url);
         controller.deleteAllTasks();

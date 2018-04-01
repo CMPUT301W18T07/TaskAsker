@@ -57,7 +57,7 @@ public class Bid {
     public double getBid() {
         return bid;
     }
-    
+
     /**
      * Purpose:
      * Sets the value of the bid

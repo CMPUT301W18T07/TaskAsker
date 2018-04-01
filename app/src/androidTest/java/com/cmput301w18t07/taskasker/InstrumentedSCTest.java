@@ -77,6 +77,25 @@ public class InstrumentedSCTest {
         assertEquals("Task 2",taskList.get(1).getName());
     }
     @Test
+    public void getTasksByRequesterWithStatus(){
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
+        User user1 = new User("Bill");
+        Task task1 = new Task("Task 1");
+        Task task2 = new Task("Task 2");
+        Task task3 = new Task("Task 3");
+        task1.setRequester(user1);
+        task2.setRequester(user1);
+        task2.setStatus("FINDME");
+        controller.saveTask(task1);
+        controller.saveTask(task2);
+        controller.saveTask(task3);
+        sleep2();
+        ArrayList<Task> taskList = controller.getTaskByRequester(user1.getUsername(),"FINDME");
+        assertEquals("Task 2",taskList.get(0).getName());
+    }
+    @Test
     public void getTasksByTaker(){
         SearchController controller = new SearchController(url);
         controller.deleteAllTasks();

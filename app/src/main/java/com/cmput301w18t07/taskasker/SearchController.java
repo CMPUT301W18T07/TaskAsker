@@ -62,7 +62,7 @@ public class SearchController {
      */
     public ArrayList<Task> getTaskByRequester(String username){
         String response = this.getRequest(this.url+"/task/"+"_search?q=requesterUsername:"+username);
-        ArrayList taskList = new ArrayList<Task>();
+        ArrayList<Task> taskList = new ArrayList<Task>();
         try{
             JSONObject reader = new JSONObject(response);
             JSONObject hits = reader.getJSONObject("hits");
@@ -71,6 +71,36 @@ public class SearchController {
                 JSONObject jsonTask = hitArray.getJSONObject(i);
                 String jsonString = jsonTask.getJSONObject("_source").toString();
                 taskList.add(gson.fromJson(jsonString,Task.class));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return taskList;
+    }
+
+    /**
+     * Return a list of all tasks requested by a user
+     * that also match a status.
+     * @param username
+     * @param status
+     * @return
+     */
+    public ArrayList<Task> getTaskByRequester(String username, String status){
+        String response = this.getRequest(this.url+"/task/"+"_search?q=requesterUsername:"+username);
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        try{
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            for(int i = 0; i < hitArray.length(); i++) {
+                JSONObject jsonTask = hitArray.getJSONObject(i);
+                String jsonString = jsonTask.getJSONObject("_source").toString();
+                taskList.add(gson.fromJson(jsonString,Task.class));
+            }
+            for (Task t : taskList){
+                if (!t.getStatus().equals(status)){
+                    taskList.remove(t);
+                }
             }
         } catch(Exception e) {
             e.printStackTrace();
@@ -189,7 +219,7 @@ public class SearchController {
 
     /**
      * Returns the value of what the next task ID should be.
-     * @return
+     * @return maxID
      */
     public int getMaxTaskId(){
         String response = this.getRequest(this.url+"/task/"+"_search?q=*");

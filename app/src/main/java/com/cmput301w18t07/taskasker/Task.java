@@ -16,9 +16,6 @@ import android.location.Location;
 import android.provider.ContactsContract;
 import android.util.Base64;
 
-import com.bumptech.glide.load.resource.bitmap.BitmapDecoder;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,9 +36,8 @@ public class Task {
     private String description;
     private int taskID;
     private User requester;
-    private User taker; // TEMPORARY - WILL BE REPLACED WITH BID
-    /* These are necessary because of the way elasticsearch handles searching,
-       I can explain more in person if necessary. */
+    private User taker;
+    private ArrayList<Bid> bidList;
     private String requesterUsername;
     private String takerUsername;
     private Location location;
@@ -90,7 +86,8 @@ public class Task {
         this.requesterUsername = req.getUsername();
         this.requester = req;
         this.status = "Requested";
-        this.time = new Date();;
+        this.time = new Date();
+        this.bidList = new ArrayList<Bid>();
     }
 
     /**
@@ -129,6 +126,22 @@ public class Task {
      *
      * @return
      */
+
+    /**
+     *  Returns bid list
+     * @return bidList
+     */
+    public ArrayList<Bid> getBidList(){
+        return this.bidList;
+    }
+
+    /**
+     * Add a bid to the bidList
+     * @param bid
+     */
+    public void addBid(Bid bid){
+        this.bidList.add(bid);
+    }
 
 
     public void setImage(ArrayList<Bitmap> imageList){

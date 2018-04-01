@@ -24,7 +24,6 @@ package com.cmput301w18t07.taskasker;
 public class Bid {
     private User bidder;
     private double bid;
-    private Task task;
 
     /**
      * Purpose:
@@ -34,10 +33,9 @@ public class Bid {
      * @param bid Double for the value of the bid
      * @param task Task the bid was made on
      */
-    public Bid(User bidder, double bid, Task task){
+    public Bid(User bidder, double bid){
         this.bidder = bidder;
         this.bid = bid;
-        this.task = task;
     }
 
     /**
@@ -59,17 +57,7 @@ public class Bid {
     public double getBid() {
         return bid;
     }
-
-    /**
-     * Purpose:
-     * Gets the task of the bid
-     *
-     * @return Task that the bid is on
-     */
-    public Task getTask() {
-        return task;
-    }
-
+    
     /**
      * Purpose:
      * Sets the value of the bid

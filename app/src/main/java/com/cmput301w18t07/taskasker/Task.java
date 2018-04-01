@@ -144,6 +144,14 @@ public class Task {
         this.bidList.add(bid);
     }
 
+    /**
+     * Remove a bid from bidList
+     * @param bid
+     */
+    public void removeBid(Bid bid){
+        this.bidList.remove(bid);
+    }
+
 
     public void setImage(ArrayList<Bitmap> imageList){
 

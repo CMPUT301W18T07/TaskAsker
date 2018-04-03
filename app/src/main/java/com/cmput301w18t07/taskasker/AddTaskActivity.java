@@ -82,7 +82,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
         title = findViewById(R.id.titleEditText);
         description = findViewById(R.id.descriptionEditText);
-
         username = getIntent().getStringExtra("username");
 
         //user = controller.getUserByUsername(username);
@@ -92,6 +91,7 @@ public class AddTaskActivity extends AppCompatActivity {
         final Button cancelButton = findViewById(R.id.cancelTaskButton);
         final Button addTaskButton = findViewById(R.id.addTaskButton);
         final Button addPhotoButton = findViewById(R.id.addPhotoButton);
+        final Button addLocationButton = findViewById(R.id.addLocation);
 
         addPhotoButton.setOnClickListener(new View.OnClickListener(){
             @Override

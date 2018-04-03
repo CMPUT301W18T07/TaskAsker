@@ -7,6 +7,7 @@
 
 package com.cmput301w18t07.taskasker;
 
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Purpose:
@@ -36,6 +39,8 @@ public class EditTask extends AppCompatActivity {
     private EditTask activity = this;
     private User check = null;
     private ConnectivityManager cm;
+    private ArrayList<Bitmap> imageFolder;
+
 
 
     /**
@@ -78,6 +83,8 @@ public class EditTask extends AppCompatActivity {
                 if (task.getStatus().equalsIgnoreCase("requested")) {
                     String titleText = title.getText().toString();
                     String descriptionText = description.getText().toString();
+                    ArrayList<Bitmap> photoFolder = task.getImageFolder();
+
                     //TODO add check for changed profile
                     try {
                         Task taskEdit = new Task(titleText, descriptionText, task.getRequester());

@@ -10,13 +10,27 @@
 
 package com.cmput301w18t07.taskasker;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
+import java.util.ArrayList;
 
 
 /**
@@ -41,6 +55,10 @@ public class AddTaskActivity extends AppCompatActivity {
     private User user;
     private String username;
     private Task task;
+    private Bitmap outBitmap;
+    private TextView textTargetUri;
+
+
 
 
     /**
@@ -53,18 +71,29 @@ public class AddTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-
+        textTargetUri = findViewById(R.id.targetUri);
 
         title = findViewById(R.id.titleEditText);
         description = findViewById(R.id.descriptionEditText);
 
         username = getIntent().getStringExtra("username");
+
         //user = controller.getUserByUsername(username);
         //Gson gson = new Gson();
         //user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
         final Button cancelButton = findViewById(R.id.cancelTaskButton);
         final Button addTaskButton = findViewById(R.id.addTaskButton);
+        final Button addPhotoButton = findViewById(R.id.addPhotoButton);
+
+        addPhotoButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, 0);
+
+            }
+        });
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +107,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 try {
                     task = new Task(title.getText().toString(),description.getText().toString(),controller.getUserByUsername(username));
+                    task.setImage(outBitmap);
                     task.setTaskID(controller.getMaxTaskId());
                     controller.saveTask(task);
                 } catch (Exception e) {
@@ -88,6 +118,40 @@ public class AddTaskActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if(resultCode == RESULT_OK){
+            Uri resultUri = data.getData();
+            String imagepath = resultUri.getPath();
+            textTargetUri.setText(resultUri.toString());
+            Bitmap bitmap;
+
+            if(imagepath != null){
+
+                outBitmap = BitmapFactory.decodeFile(imagepath);
+
+            }
+
+            //try{
+                //bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                //bitmap.compress(Bitmap.CompressFormat.JPEG, 10, out);
+               // Bitmap decode = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+
+
+
+
+           // } catch (FileNotFoundException e){
+                //e.printStackTrace();
+            //} catch (IOException e){
+                //e.printStackTrace();
+           // }
+
+    }
+
 
     }
 }

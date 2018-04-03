@@ -46,8 +46,8 @@ public class Task {
     private Bid bid;
     private Date time;
     private String status;
-    private ArrayList<Bitmap> imageFolder;
-    private ArrayList<String> base64Folder;
+    private ArrayList<Bitmap> imageFolder = new ArrayList<Bitmap>();
+    private ArrayList<String> base64Folder =  new ArrayList<String>();
 
 
 
@@ -84,6 +84,7 @@ public class Task {
         } else{
             this.description = description;
         }
+
         this.requesterUsername = req.getUsername();
         this.requester = req;
         this.status = "Requested";
@@ -153,20 +154,20 @@ public class Task {
     }
 
 
-    public void setImage(ArrayList<Bitmap> imageList){
+    public void setImage(Bitmap image){
 
-        base64Folder.clear();
-        ArrayList<String> tempArray = new ArrayList<>();
-        for(int i= 0; i < imageList.size();i++){
-            Bitmap bitmap = imageList.get(i);
-            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
-            byte[] b = byteStream.toByteArray();
-            String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
-            tempArray.add(base64Image);
-        }
 
-        this.base64Folder = tempArray;}
+
+
+        Bitmap bitmap = image;
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
+        byte[] b = byteStream.toByteArray();
+        String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
+        base64Folder.add(base64Image);
+        return;
+
+    }
 
     /**
      * Purpose:

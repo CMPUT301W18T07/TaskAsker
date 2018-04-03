@@ -8,13 +8,17 @@
 package com.cmput301w18t07.taskasker;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -37,6 +41,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
     private MyTaskDetailsActivity activity = this;
     private User check = null;
     private ConnectivityManager cm;
+    private ArrayList<Bitmap> imageFolder = new ArrayList<Bitmap>();
 
 
     /**
@@ -54,15 +59,22 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
 
         Task task = controller.getTaskById(taskID);
         //final int index = getIntent().getIntExtra("Index", -1);
+        imageFolder = task.getImageFolder();
+
 
         final Button backButton = findViewById(R.id.backTaskButton);
         final Button deleteButton = findViewById(R.id.deleteTaskButton);
         final Button editButton = findViewById(R.id.editTaskButton);
 
+
         final TextView title = findViewById(R.id.title);
         final TextView status = findViewById(R.id.status);
         final TextView lowestBid = findViewById(R.id.lowestbid);
         final TextView description = findViewById(R.id.description);
+
+        ImageView imageView = findViewById(R.id.imageView);
+        Bitmap bm = imageFolder.get(0);
+        imageView.setImageBitmap(bm);
 
 
         title.setText(task.getName());

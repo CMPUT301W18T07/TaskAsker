@@ -9,9 +9,11 @@ package com.cmput301w18t07.taskasker;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,7 +61,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
 
         Task task = controller.getTaskById(taskID);
         //final int index = getIntent().getIntExtra("Index", -1);
-        imageFolder = task.getImageFolder();
+
 
 
         final Button backButton = findViewById(R.id.backTaskButton);
@@ -71,9 +73,12 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         final TextView status = findViewById(R.id.status);
         final TextView lowestBid = findViewById(R.id.lowestbid);
         final TextView description = findViewById(R.id.description);
+        final TextView output = findViewById(R.id.output);
 
         ImageView imageView = findViewById(R.id.imageView);
-        Bitmap bm = imageFolder.get(0);
+        String goodString = task.getSingleImage();
+        byte[] decodedString = Base64.decode(goodString, Base64.DEFAULT);
+        Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         imageView.setImageBitmap(bm);
 
 

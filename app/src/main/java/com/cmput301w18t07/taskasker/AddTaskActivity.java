@@ -78,7 +78,7 @@ public class AddTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-        textTargetUri = findViewById(R.id.targetUri);
+
 
         title = findViewById(R.id.titleEditText);
         description = findViewById(R.id.descriptionEditText);
@@ -132,8 +132,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK){
             Uri resultUri = data.getData();
-            String imagepath = resultUri.getPath();
-            textTargetUri.setText(resultUri.toString());
             targetImage = findViewById(R.id.imageView);
 
 

@@ -15,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.provider.ContactsContract;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -163,7 +164,7 @@ public class Task {
         image.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
         byte[] b = byteStream.toByteArray();
         String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
-        base64Folder.add(base64Image);
+        inputBitmap = base64Image;
 
 
     }
@@ -296,7 +297,10 @@ public class Task {
         this.takerUsername = takerUsername;
     }
 
-    
+
+    public String getSingleImage(){
+       return this.inputBitmap;
+    }
 
     public ArrayList<Bitmap> getImageFolder(){
         imageFolder.clear();

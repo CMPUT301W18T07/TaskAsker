@@ -8,6 +8,7 @@
 package com.cmput301w18t07.taskasker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,8 +116,11 @@ public class TaskSearchListAdapter extends BaseAdapter{
         taskRequester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "string: " + task.getName());
-                Toast.makeText(mContext, "username clicked: " + task.getRequester().getUsername(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, ProfileActivity.class);
+                intent.putExtra("username", task.getRequester().getUsername());
+                mContext.startActivity(intent);
+                //Log.d(TAG, "string: " + task.getName());
+                //Toast.makeText(mContext, "username clicked: " + task.getRequester().getUsername(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,6 +128,15 @@ public class TaskSearchListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "view clicked: " + task.getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, TaskDetailsActivity.class);
+                intent.putExtra("task ID", task.getTaskID());
+                intent.putExtra("username", task.getRequester().getUsername());
+                mContext.startActivity(intent);
+
+                //Intent intent = new Intent(mContext, TaskDetailsActivity.class);
+                //intent.putExtra("task ID", task.getTaskID());
+                //intent.putExtra("username", task.getRequester().getUsername());
+                //mContext.startActivity(intent);
             }
         });
 

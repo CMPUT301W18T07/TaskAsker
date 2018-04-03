@@ -80,8 +80,8 @@ public class TaskDetailsActivity extends AppCompatActivity {
             lowestBidText.setVisibility(View.VISIBLE);
             lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
         } catch(Exception e){
-            lowestBid.setVisibility(View.GONE);
-            lowestBidText.setVisibility(View.GONE);
+            //lowestBid.setVisibility(View.GONE);
+            //lowestBidText.setVisibility(View.GONE);
         }
 
 

@@ -46,8 +46,10 @@ public class Task {
     private Bid bid;
     private Date time;
     private String status;
-    private ArrayList<Bitmap> imageFolder = new ArrayList<Bitmap>();
-    private ArrayList<String> base64Folder =  new ArrayList<String>();
+    private ArrayList<Bitmap> imageFolder = new ArrayList<>();
+    private ArrayList<String> base64Folder =  new ArrayList<>();
+    private Bitmap outBitmap;
+    private String inputBitmap;
 
 
 
@@ -157,15 +159,12 @@ public class Task {
     public void setImage(Bitmap image){
 
 
-
-
-        Bitmap bitmap = image;
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-        //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
+        image.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
         byte[] b = byteStream.toByteArray();
         String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
         base64Folder.add(base64Image);
-        return;
+
 
     }
 
@@ -296,6 +295,8 @@ public class Task {
     public void setTakerUsername(String takerUsername) {
         this.takerUsername = takerUsername;
     }
+
+    
 
     public ArrayList<Bitmap> getImageFolder(){
         imageFolder.clear();

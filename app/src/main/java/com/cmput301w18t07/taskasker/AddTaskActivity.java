@@ -10,7 +10,9 @@
 
 package com.cmput301w18t07.taskasker;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -22,13 +24,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 
@@ -57,6 +62,8 @@ public class AddTaskActivity extends AppCompatActivity {
     private Task task;
     private Bitmap outBitmap;
     private TextView textTargetUri;
+    private ImageView targetImage;
+    private File imageFile;
 
 
 
@@ -89,7 +96,7 @@ public class AddTaskActivity extends AppCompatActivity {
         addPhotoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 0);
 
             }
@@ -127,31 +134,22 @@ public class AddTaskActivity extends AppCompatActivity {
             Uri resultUri = data.getData();
             String imagepath = resultUri.getPath();
             textTargetUri.setText(resultUri.toString());
-            Bitmap bitmap;
+            targetImage = findViewById(R.id.imageView);
 
-            if(imagepath != null){
 
-                outBitmap = BitmapFactory.decodeFile(imagepath);
-
+            try{
+                outBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),resultUri);
+            } catch (IOException e){
+                e.printStackTrace();
             }
 
-            //try{
-                //bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                //bitmap.compress(Bitmap.CompressFormat.JPEG, 10, out);
-               // Bitmap decode = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
 
+            targetImage.setImageBitmap(outBitmap);
 
-
-
-           // } catch (FileNotFoundException e){
-                //e.printStackTrace();
-            //} catch (IOException e){
-                //e.printStackTrace();
-           // }
 
     }
 
 
     }
+
 }

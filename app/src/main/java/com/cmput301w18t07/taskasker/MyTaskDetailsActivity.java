@@ -41,7 +41,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
     private MyTaskDetailsActivity activity = this;
     private User check = null;
     private ConnectivityManager cm;
-    private ArrayList<Bitmap> imageFolder = new ArrayList<Bitmap>();
+    private ArrayList<Bitmap> imageFolder = new ArrayList<>();
 
 
     /**

@@ -15,7 +15,6 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.provider.ContactsContract;
 import android.util.Base64;
-import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -64,7 +63,7 @@ public class Task {
      */
     public Task(String name){
         this.name = name;
-        this.bidList = new ArrayList<Bid>();
+        this.bidList = new ArrayList<>();
     }
 
     /**
@@ -92,7 +91,7 @@ public class Task {
         this.requester = req;
         this.status = "Requested";
         this.time = new Date();
-        this.bidList = new ArrayList<Bid>();
+        this.bidList = new ArrayList<>();
         this.lowestBid = 0.00;
     }
 
@@ -108,6 +107,12 @@ public class Task {
         this.status = "Assigned";
     }
 
+    /**
+     * Purpose:
+     * Sets the taker of the task
+     *
+     * @param taskID Integer representation of the task's ID
+     */
     public void setTaskID(int taskID){
         this.taskID = taskID;
     }
@@ -127,7 +132,7 @@ public class Task {
      * Purpose:
      * Sets the status of the task
      *
-     * @param status
+     * @param status String representation of the status of the task
      */
     public void setStatus(String status){
         this.status = status;
@@ -137,7 +142,7 @@ public class Task {
      * Purpose:
      * Sets the lowest bid of the task
      *
-     * @param bid
+     * @param bid Value of the lowest bid on the task
      */
     public void setLowestBid(double bid){
         this.lowestBid = bid;
@@ -147,7 +152,6 @@ public class Task {
      * Purpose:
      * Sets list of Images that have been converted to Base64
      *
-     *  Returns bid list
      * @return bidList
      */
     public ArrayList<Bid> getBidList(){
@@ -155,30 +159,37 @@ public class Task {
     }
 
     /**
+     * Purpose:
      * Add a bid to the bidList
-     * @param bid
+     *
+     * @param bid Bid object to be added to the list
      */
     public void addBid(Bid bid){
         this.bidList.add(bid);
     }
 
     /**
+     * Purpose:
      * Remove a bid from bidList
-     * @param bid
+     *
+     * @param bid Bid object to be removed from the list
      */
     public void removeBid(Bid bid){
         this.bidList.remove(bid);
     }
 
-
+    /**
+     * Purpose:
+     * Set the image of the task
+     *
+     * @param image Bitmap object of the image
+     */
     public void setImage(Bitmap image){
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
         byte[] b = byteStream.toByteArray();
         String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
         inputBitmap = base64Image;
-
-
     }
 
     /**

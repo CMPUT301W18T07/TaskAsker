@@ -9,6 +9,8 @@ package com.cmput301w18t07.taskasker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static junit.framework.Assert.*;
 
 /**
@@ -25,11 +27,15 @@ import static junit.framework.Assert.*;
 public class TaskTest {
     private User firstUser;
     private User secondUser;
+    private Bid firstBid;
+    private Bid secondBid;
 
     public TaskTest(){
         try{
             firstUser = new User("req", "req@fake.com", "000-000-0000", "Requester", "Fake");
             secondUser = new User("take","take@fake.com","000-000-0000","Taker","Fake");
+            firstBid = new Bid(firstUser, 12.12);
+            secondBid = new Bid(secondUser, 11.11);
         } catch(Exception e) {
             e.printStackTrace();
             assertTrue(false);
@@ -120,6 +126,62 @@ public class TaskTest {
         task.setRequester(secondUser);
         assertEquals(secondUser,task.getRequester());
         assertNull(task.getTaker());
+    }
+
+    @Test
+    public void changeTaskIDTest(){
+        Task task = new Task("");
+        try{
+            task = new Task("","",firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertEquals(0, task.getTaskID());
+        task.setTaskID(1);
+        assertEquals(1, task.getTaskID());
+    }
+
+    public void changeStatusTest(){
+        Task task = new Task("");
+        try{
+            task = new Task("","",firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertEquals("Requested", task.getStatus());
+        task.setStatus("Completed");
+        assertEquals("Completed", task.getStatus());
+        task.setStatus("LOL");
+        assertEquals("LOL", task.getStatus());
+        task.setStatus("");
+        assertEquals("", task.getStatus());
+    }
+
+    public void bidListTesting(){
+        Task task = new Task("");
+        try{
+            task = new Task("","",firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        ArrayList<Bid> list = new ArrayList<Bid>();
+        assertNull(task.getBidList());
+        task.addBid(firstBid);
+        list.add(firstBid);
+        assertEquals(list, task.getBidList());
+        task.addBid(secondBid);
+        list.add(secondBid);
+        assertEquals(list, task.getBidList());
+        task.removeBid(firstBid);
+        list.remove(firstBid);
+        assertEquals(list, task.getBidList());
+        task.removeBid(secondBid);
+        list.remove(secondBid);
+        assertEquals(list, task.getBidList());
+        assertNull(task.getBidList());
     }
 
     @Test

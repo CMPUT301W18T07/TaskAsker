@@ -116,6 +116,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     task = new Task(title.getText().toString(),description.getText().toString(),controller.getUserByUsername(username));
                     task.setImage(outBitmap);
                     task.setTaskID(controller.getMaxTaskId());
+                    task.setLowestBid(0);
                     controller.saveTask(task);
                 } catch (Exception e) {
                     e.printStackTrace();

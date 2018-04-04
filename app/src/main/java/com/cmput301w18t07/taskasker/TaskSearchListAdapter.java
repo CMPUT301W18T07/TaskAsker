@@ -108,7 +108,13 @@ public class TaskSearchListAdapter extends BaseAdapter{
             taskTitle.setText(taskArrayList.get(position).getName());
             taskStatus.setText(taskArrayList.get(position).getStatus());
             taskRequester.setText(taskArrayList.get(position).getRequester().getUsername());
-            taskLowestBid.setText(taskArrayList.get(position).getBid().toString());
+            double lBid = taskArrayList.get(position).getLowestBid();
+            if (lBid == 0){
+                taskLowestBid.setText("No Bids");
+            }
+            else {
+                taskLowestBid.setText("$" + String.format("%.2f", lBid));
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -127,7 +133,7 @@ public class TaskSearchListAdapter extends BaseAdapter{
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "view clicked: " + task.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "view clicked: " + task.getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, TaskDetailsActivity.class);
                 intent.putExtra("task ID", task.getTaskID());
                 intent.putExtra("username", task.getRequester().getUsername());

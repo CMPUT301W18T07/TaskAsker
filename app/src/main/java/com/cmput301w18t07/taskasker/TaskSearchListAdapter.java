@@ -122,9 +122,17 @@ public class TaskSearchListAdapter extends BaseAdapter{
         taskRequester.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ProfileActivity.class);
-                intent.putExtra("username", task.getRequester().getUsername());
-                mContext.startActivity(intent);
+
+                if (task.getRequester() == null) {
+                    Toast.makeText(mContext, "Username Not Defined", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(mContext, ProfileActivity.class);
+                    intent.putExtra("username", task.getRequester().getUsername());
+                    mContext.startActivity(intent);
+                }
+
+
                 //Log.d(TAG, "string: " + task.getName());
                 //Toast.makeText(mContext, "username clicked: " + task.getRequester().getUsername(), Toast.LENGTH_SHORT).show();
             }
@@ -134,10 +142,18 @@ public class TaskSearchListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 //Toast.makeText(mContext, "view clicked: " + task.getName(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, TaskDetailsActivity.class);
-                intent.putExtra("task ID", task.getTaskID());
-                intent.putExtra("username", task.getRequester().getUsername());
-                mContext.startActivity(intent);
+
+                //String username = task.getRequester().getUsername();
+
+                if (task.getRequester() == null) {
+                    Toast.makeText(mContext, "Username Not Defined", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(mContext, TaskDetailsActivity.class);
+                    intent.putExtra("task ID", task.getTaskID());
+                    intent.putExtra("username", task.getRequester().getUsername());
+                    mContext.startActivity(intent);
+                }
 
                 //Intent intent = new Intent(mContext, TaskDetailsActivity.class);
                 //intent.putExtra("task ID", task.getTaskID());

@@ -156,6 +156,45 @@ public class SearchController {
     }
 
     /**
+     * Return all tasks that havent been assigned
+     * @return ArrayList of Tasks
+     */
+    public ArrayList<Task> getOpenTasks(String search){
+        String query = "{\"query\":{\"bool\":{\"must_not\":{\"match\":{\"status\":\"Assigned\"}}}}}";
+        String response = this.getRequest(this.url+"/task/"+"_search",query);
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        try{
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            for(int i = 0; i < hitArray.length(); i++){
+                JSONObject jsonTask = hitArray.getJSONObject(i);
+                String jsonString = jsonTask.getJSONObject("_source").toString();
+                taskList.add(gson.fromJson(jsonString,Task.class));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        String[] searches = search.trim().split("\\s+");
+        for(int i = 0; i < taskList.size(); i++){
+            Boolean taskContains = false;
+            Task task = taskList.get(i);
+            for(int j = 0; j < searches.length && taskContains == false; j++){
+                if(task.getName().toLowerCase().contains(searches[j].toLowerCase())){
+                    taskContains = true;
+                }
+                if(task.getDescription().toLowerCase().contains(searches[j].toLowerCase())){
+                    taskContains = true;
+                }
+            }
+            if(taskContains == false){
+                taskList.remove(i);
+            }
+        }
+        return taskList;
+    }
+
+    /**
      * Put a new user into the elasticsearch cloud.
      * @param user
      */

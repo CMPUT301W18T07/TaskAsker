@@ -58,6 +58,36 @@ public class InstrumentedSCTest {
         assertEquals(null,controller.getUserByUsername("Jill"));
     }
     @Test
+    public void searchAllTasks(){
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
+        User user = new User("Bill");
+        try {
+            Task task1 = new Task("Hello", "Fuck you", user);
+            Task task2 = new Task("Jelly", "Bing bong", user);
+            Task task3 = new Task("Plink1", "132", user);
+            controller.saveUser(user);
+            sleep2();
+            controller.saveTask(task1);
+            sleep2();
+            controller.saveTask(task2);
+            sleep2();
+            controller.saveTask(task3);
+            sleep2();
+            ArrayList<Task> taskList = controller.getOpenTasks("Bing CRAP");
+            assertEquals(1,taskList.size());
+            assertEquals("Jelly",taskList.get(0).getName());
+            sleep2();
+            taskList = controller.getOpenTasks("Bing link");
+            assertEquals(2,taskList.size());
+            assertEquals("Jelly",taskList.get(0).getName());
+            assertEquals("Plink1",taskList.get(1).getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
     public void updateTaskTest(){
         SearchController controller = new SearchController(url);
         controller.deleteAllTasks();

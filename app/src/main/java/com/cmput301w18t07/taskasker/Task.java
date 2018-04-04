@@ -178,14 +178,10 @@ public class Task {
      * Purpose:
      * Set the image of the task
      *
-     * @param image Bitmap object of the image
+     * @param inputImages ArrayList of Base64 Strings for images
      */
-    public void setImage(Bitmap image){
-        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
-        byte[] b = byteStream.toByteArray();
-        String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
-        inputBitmap = base64Image;
+    public void setImage(ArrayList<String> inputImages){
+        this.base64Folder = inputImages;
     }
 
     /**
@@ -322,14 +318,7 @@ public class Task {
        return this.inputBitmap;
     }
 
-    public ArrayList<Bitmap> getImageFolder(){
-        imageFolder.clear();
-        for(int i = 0; i < base64Folder.size();i++) {
-            byte[] decodedString = Base64.decode(base64Folder.get(i), Base64.DEFAULT);
-            Bitmap decodedbyte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            imageFolder.add(decodedbyte);
-        }
-        return this.imageFolder;}
+    public ArrayList<String> getImageFolder(){return this.base64Folder;}
     /**
      * Gets a list of Images converted from Base64
      *

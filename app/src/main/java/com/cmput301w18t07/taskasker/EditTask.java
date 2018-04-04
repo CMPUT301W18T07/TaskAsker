@@ -83,7 +83,7 @@ public class EditTask extends AppCompatActivity {
                 if (task.getStatus().equalsIgnoreCase("requested")) {
                     String titleText = title.getText().toString();
                     String descriptionText = description.getText().toString();
-                    ArrayList<Bitmap> photoFolder = task.getImageFolder();
+                    ArrayList<String> photoFolder = task.getImageFolder();
 
                     //TODO add check for changed profile
                     try {

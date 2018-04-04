@@ -44,6 +44,8 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
     private User check = null;
     private ConnectivityManager cm;
     private ArrayList<Bitmap> imageFolder = new ArrayList<>();
+    private ArrayList<String> base64Folder = new ArrayList<>();
+    private int arrayIndex = 0;
 
 
     /**
@@ -62,7 +64,11 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         Task task = controller.getTaskById(taskID);
         //final int index = getIntent().getIntExtra("Index", -1);
 
-
+        base64Folder = task.getImageFolder();
+        for(int i = 0; i < base64Folder.size(); i++){
+            String base64Image = base64Folder.get(i);
+            
+        }
 
         final Button backButton = findViewById(R.id.backTaskButton);
         final Button deleteButton = findViewById(R.id.deleteTaskButton);

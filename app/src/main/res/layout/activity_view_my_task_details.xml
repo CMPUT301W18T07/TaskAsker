@@ -10,24 +10,22 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="28dp"
         android:text="TextView"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:layout_editor_absoluteY="199dp"
         tools:text="@string/title" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="327dp"
         android:layout_height="86dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="28dp"
         android:text="@string/description"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+        tools:layout_editor_absoluteY="413dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,65 +36,59 @@
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
         android:text="@string/status"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/statusText"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        tools:layout_editor_absoluteY="272dp" />
 
     <TextView
         android:id="@+id/lowestbidText"
         android:layout_width="127dp"
         android:layout_height="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="36dp"
         android:text="@string/lowestbid"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusText" />
+        tools:layout_editor_absoluteY="320dp" />
 
     <TextView
         android:id="@+id/lowestbid"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
         android:text="0.00"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/lowestbidText"
-        app:layout_constraintTop_toBottomOf="@+id/statusText" />
+        tools:layout_editor_absoluteY="320dp" />
 
     <TextView
         android:id="@+id/statusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
         android:text="@string/status"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        tools:layout_editor_absoluteY="272dp" />
 
     <TextView
         android:id="@+id/descriptionText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="40dp"
         android:text="@string/description"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lowestbidText" />
+        tools:layout_editor_absoluteY="369dp" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="154dp"
-        android:layout_height="112dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="175dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -139,5 +131,29 @@
         app:layout_constraintEnd_toStartOf="@+id/deleteTaskButton"
         app:layout_constraintStart_toEndOf="@+id/backTaskButton"
         app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Last"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
 
 </android.support.constraint.ConstraintLayout>

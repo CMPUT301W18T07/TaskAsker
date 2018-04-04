@@ -64,6 +64,11 @@ public class AddTaskActivity extends AppCompatActivity {
     private TextView textTargetUri;
     private ImageView targetImage;
     private File imageFile;
+    private ArrayList<Bitmap> bitmapList = new ArrayList<>();
+    private ArrayList<String> base64Array = new ArrayList<>();
+    private int arrayIndex = 0;
+    private Button addPhotoButton;
+
 
 
 
@@ -90,7 +95,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
         final Button cancelButton = findViewById(R.id.cancelTaskButton);
         final Button addTaskButton = findViewById(R.id.addTaskButton);
-        final Button addPhotoButton = findViewById(R.id.addPhotoButton);
+        addPhotoButton = findViewById(R.id.addPhotoButton);
         final Button addLocationButton = findViewById(R.id.addLocation);
 
         addPhotoButton.setOnClickListener(new View.OnClickListener(){
@@ -114,7 +119,19 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 try {
                     task = new Task(title.getText().toString(),description.getText().toString(),controller.getUserByUsername(username));
-                    task.setImage(outBitmap);
+                    if(bitmapList.get(0) == null){
+                        Toast.makeText(getApplicationContext(), "No Photo Added", Toast.LENGTH_LONG).show();
+                    }else {
+                        for(int i = 0; i < arrayIndex; i++){
+                            Bitmap bm = bitmapList.get(i);
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] b = baos.toByteArray();
+                            String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
+                            base64Array.add(i, base64Image);
+                        }
+                        task.setImage(base64Array);
+                    }
                     task.setTaskID(controller.getMaxTaskId());
                     task.setLowestBid(0);
                     controller.saveTask(task);
@@ -141,14 +158,24 @@ public class AddTaskActivity extends AppCompatActivity {
             } catch (IOException e){
                 e.printStackTrace();
             }
+            if(arrayIndex > 9){
+                Toast.makeText(getApplicationContext(), "Max 10 Photos", Toast.LENGTH_LONG).show();
+            }
+            else {
+                bitmapList.add(arrayIndex, outBitmap);
+                targetImage.setImageBitmap(outBitmap);
+                arrayIndex++;
+            }
+
+            String newText = "Add Another Photo";
+            addPhotoButton.setText(newText);
 
 
-            targetImage.setImageBitmap(outBitmap);
+        }
 
 
     }
 
 
-    }
 
 }

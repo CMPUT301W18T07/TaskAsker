@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,12 +68,16 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         base64Folder = task.getImageFolder();
         for(int i = 0; i < base64Folder.size(); i++){
             String base64Image = base64Folder.get(i);
-            
+            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+            Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageFolder.add(i, bm);
         }
 
         final Button backButton = findViewById(R.id.backTaskButton);
         final Button deleteButton = findViewById(R.id.deleteTaskButton);
         final Button editButton = findViewById(R.id.editTaskButton);
+        final Button lastPhoto = findViewById(R.id.lastPhoto);
+        final Button nextPhoto = findViewById(R.id.nextPhoto);
 
 
         final TextView title = findViewById(R.id.title);
@@ -81,11 +86,15 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         final TextView description = findViewById(R.id.description);
         final TextView output = findViewById(R.id.output);
 
-        ImageView imageView = findViewById(R.id.imageView);
-        String goodString = task.getSingleImage();
-        byte[] decodedString = Base64.decode(goodString, Base64.DEFAULT);
-        Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        imageView.setImageBitmap(bm);
+        final ImageView imageView = findViewById(R.id.imageView);
+
+        if(imageFolder.get(arrayIndex) == null){
+            Toast.makeText(getApplicationContext(), "No Picture Found", Toast.LENGTH_LONG).show();
+        }else{
+            imageView.setImageBitmap(imageFolder.get(0));
+        }
+
+
 
 
         title.setText(task.getName());
@@ -93,6 +102,32 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
         description.setText(task.getDescription());
 
+        nextPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(arrayIndex < imageFolder.size() - 1){
+                    arrayIndex++;
+                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                }else{
+                    arrayIndex = 0;
+                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                }
+
+            }
+        });
+
+        lastPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(arrayIndex > 0){
+                    arrayIndex--;
+                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                }else{
+                    arrayIndex = imageFolder.size() - 1;
+                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                }
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

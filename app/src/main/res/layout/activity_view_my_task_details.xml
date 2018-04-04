@@ -133,6 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <Button
+        android:id="@+id/nextPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -145,6 +146,7 @@
         app:layout_constraintVertical_bias="0.109" />
 
     <Button
+        android:id="@+id/lastPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -162,6 +162,7 @@ public class Task {
      */
     public void addBid(Bid bid){
         this.bidList.add(bid);
+        this.status = "Bidded";
     }
 
     /**
@@ -172,6 +173,9 @@ public class Task {
      */
     public void removeBid(Bid bid){
         this.bidList.remove(bid);
+        if (this.bidList.size() <= 0){
+            this.status = "Requested";
+        }
     }
 
     /**

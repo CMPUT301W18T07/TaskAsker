@@ -45,7 +45,7 @@ public class Task {
     private double lowestBid;
     private Bid bid;
     private Date time;
-    private String status;
+    private String status; //(Requested,Bidded,Accepted)
     private ArrayList<Bitmap> imageFolder = new ArrayList<>();
     private ArrayList<String> base64Folder =  new ArrayList<>();
     private Bitmap outBitmap;
@@ -126,6 +126,17 @@ public class Task {
 
     /**
      * Purpose:
+     * Sets the bid that has been accepted.
+     *
+     * @param bid
+     */
+    public void setBid(Bid bid){
+        this.bid = bid;
+        this.status = "Accepted";
+    }
+
+    /**
+     * Purpose:
      * Sets the status of the task
      *
      * @param status String representation of the status of the task
@@ -162,6 +173,7 @@ public class Task {
      */
     public void addBid(Bid bid){
         this.bidList.add(bid);
+        this.status = "Bidded";
     }
 
     /**
@@ -172,6 +184,9 @@ public class Task {
      */
     public void removeBid(Bid bid){
         this.bidList.remove(bid);
+        if (this.bidList.size() <= 0){
+            this.status = "Requested";
+        }
     }
 
     /**

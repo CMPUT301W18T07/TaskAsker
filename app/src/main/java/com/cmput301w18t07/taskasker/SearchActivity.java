@@ -38,7 +38,7 @@ public class SearchActivity extends AppCompatActivity {
         taskListView = findViewById(R.id.SearchView);
         requesterTextView = findViewById(R.id.textRequester);
 
-        openTaskList = controller.getOpenTasks();
+        openTaskList = controller.getOpenTasks(); //<<--- INSERT TEXTVIEW HERE
 
         try {
             Thread.sleep(500);

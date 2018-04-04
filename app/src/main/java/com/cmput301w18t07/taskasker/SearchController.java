@@ -156,7 +156,10 @@ public class SearchController {
     }
 
     /**
-     * Return all tasks that havent been assigned
+     * Return all tasks that havent been assigned that
+     * match one of the keywords in the name or description
+     *
+     * @param search
      * @return ArrayList of Tasks
      */
     public ArrayList<Task> getOpenTasks(String search){

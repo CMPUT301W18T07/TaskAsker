@@ -83,6 +83,14 @@ public class InstrumentedSCTest {
             assertEquals(2,taskList.size());
             assertEquals("Jelly",taskList.get(0).getName());
             assertEquals("Plink1",taskList.get(1).getName());
+            sleep2();
+            taskList = controller.getOpenTasks("Bing link hell");
+            assertEquals(3,taskList.size());
+            assertEquals("Hello",taskList.get(0).getName());
+            assertEquals("Plink1",taskList.get(2).getName());
+            sleep2();
+            taskList = controller.getOpenTasks("");
+            assertEquals(3,taskList.size());
         } catch (Exception e) {
             e.printStackTrace();
         }

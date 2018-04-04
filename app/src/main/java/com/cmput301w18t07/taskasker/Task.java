@@ -45,7 +45,7 @@ public class Task {
     private double lowestBid;
     private Bid bid;
     private Date time;
-    private String status;
+    private String status; //(Requested,Bidded,Accepted)
     private ArrayList<Bitmap> imageFolder = new ArrayList<>();
     private ArrayList<String> base64Folder =  new ArrayList<>();
     private Bitmap outBitmap;
@@ -122,6 +122,17 @@ public class Task {
     public void setRequester(User user){
         this.requester = user;
         this.requesterUsername = user.getUsername();
+    }
+
+    /**
+     * Purpose:
+     * Sets the bid that has been accepted.
+     *
+     * @param bid
+     */
+    public void setBid(Bid bid){
+        this.bid = bid;
+        this.status = "Accepted";
     }
 
     /**

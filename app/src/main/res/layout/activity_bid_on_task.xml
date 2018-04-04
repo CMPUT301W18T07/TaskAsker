@@ -63,12 +63,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Enter a bid..."
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="343dp" />
+        app:layout_constraintTop_toBottomOf="@+id/lowestBidText" />
 
     <Button
         android:id="@+id/backButton"

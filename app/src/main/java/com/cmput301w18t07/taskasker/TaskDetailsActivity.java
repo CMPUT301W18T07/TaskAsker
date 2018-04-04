@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -67,23 +68,31 @@ public class TaskDetailsActivity extends AppCompatActivity {
         final TextView status = findViewById(R.id.status);
         final TextView lowestBid = findViewById(R.id.lowestbid);
         final TextView description = findViewById(R.id.description);
-        final TextView lowestBidText = findViewById(R.id.lowestBidText);
 
         title.setText(task.getName());
         status.setText(task.getStatus());
         description.setText(task.getDescription());
+        String bidString = Double.toString(task.getLowestBid());
+        //Toast.makeText(activity, bidString, Toast.LENGTH_SHORT).show();
+        double lBid = task.getLowestBid();
+        if (lBid == 0){
+            lowestBid.setText("No Bids");
+        }
+        else {
+            lowestBid.setText("$" + String.format("%.2f", lBid));
+        }
 
-        Bid low;
+        /*Bid low;
         try{
             low = task.getBid();
             lowestBid.setVisibility(View.VISIBLE);
             lowestBidText.setVisibility(View.VISIBLE);
             lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
         } catch(Exception e){
-            //lowestBid.setVisibility(View.GONE);
-            //lowestBidText.setVisibility(View.GONE);
+            lowestBid.setVisibility(View.GONE);
+            lowestBidText.setVisibility(View.GONE);
         }
-
+        */
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +109,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 intent.putExtra("task ID", taskID);
                 intent.putExtra("username", user.getUsername());
                 startActivity(intent);
+                finish();
             }
         });
     }

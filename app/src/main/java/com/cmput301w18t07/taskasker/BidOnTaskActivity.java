@@ -7,12 +7,14 @@
 
 package com.cmput301w18t07.taskasker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Purpose:
@@ -26,10 +28,10 @@ import android.widget.TextView;
  * @see Bid
  * @see Task
  */
-
 public class BidOnTaskActivity extends AppCompatActivity {
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
+
 
     /**
      * Purpose:
@@ -50,22 +52,33 @@ public class BidOnTaskActivity extends AppCompatActivity {
         final Button submitButton = findViewById(R.id.submitButton);
 
         final TextView title = findViewById(R.id.title);
-        final TextView lowestBid = findViewById(R.id.lowestbid);
+        final TextView lowestBid = findViewById(R.id.lowestBid);
         final TextView lowestBidText = findViewById(R.id.lowestBidText);
 
         final EditText bidEditText = findViewById(R.id.bidEditText);
 
         title.setText(task.getName());
-        Bid low;
-        try{
-            low = task.getBid();
-            lowestBid.setVisibility(View.VISIBLE);
-            lowestBidText.setVisibility(View.VISIBLE);
-            lowestBidText.setText("$" + String.format("%.2f", task.getLowestBid()));
-        } catch(Exception e){
-            lowestBid.setVisibility(View.GONE);
-            lowestBidText.setVisibility(View.GONE);
+        //lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
+        //lowestBid.setText("TEST");
+
+        double lBid = task.getLowestBid();
+        if (lBid == 0){
+            lowestBid.setText("No Bids");
         }
+        else {
+            lowestBid.setText("$" + String.format("%.2f", lBid));
+        }
+
+        //Bid low;
+        //try{
+        //    low = task.getBid();
+        //    lowestBid.setVisibility(View.VISIBLE);
+        //    lowestBidText.setVisibility(View.VISIBLE);
+        //    lowestBidText.setText("$" + String.format("%.2f", task.getLowestBid()));
+        //} catch(Exception e){
+            //lowestBid.setVisibility(View.GONE);
+            //lowestBidText.setVisibility(View.GONE);
+        //}
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,10 +89,19 @@ public class BidOnTaskActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //@TODO: Add the new bid to the server
+
                 double bid = Double.parseDouble(bidEditText.getText().toString());
+                if (task.getLowestBid() == 0 || bid < task.getLowestBid()) {
+                    //Toast.makeText(getApplicationContext(), "Lowest Bid Added", Toast.LENGTH_LONG).show();
+                    task.setLowestBid(bid);
+                    controller.updateTask(task);
+                }
                 Bid newBid = new Bid(user, bid);
+                Toast.makeText(getApplicationContext(), Double.toString(newBid.getBid()), Toast.LENGTH_LONG).show();
                 controller.setBid(newBid,taskID);
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

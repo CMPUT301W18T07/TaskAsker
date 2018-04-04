@@ -93,6 +93,7 @@ public class Task {
         this.status = "Requested";
         this.time = new Date();
         this.bidList = new ArrayList<Bid>();
+        this.lowestBid = 0.00;
     }
 
     /**
@@ -122,17 +123,30 @@ public class Task {
         this.requesterUsername = user.getUsername();
     }
 
+    /**
+     * Purpose:
+     * Sets the status of the task
+     *
+     * @param status
+     */
     public void setStatus(String status){
         this.status = status;
     }
+
+    /**
+     * Purpose:
+     * Sets the lowest bid of the task
+     *
+     * @param bid
+     */
+    public void setLowestBid(double bid){
+        this.lowestBid = bid;
+    }
+
     /**
      * Purpose:
      * Sets list of Images that have been converted to Base64
      *
-     * @return
-     */
-
-    /**
      *  Returns bid list
      * @return bidList
      */
@@ -158,8 +172,6 @@ public class Task {
 
 
     public void setImage(Bitmap image){
-
-
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, byteStream);
         byte[] b = byteStream.toByteArray();
@@ -219,6 +231,7 @@ public class Task {
     public Bid getBid() {
         return bid;
     }
+
     /**
      * Purpose:
      * Gets the requester of the task
@@ -256,7 +269,7 @@ public class Task {
      * @return double of the task's minimum price
      */
     public double getLowestBid() {
-        return lowestBid;
+        return this.lowestBid;
     }
 
     /**

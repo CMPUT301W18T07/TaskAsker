@@ -51,10 +51,6 @@ public class Task {
     private Bitmap outBitmap;
     private String inputBitmap;
 
-
-
-
-
     /**
      * Purpose:
      * Basic constructor, mostly for use in the testing of other classes
@@ -63,7 +59,7 @@ public class Task {
      */
     public Task(String name){
         this.name = name;
-        this.bidList = new ArrayList<>();
+        this.bidList = new ArrayList<Bid>();
     }
 
     /**
@@ -73,7 +69,7 @@ public class Task {
      * @param name String of the task's name
      * @param description String of the task's description
      * @param req User object of the task requester
-     * @throws Exception Thrown when a name or descrition is longer than the maximum allowed
+     * @throws Exception Thrown when a name or description is longer than the maximum allowed
      */
     public Task(String name, String description, User req) throws Exception {
         if(name.length() > 30){
@@ -91,7 +87,7 @@ public class Task {
         this.requester = req;
         this.status = "Requested";
         this.time = new Date();
-        this.bidList = new ArrayList<>();
+        this.bidList = new ArrayList<Bid>();
         this.lowestBid = 0.00;
     }
 

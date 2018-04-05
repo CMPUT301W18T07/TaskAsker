@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018 Brendan Bartok, Christopher Wood, Dylan Alcock, Lucas Gauk, Thomas Mackay,
+  ~ Tyler Strembitsky, CMPUT301, University of Alberta - All Rights Reserved. You may use,
+  ~ distribute, or modify this code under terms and conditions of the Code of Student Behaviour
+  ~  at University of Alberta. You can find a copy of the license on this project.
+  -->
+
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    class="com.google.android.gms.maps.SupportMapFragment" />

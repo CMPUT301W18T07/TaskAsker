@@ -102,6 +102,15 @@ public class AddTaskActivity extends AppCompatActivity {
         addPhotoButton = findViewById(R.id.addPhotoButton);
         final Button addLocationButton = findViewById(R.id.addLocation);
 
+        addLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddTaskActivity.this, MapActivity.class );
+                startActivity(intent);
+
+            }
+        });
+
         addPhotoButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

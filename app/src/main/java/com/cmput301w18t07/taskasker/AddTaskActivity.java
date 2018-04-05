@@ -116,19 +116,17 @@ public class AddTaskActivity extends AppCompatActivity {
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                try {
-                    task = new Task(title.getText().toString(),description.getText().toString(),controller.getUserByUsername(username));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-
-                if (task != null) {
+                if(bitmapList.size() != 0) {
                     try {
-                        if (bitmapList.get(0) == null) {
-                            Toast.makeText(getApplicationContext(), "No Photo Added", Toast.LENGTH_LONG).show();
-                        } else {
+                        task = new Task(title.getText().toString(), description.getText().toString(), controller.getUserByUsername(username));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                    if (task != null) {
+                        try {
+
                             for (int i = 0; i < arrayIndex; i++) {
                                 Bitmap bm = bitmapList.get(i);
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -138,18 +136,20 @@ public class AddTaskActivity extends AppCompatActivity {
                                 base64Array.add(i, base64Image);
                             }
                             task.setImage(base64Array);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+
+                        task.setTaskID(controller.getMaxTaskId());
+                        controller.saveTask(task);
+                        setResult(RESULT_OK);
+                        finish();
                     }
-
-                    task.setTaskID(controller.getMaxTaskId());
-                    controller.saveTask(task);
-                    setResult(RESULT_OK);
-                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "No Images Added", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 

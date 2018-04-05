@@ -94,13 +94,21 @@ public class BidOnTaskActivity extends AppCompatActivity {
                 double bid = Double.parseDouble(bidEditText.getText().toString());
 
                 Bid newBid = new Bid(user, bid);
-                Toast.makeText(getApplicationContext(), Double.toString(newBid.getBid()), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), Double.toString(newBid.getBid()), Toast.LENGTH_LONG).show();
                 controller.setBid(newBid,taskID);
 
+                Toast.makeText(getApplicationContext(), "Bid placed on task: "+ task.getName(), Toast.LENGTH_LONG).show();
+
                 if (task.getLowestBid() == 0 || bid < task.getLowestBid()) {
-                    Toast.makeText(getApplicationContext(), "Lowest Bid Added", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Lowest Bid Added", Toast.LENGTH_LONG).show();
                     task.setLowestBid(bid);
+                    task.setStatus("Bidded");
                     controller.updateTask(task);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 finish();

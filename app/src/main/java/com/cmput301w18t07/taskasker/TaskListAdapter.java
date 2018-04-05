@@ -102,7 +102,7 @@ public class TaskListAdapter extends BaseAdapter{
         String status = taskArrayList.get(position).getStatus();
         taskStatus.setText(status);
         if (status.equals("Bidded")) {
-            taskStatus.setBackgroundResource(R.color.bidded_background);
+            v.setBackgroundResource(R.color.bidded_background);
         }
 
         v.setTag(taskArrayList.get(position).getName());

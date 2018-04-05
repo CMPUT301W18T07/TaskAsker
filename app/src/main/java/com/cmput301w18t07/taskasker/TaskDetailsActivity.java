@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 /**
@@ -61,7 +60,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         //final int index = getIntent().getIntExtra("Index", -1);
         final User user = controller.getUserByUsername(username);
 
-        final Button backButton = findViewById(R.id.backTaskButton);
+        final Button backButton = findViewById(R.id.backButton);
         final Button bidButton = findViewById(R.id.bidButton);
 
         final TextView title = findViewById(R.id.title);

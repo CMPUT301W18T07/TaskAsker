@@ -10,7 +10,9 @@
 
 package com.cmput301w18t07.taskasker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Task> requestedTaskList;
     private TaskListAdapter requestedAdapter;
     private TaskListAdapter acceptedAdapter;
+    private TextView listTasks;
 
 
     /**
@@ -68,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
+        listTasks = findViewById(R.id.acceptedTitleTextView);
+
         acceptedTaskListView = findViewById(R.id.acceptedListView);
         requestedTaskListView = findViewById(R.id.requestedListView);
 
@@ -79,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
         acceptedTaskListView.setAdapter(acceptedAdapter);
         requestedTaskListView.setAdapter(requestedAdapter);
+
+
 
         acceptedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -220,5 +228,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void taskView(View view) {
+        final CharSequence taskTypes[] = new CharSequence[]{"My Accepted Tasks", "Tasks I've Bidded On", "My Tasks With Status Bidded", "My Tasks With Status Assigned"};
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose the Tasks You Wish to Display");
+        builder.setItems(taskTypes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // the user clicked on colors[which]
+                listTasks.setText(taskTypes[which]);
+            }
+        });
+        builder.show();
+    }
 }

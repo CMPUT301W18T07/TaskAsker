@@ -43,6 +43,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
     private TextView errorMessage;
     private MyTaskDetailsActivity activity = this;
     private User check = null;
+    Task task;
     private ConnectivityManager cm;
     private ArrayList<Bitmap> imageFolder = new ArrayList<>();
     private ArrayList<String> base64Folder = new ArrayList<>();
@@ -62,7 +63,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
 
         final int taskID = getIntent().getIntExtra("task ID", 0);
 
-        Task task = controller.getTaskById(taskID);
+        task = controller.getTaskById(taskID);
         //final int index = getIntent().getIntExtra("Index", -1);
 
         base64Folder = task.getImageFolder();
@@ -73,7 +74,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
             imageFolder.add(i, bm);
         }
 
-        final Button backButton = findViewById(R.id.backTaskButton);
+        final Button doneButton = findViewById(R.id.doneTaskButton);
         final Button deleteButton = findViewById(R.id.deleteTaskButton);
         final Button editButton = findViewById(R.id.editTaskButton);
         final Button lastPhoto = findViewById(R.id.lastPhoto);
@@ -129,11 +130,18 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
             }
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(RESULT_OK);
-                finish();
+                if (task.getStatus().equals("Assigned")){
+                    task.setStatus("Done");
+                    controller.updateTask(task);
+                    setResult(RESULT_OK);
+                    finish();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Cannot mark task as done if it isn't assigned", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

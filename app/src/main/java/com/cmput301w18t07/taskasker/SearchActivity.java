@@ -41,7 +41,7 @@ public class SearchActivity extends AppCompatActivity {
         taskListView = findViewById(R.id.SearchView);
         requesterTextView = findViewById(R.id.textRequester);
 
-        openTaskList = controller.getOpenTasks(); //<<--- INSERT TEXTVIEW HERE
+        openTaskList = controller.getOpenTasks();
 
         try {
             Thread.sleep(500);
@@ -67,5 +67,20 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            openTaskList.clear();
+            Thread.sleep(500);
+            openTaskList.addAll(controller.getOpenTasks());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //openTaskList.addAll(controller.getOpenTasks());
+        taskAdapter.notifyDataSetChanged();
     }
 }

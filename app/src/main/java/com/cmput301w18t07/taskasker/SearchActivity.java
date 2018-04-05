@@ -12,8 +12,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -31,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
@@ -50,18 +53,19 @@ public class SearchActivity extends AppCompatActivity {
 
         taskListView.setAdapter(taskAdapter);
 
-    }
 
-    public void usernameClick(View view){
-        Intent intent = new Intent(activity, ProfileActivity.class);
-        Gson gson = new Gson();
-        //intent.putExtra("user",gson.toJson(user));
-        intent.putExtra("username",requesterTextView.getText().toString());
-        startActivity(intent);
-    }
+        Button searchButton = findViewById(R.id.searchButton);
+        final EditText keywords = findViewById(R.id.searchKeywords);
 
-    //@Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        long viewId = view.getId();
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openTaskList.clear();
+                openTaskList.addAll(controller.getOpenTasks(keywords.getText().toString()));
+                taskAdapter.notifyDataSetChanged();
+
+            }
+        });
     }
 }

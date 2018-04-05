@@ -86,22 +86,23 @@ public class BidOnTaskActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 double bid = Double.parseDouble(bidEditText.getText().toString());
-                if (task.getLowestBid() == 0 || bid < task.getLowestBid()) {
-                    //Toast.makeText(getApplicationContext(), "Lowest Bid Added", Toast.LENGTH_LONG).show();
-                    task.setLowestBid(bid);
-                    controller.updateTask(task);
-                }
+
                 Bid newBid = new Bid(user, bid);
                 Toast.makeText(getApplicationContext(), Double.toString(newBid.getBid()), Toast.LENGTH_LONG).show();
                 controller.setBid(newBid,taskID);
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                if (task.getLowestBid() == 0 || bid < task.getLowestBid()) {
+                    Toast.makeText(getApplicationContext(), "Lowest Bid Added", Toast.LENGTH_LONG).show();
+                    task.setLowestBid(bid);
+                    controller.updateTask(task);
+                }
+
                 finish();
             }
         });

@@ -119,28 +119,37 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 try {
                     task = new Task(title.getText().toString(),description.getText().toString(),controller.getUserByUsername(username));
-                    if(bitmapList.get(0) == null){
-                        Toast.makeText(getApplicationContext(), "No Photo Added", Toast.LENGTH_LONG).show();
-                    }else {
-                        for(int i = 0; i < arrayIndex; i++){
-                            Bitmap bm = bitmapList.get(i);
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                            byte[] b = baos.toByteArray();
-                            String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
-                            base64Array.add(i, base64Image);
-                        }
-                        task.setImage(base64Array);
-                    }
-                    task.setTaskID(controller.getMaxTaskId());
-                    task.setLowestBid(0);
-                    controller.saveTask(task);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-                setResult(RESULT_OK);
-                finish();
+
+                if (task != null) {
+                    try {
+                        if (bitmapList.get(0) == null) {
+                            Toast.makeText(getApplicationContext(), "No Photo Added", Toast.LENGTH_LONG).show();
+                        } else {
+                            for (int i = 0; i < arrayIndex; i++) {
+                                Bitmap bm = bitmapList.get(i);
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                byte[] b = baos.toByteArray();
+                                String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
+                                base64Array.add(i, base64Image);
+                            }
+                            task.setImage(base64Array);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+
+                    task.setTaskID(controller.getMaxTaskId());
+                    controller.saveTask(task);
+                    setResult(RESULT_OK);
+                    finish();
+                }
+
             }
         });
 

@@ -74,11 +74,23 @@ public class Task {
     public Task(String name, String description, User req) throws Exception {
         if(name.length() > 30){
             throw new Exception("Task name too long");
+        }
+        //else {
+        //    this.name = name;
+        //}
+        if(name.matches("")){
+            throw new Exception("Task must have a title.");
         } else {
             this.name = name;
         }
         if(description.length() > 300){
             throw new Exception("Task description too long");
+        }
+        //else{
+            //   this.description = description;
+        //}
+        if(description.matches("")){
+            throw new Exception("Task must have a description");
         } else{
             this.description = description;
         }

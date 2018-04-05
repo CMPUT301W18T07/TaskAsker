@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class SearchActivity extends AppCompatActivity {
     private ListView taskListView;
     private TextView requesterTextView;
     private SearchActivity activity = this;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -40,6 +42,8 @@ public class SearchActivity extends AppCompatActivity {
 
         taskListView = findViewById(R.id.SearchView);
         requesterTextView = findViewById(R.id.textRequester);
+        progressBar = findViewById(R.id.ProgressBar1);
+        progressBar.setVisibility(View.GONE);
 
         openTaskList = controller.getOpenTasks();
 
@@ -60,6 +64,7 @@ public class SearchActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 openTaskList.clear();
                 openTaskList.addAll(controller.getOpenTasks(keywords.getText().toString()));

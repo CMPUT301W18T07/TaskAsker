@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button createNewAccount;
     private User user;
     private ConnectivityManager cm;
+    private ProgressBar progressBar;
 
 
     /**
@@ -67,10 +69,14 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.usernameEditText);
         loginButton = findViewById(R.id.loginButton);
         createNewAccount = findViewById(R.id.createAccountButton);
+        progressBar = findViewById(R.id.ProgressBar1);
+        progressBar.setVisibility(View.GONE);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                progressBar.setVisibility(View.VISIBLE);
                 boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
                 if (isConnected) {
                     try {
@@ -95,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } else {
                     //TODO: HANDLE OFFLINE ERROR MESSAGES FOR LOGIN SCREEN
+                    Toast.makeText(getApplicationContext(), "Please Connect To Internet To Log In", Toast.LENGTH_LONG);
                 }
 
             }
@@ -124,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         if(requestCode == 1){
             if(resultCode == RESULT_OK){
                 username.setText(data.getStringExtra("username"));
+
             }
         }
     }

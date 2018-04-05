@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -43,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView userNameTextView;
     private User user;
     private String username;
+    private ProgressBar progressBar;
 
 
     /**
@@ -61,6 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.emailTextView);
         phone = findViewById(R.id.phoneTextView);
         userNameTextView = findViewById(R.id.profileusernameTextView);
+        progressBar = findViewById(R.id.ProgressBar1);
+        progressBar.setVisibility(View.GONE);
 
         username = getIntent().getStringExtra("username");
         user = controller.getUserByUsername(username);
@@ -80,6 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 finish();
             }
         });
@@ -97,6 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 Intent intent = new Intent(activity, LoginActivity.class);
                 startActivity(intent);
                 finish();

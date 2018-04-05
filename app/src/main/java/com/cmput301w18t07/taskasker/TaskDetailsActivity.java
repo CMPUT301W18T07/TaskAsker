@@ -11,13 +11,20 @@
 package com.cmput301w18t07.taskasker;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 /**
@@ -40,6 +47,10 @@ public class TaskDetailsActivity extends AppCompatActivity {
     private TaskDetailsActivity activity = this;
     private User check = null;
     private ConnectivityManager cm;
+    private ImageView imageView;
+    private ArrayList<Bitmap> imageFolder = new ArrayList<>();
+    private ArrayList<String> base64Folder = new ArrayList<>();
+    private int arrayIndex = 0;
 
 
     /**
@@ -62,11 +73,33 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
         final Button backButton = findViewById(R.id.backButton);
         final Button bidButton = findViewById(R.id.bidButton);
+        final Button nextPhoto = findViewById(R.id.nextPhoto);
+        final Button lastPhoto = findViewById(R.id.lastPhoto);
 
         final TextView title = findViewById(R.id.title);
         final TextView status = findViewById(R.id.status);
         final TextView lowestBid = findViewById(R.id.lowestbid);
         final TextView description = findViewById(R.id.description);
+
+        imageView = findViewById(R.id.imageView);
+
+        base64Folder = task.getImageFolder();
+
+        for(int i = 0; i < base64Folder.size(); i++){
+            String base64Image = base64Folder.get(i);
+            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+            Bitmap bm = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imageFolder.add(i, bm);
+        }
+
+        if(imageFolder.get(arrayIndex) == null){
+            Toast.makeText(getApplicationContext(), "No Picture Found", Toast.LENGTH_LONG).show();
+        }else{
+            imageView.setImageBitmap(imageFolder.get(0));
+        }
+
+
+
 
         title.setText(task.getName());
         status.setText(task.getStatus());
@@ -92,6 +125,33 @@ public class TaskDetailsActivity extends AppCompatActivity {
             lowestBidText.setVisibility(View.GONE);
         }
         */
+
+        nextPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(arrayIndex < imageFolder.size() - 1){
+                    arrayIndex++;
+                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                }else{
+                    arrayIndex = 0;
+                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                }
+
+            }
+        });
+
+        lastPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(arrayIndex > 0){
+                    arrayIndex--;
+                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                }else{
+                    arrayIndex = imageFolder.size() - 1;
+                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                }
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

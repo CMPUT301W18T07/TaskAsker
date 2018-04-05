@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private TaskListAdapter requestedAdapter;
     private TaskListAdapter acceptedAdapter;
     private TextView listTasks;
+    private ProgressBar progressBar;
 
 
     /**
@@ -76,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
         acceptedTaskListView = findViewById(R.id.acceptedListView);
         requestedTaskListView = findViewById(R.id.requestedListView);
+        progressBar= findViewById(R.id.ProgressBar1);
+        progressBar.setVisibility(View.GONE);
 
         acceptedTaskList = controller.getTaskByTaker(user.getUsername());
         requestedTaskList = controller.getTaskByRequester(user.getUsername());
@@ -91,12 +95,14 @@ public class MainActivity extends AppCompatActivity {
         acceptedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                progressBar.setVisibility(View.VISIBLE);
                 Task task = (Task) parent.getItemAtPosition(position);
                 int taskID = task.getTaskID();
                 Intent intent = new Intent(activity, TaskDetailsActivity.class);
                 intent.putExtra("task ID", taskID);
                 intent.putExtra("username", user.getUsername());
                 startActivity(intent);
+
             }
         });
 
@@ -104,12 +110,14 @@ public class MainActivity extends AppCompatActivity {
         requestedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                progressBar.setVisibility(View.VISIBLE);
                 Task task = (Task) parent.getItemAtPosition(position);
                 int taskID = task.getTaskID();
                 Intent intent = new Intent(activity, MyTaskDetailsActivity.class);
                 intent.putExtra("task ID", taskID);
                 //startActivity(intent);
                 startActivityForResult(intent, 11);
+
             }
         });
 
@@ -119,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-
+        progressBar.setVisibility(View.GONE);
         //Toast.makeText(getApplicationContext(), "This is on Resume", Toast.LENGTH_LONG).show();
 
         try {
@@ -166,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void profileClick(View view){
+        progressBar.setVisibility(View.VISIBLE);
         Intent intent = new Intent(activity, ProfileActivity.class);
         Gson gson = new Gson();
         //intent.putExtra("user",gson.toJson(user));
@@ -188,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void searchTaskClick(View view) {
+        progressBar.setVisibility(View.VISIBLE);
         Intent intent = new Intent(activity, SearchActivity.class);
         //intent.putExtra("username", user.getUsername());
         //startActivity(intent);

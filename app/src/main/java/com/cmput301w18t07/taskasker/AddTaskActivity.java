@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +69,7 @@ public class AddTaskActivity extends AppCompatActivity {
     private ArrayList<String> base64Array = new ArrayList<>();
     private int arrayIndex = 0;
     private Button addPhotoButton;
+    private ProgressBar newProgress;
 
 
 
@@ -88,6 +90,8 @@ public class AddTaskActivity extends AppCompatActivity {
         title = findViewById(R.id.titleEditText);
         description = findViewById(R.id.descriptionEditText);
         username = getIntent().getStringExtra("username");
+        newProgress = findViewById(R.id.ProgressBar1);
+        newProgress.setVisibility(View.GONE);
 
         //user = controller.getUserByUsername(username);
         //Gson gson = new Gson();
@@ -110,12 +114,14 @@ public class AddTaskActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                newProgress.setVisibility(View.VISIBLE);
                 finish();
             }
         });
         addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                newProgress.setVisibility(View.VISIBLE);
                 if(bitmapList.size() != 0) {
                     try {
                         task = new Task(title.getText().toString(), description.getText().toString(), controller.getUserByUsername(username));
@@ -145,10 +151,12 @@ public class AddTaskActivity extends AppCompatActivity {
                         task.setTaskID(controller.getMaxTaskId());
                         controller.saveTask(task);
                         setResult(RESULT_OK);
+                        
                         finish();
                     }
                 }else{
                     Toast.makeText(getApplicationContext(), "No Images Added", Toast.LENGTH_LONG).show();
+                    newProgress.setVisibility(View.GONE);
                 }
             }
         });

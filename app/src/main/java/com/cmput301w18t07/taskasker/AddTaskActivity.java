@@ -160,10 +160,21 @@ public class AddTaskActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             Uri resultUri = data.getData();
             targetImage = findViewById(R.id.imageView);
+            Boolean toLarge = false;
 
 
             try{
                 outBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),resultUri);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                outBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] b = baos.toByteArray();
+                long imageSize = b.length;
+                if (imageSize > 65536){
+                    toLarge = true;
+                }else{
+                    Toast.makeText(getApplicationContext(), Long.toString(imageSize), Toast.LENGTH_LONG).show();
+                }
+
             } catch (IOException e){
                 e.printStackTrace();
             }
@@ -171,9 +182,13 @@ public class AddTaskActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Max 10 Photos", Toast.LENGTH_LONG).show();
             }
             else {
-                bitmapList.add(arrayIndex, outBitmap);
-                targetImage.setImageBitmap(outBitmap);
-                arrayIndex++;
+                if(!toLarge) {
+                    bitmapList.add(arrayIndex, outBitmap);
+                    targetImage.setImageBitmap(outBitmap);
+                    arrayIndex++;
+                }else{
+                    Toast.makeText(getApplicationContext(), "Image Size To Large. Max Size is 64kb", Toast.LENGTH_LONG).show();
+                }
             }
 
             String newText = "Add Another Photo";

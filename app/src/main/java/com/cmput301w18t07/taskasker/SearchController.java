@@ -233,38 +233,6 @@ public class SearchController {
     }
 
     /**
-     * Add bid to task with taskID
-     * @param bid
-     * @param taskID
-     */
-    public void setBid(Bid bid, int taskID){
-        Task task = this.getTaskById(taskID);
-        task.addBid(bid);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        this.updateTask(task);
-    }
-
-    /**
-     * Remove bid from task with taskID
-     * @param bid
-     * @param taskID
-     */
-    public void removeBid(Bid bid, int taskID){
-        Task task = this.getTaskById(taskID);
-        task.removeBid(bid);
-        try {
-            Thread.sleep(200);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        this.updateTask(task);
-    }
-
-    /**
      * Push updated task to elasticsearch
      * @param task
      */

@@ -12,17 +12,14 @@ package com.cmput301w18t07.taskasker;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -81,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar= findViewById(R.id.ProgressBar1);
         progressBar.setVisibility(View.GONE);
 
-        acceptedTaskList = controller.getTaskByTaker(user.getUsername());
+        acceptedTaskList = controller.getTaskByBidder(user.getUsername()); //NOW GETS TASKS THAT YOU HAVE A BID ON
         requestedTaskList = controller.getTaskByRequester(user.getUsername());
 
         acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
@@ -131,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), "This is on Resume", Toast.LENGTH_LONG).show();
 
         try {
-            acceptedTaskList = controller.getTaskByTaker(user.getUsername());
+            acceptedTaskList = controller.getTaskByBidder(user.getUsername());
             requestedTaskList = controller.getTaskByRequester(user.getUsername());
 
             Thread.sleep(500);
@@ -202,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
         //intent.putExtra("username", user.getUsername());
         //startActivity(intent);
         startActivity(intent);
-
     }
 
     /**

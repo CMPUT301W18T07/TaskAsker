@@ -7,7 +7,6 @@
 
 package com.cmput301w18t07.taskasker;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -95,21 +94,21 @@ public class BidOnTaskActivity extends AppCompatActivity {
 
                 Bid newBid = new Bid(user, bid);
                 //Toast.makeText(getApplicationContext(), Double.toString(newBid.getBid()), Toast.LENGTH_LONG).show();
-                controller.setBid(newBid,taskID);
+                task.addBid(newBid);
 
                 Toast.makeText(getApplicationContext(), "Bid placed on task: "+ task.getName(), Toast.LENGTH_LONG).show();
 
                 if (task.getLowestBid() == 0 || bid < task.getLowestBid()) {
                     //Toast.makeText(getApplicationContext(), "Lowest Bid Added", Toast.LENGTH_LONG).show();
                     task.setLowestBid(bid);
-                    task.setStatus("Bidded");
-                    controller.updateTask(task);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+
+                controller.updateTask(task);
 
                 finish();
             }

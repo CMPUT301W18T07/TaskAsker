@@ -17,4 +17,11 @@
     <string name="phoneNumber">Phone Number</string>
     <string name="deleteTask">Delete Task</string>
     <string name="title_activity_accept_bid">AcceptBidActivity</string>
+    
+    <string-array name="taskTypes">
+        <item>"My Accepted Tasks"</item>
+        <item>"Tasks I've Bidded On"</item>
+        <item>"My Tasks With Status Bidded"</item>
+        <item>"My Tasks With Status Assigned"</item>
+    </string-array>
 </resources>

@@ -17,8 +17,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -71,12 +73,21 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
-        listTasks = findViewById(R.id.acceptedTitleTextView);
+        //listTasks = findViewById(R.id.acceptedTitleTextView);
 
         acceptedTaskListView = findViewById(R.id.acceptedListView);
         requestedTaskListView = findViewById(R.id.requestedListView);
         progressBar= findViewById(R.id.ProgressBar1);
         progressBar.setVisibility(View.GONE);
+
+        Spinner spinner = (Spinner) findViewById(R.id.taskSpinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.taskTypes, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
         acceptedTaskList = controller.getTaskByBidder(user.getUsername()); //NOW GETS TASKS THAT YOU HAVE A BID ON
         requestedTaskList = controller.getTaskByRequester(user.getUsername());
@@ -244,8 +255,38 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // the user clicked on colors[which]
                 listTasks.setText(taskTypes[which]);
+                if (taskTypes[which].equals("My Accepted Tasks")){
+                    //@TODO add adapter to show each task with its task requester username, title, status, and my accepted bid
+                    acceptedTaskList.clear();
+                    acceptedTaskList = controller.getTaskByTaker(user.getUsername());
+                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                    acceptedTaskListView.setAdapter(taskBiddedAdapter);
+                }
+                else if (taskTypes[which].equals("Tasks I've Bidded On")){
+                    //@TODO add adapter to show each with its task requester username, title, status, lowest bid so far, and my bid.
+                    acceptedTaskList.clear();
+                    acceptedTaskList = controller.getTaskByBidder(user.getUsername());
+                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                    acceptedTaskListView.setAdapter(taskBiddedAdapter);
+                }
+                else if (taskTypes[which].equals("My Tasks With Status Bidded")){
+                    acceptedTaskList.clear();
+                    acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Bidded");
+                    acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+                    acceptedTaskListView.setAdapter(acceptedAdapter);
+                }
+                else if (taskTypes[which].equals("My Tasks With Status Assigned")){
+                    //@TODO add adapter to show each task with its task provider username, title, status, and accepted bid
+                    acceptedTaskList.clear();
+                    acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Assigned");
+                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                    acceptedTaskListView.setAdapter(acceptedAdapter);
+                }
             }
         });
         builder.show();
     }
+
+
 }
+

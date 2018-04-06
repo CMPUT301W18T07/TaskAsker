@@ -251,35 +251,58 @@ public class InstrumentedSCTest {
         assertEquals(openTasks.get(0).getName(),"Test task 3");
     }
     @Test
-    public void addExampleStuff(){
+    public void getTasksByBidder(){
         SearchController controller = new SearchController(url);
-        User user1 = new User("Lucas");
-        Task task1 = new Task("Wash my Cat");
-        task1.setTaskID(controller.getMaxTaskId());
-        Task task2 = new Task("Lick my windows");
-        task2.setTaskID(controller.getMaxTaskId());
-        Task task3 = new Task("Buy me drugs");
-        task3.setTaskID(controller.getMaxTaskId());
-        Task task4 = new Task("Sell those drugs");
-        task4.setTaskID(controller.getMaxTaskId());
-        Task task5 = new Task("Code my app");
-        task5.setTaskID(controller.getMaxTaskId());
-        task1.setRequester(user1);
-        task2.setRequester(user1);
-        task3.setRequester(user1);
-        task4.setTaker(user1);
-        task5.setTaker(user1);
-        controller.saveUser(user1);
+        User user1 = new User("Tom");
+        User user2 = new User("Jimmy");
+        controller.deleteAllTasks();
         sleep2();
+        controller.saveUser(user1);
+        controller.saveUser(user2);
+        Task task1 = new Task("Test task 1");
+        sleep2();
+        Task task2 = new Task("Test task 2");
+        sleep2();
+        Task task3 = new Task("Test task 3");
+        sleep2();
+        Task task4 = new Task("Test task 4");
+        sleep2();
+        Bid bid1 = new Bid(user1, 100);
+        Bid bid2 = new Bid(user1, 200);
+        Bid bid3 = new Bid(user2, 69);
+        Bid bid4 = new Bid(user2, 240);
+        task1.addBid(bid1);
+        task2.addBid(bid3);
+        task3.addBid(bid2);
+        task3.addBid(bid4);
         controller.saveTask(task1);
         sleep2();
+        task2.setTaskID(controller.getMaxTaskId());
         controller.saveTask(task2);
         sleep2();
+        task3.setTaskID(controller.getMaxTaskId());
         controller.saveTask(task3);
         sleep2();
+        task4.setTaskID(controller.getMaxTaskId());
         controller.saveTask(task4);
         sleep2();
-        controller.saveTask(task5);
+        ArrayList<Task> biddedTasks = controller.getTaskByBidder("Tom");
+        assertEquals(2, biddedTasks.size());
+        assertEquals(biddedTasks.get(0).getName(),"Test task 1");
+        assertEquals(biddedTasks.get(1).getName(),"Test task 3");
+        task4.addBid(bid1);
+        controller.updateTask(task4);
+        sleep2();
+        biddedTasks = controller.getTaskByBidder("Tom");
+        assertEquals(3, biddedTasks.size());
+        assertEquals(biddedTasks.get(0).getName(),"Test task 1");
+        assertEquals(biddedTasks.get(1).getName(),"Test task 4");
+        assertEquals(biddedTasks.get(2).getName(),"Test task 3");
+        sleep2();
+        biddedTasks = controller.getTaskByBidder("Jimmy");
+        assertEquals(2, biddedTasks.size());
+        assertEquals(biddedTasks.get(0).getName(),"Test task 2");
+        assertEquals(biddedTasks.get(1).getName(),"Test task 3");
     }
     /*Helper function*/
     private void sleep2(){

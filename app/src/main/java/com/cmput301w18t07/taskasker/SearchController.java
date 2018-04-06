@@ -79,6 +79,32 @@ public class SearchController {
     }
 
     /**
+     * Returns a list of bids that a user with Username
+     * has bid on.
+     *
+     * @param username
+     * @return ArrayList of Task objects
+     */
+    public ArrayList<Task> getTaskByBidder(String username){
+        String response = this.getRequest(this.url+"/task/"+"_search?q=bidderUsername:"+username);
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        try{
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            for(int i = 0; i < hitArray.length(); i++) {
+                JSONObject jsonTask = hitArray.getJSONObject(i);
+                String jsonString = jsonTask.getJSONObject("_source").toString();
+                taskList.add(gson.fromJson(jsonString,Task.class));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return taskList;
+    }
+
+
+    /**
      * Return a list of all tasks requested by a user
      * that also match a status.
      * @param username

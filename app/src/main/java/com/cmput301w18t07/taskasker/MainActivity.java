@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private TaskListAdapter acceptedAdapter;
     private TextView listTasks;
     private ProgressBar progressBar;
+    private Spinner spinner;
 
 
     /**
@@ -80,25 +81,61 @@ public class MainActivity extends AppCompatActivity {
         progressBar= findViewById(R.id.ProgressBar1);
         progressBar.setVisibility(View.GONE);
 
-        Spinner spinner = (Spinner) findViewById(R.id.taskSpinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        spinner = findViewById(R.id.taskSpinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.taskTypes, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+        // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
         acceptedTaskList = controller.getTaskByBidder(user.getUsername()); //NOW GETS TASKS THAT YOU HAVE A BID ON
         requestedTaskList = controller.getTaskByRequester(user.getUsername());
 
-        acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+        //acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
         requestedAdapter = new TaskListAdapter(getApplicationContext(), requestedTaskList);
 
-        acceptedTaskListView.setAdapter(acceptedAdapter);
+        //acceptedTaskListView.setAdapter(acceptedAdapter);
         requestedTaskListView.setAdapter(requestedAdapter);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                if (item.equals("My Accepted Tasks")){
+                    //@TODO add adapter to show each task with its task requester username, title, status, and my accepted bid
+                    acceptedTaskList.clear();
+                    acceptedTaskList = controller.getTaskByTaker(user.getUsername());
+                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                    acceptedTaskListView.setAdapter(taskBiddedAdapter);
+                }
+                else if (item.equals("Tasks I've Bidded On")){
+                    //@TODO add adapter to show each with its task requester username, title, status, lowest bid so far, and my bid.
+                    acceptedTaskList.clear();
+                    acceptedTaskList = controller.getTaskByBidder(user.getUsername());
+                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                    acceptedTaskListView.setAdapter(taskBiddedAdapter);
+                }
+                else if (item.equals("My Tasks With Status Bidded")){
+                    acceptedTaskList.clear();
+                    acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Bidded");
+                    acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+                    acceptedTaskListView.setAdapter(acceptedAdapter);
+                }
+                else if (item.equals("My Tasks With Status Assigned")){
+                    //@TODO add adapter to show each task with its task provider username, title, status, and accepted bid
+                    acceptedTaskList.clear();
+                    acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Assigned");
+                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                    acceptedTaskListView.setAdapter(acceptedAdapter);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         acceptedTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -139,15 +176,43 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), "This is on Resume", Toast.LENGTH_LONG).show();
 
         try {
-            acceptedTaskList = controller.getTaskByBidder(user.getUsername());
             requestedTaskList = controller.getTaskByRequester(user.getUsername());
+
+            String item = spinner.getSelectedItem().toString();
+            if (item.equals("My Accepted Tasks")){
+                //@TODO add adapter to show each task with its task requester username, title, status, and my accepted bid
+                acceptedTaskList.clear();
+                acceptedTaskList = controller.getTaskByTaker(user.getUsername());
+                TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                acceptedTaskListView.setAdapter(taskBiddedAdapter);
+            }
+            else if (item.equals("Tasks I've Bidded On")){
+                //@TODO add adapter to show each with its task requester username, title, status, lowest bid so far, and my bid.
+                acceptedTaskList.clear();
+                acceptedTaskList = controller.getTaskByBidder(user.getUsername());
+                TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                acceptedTaskListView.setAdapter(taskBiddedAdapter);
+            }
+            else if (item.equals("My Tasks With Status Bidded")){
+                acceptedTaskList.clear();
+                acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Bidded");
+                acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+                acceptedTaskListView.setAdapter(acceptedAdapter);
+            }
+            else if (item.equals("My Tasks With Status Assigned")){
+                //@TODO add adapter to show each task with its task provider username, title, status, and accepted bid
+                acceptedTaskList.clear();
+                acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Assigned");
+                TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
+                acceptedTaskListView.setAdapter(acceptedAdapter);
+            }
 
             Thread.sleep(500);
 
-            acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
+            //acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
             requestedAdapter = new TaskListAdapter(getApplicationContext(), requestedTaskList);
 
-            acceptedTaskListView.setAdapter(acceptedAdapter);
+            //acceptedTaskListView.setAdapter(acceptedAdapter);
             requestedTaskListView.setAdapter(requestedAdapter);
 
         } catch (InterruptedException e) {
@@ -244,49 +309,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    public void taskView(View view) {
-        final CharSequence taskTypes[] = new CharSequence[]{"My Accepted Tasks", "Tasks I've Bidded On", "My Tasks With Status Bidded", "My Tasks With Status Assigned"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose the Tasks You Wish to Display");
-        builder.setItems(taskTypes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // the user clicked on colors[which]
-                listTasks.setText(taskTypes[which]);
-                if (taskTypes[which].equals("My Accepted Tasks")){
-                    //@TODO add adapter to show each task with its task requester username, title, status, and my accepted bid
-                    acceptedTaskList.clear();
-                    acceptedTaskList = controller.getTaskByTaker(user.getUsername());
-                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
-                    acceptedTaskListView.setAdapter(taskBiddedAdapter);
-                }
-                else if (taskTypes[which].equals("Tasks I've Bidded On")){
-                    //@TODO add adapter to show each with its task requester username, title, status, lowest bid so far, and my bid.
-                    acceptedTaskList.clear();
-                    acceptedTaskList = controller.getTaskByBidder(user.getUsername());
-                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
-                    acceptedTaskListView.setAdapter(taskBiddedAdapter);
-                }
-                else if (taskTypes[which].equals("My Tasks With Status Bidded")){
-                    acceptedTaskList.clear();
-                    acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Bidded");
-                    acceptedAdapter = new TaskListAdapter(getApplicationContext(), acceptedTaskList);
-                    acceptedTaskListView.setAdapter(acceptedAdapter);
-                }
-                else if (taskTypes[which].equals("My Tasks With Status Assigned")){
-                    //@TODO add adapter to show each task with its task provider username, title, status, and accepted bid
-                    acceptedTaskList.clear();
-                    acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Assigned");
-                    TaskSearchListAdapter taskBiddedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList);
-                    acceptedTaskListView.setAdapter(acceptedAdapter);
-                }
-            }
-        });
-        builder.show();
-    }
-
-
 }
 

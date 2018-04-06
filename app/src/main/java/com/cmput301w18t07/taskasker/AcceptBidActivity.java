@@ -7,10 +7,9 @@
 
 package com.cmput301w18t07.taskasker;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -40,6 +39,8 @@ public class AcceptBidActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         //TODO: Functionality for accepting Bids
                         //MAKE SURE CHANGE STATUS FIELD
+                        //^Done automatically by the setBid(Bid) function of Task
+                        //It also deletes the rest of the bids in the Task's bidList -Lucas
                     }
                 });
                 deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +48,7 @@ public class AcceptBidActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         //TODO: Functionality for deleting Bids
                         //MAKE SURE TO CHECK TO SEE IF THERE ARE NO BIDS, IF SO CHANGE THE STATUS
+                        //^This is also done automatically by Task when removeBid(Bid) is called -Lucas
                     }
                 });
                 dialogBuilder.setView(dialogView);

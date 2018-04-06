@@ -11,12 +11,9 @@
 package com.cmput301w18t07.taskasker;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.provider.ContactsContract;
-import android.util.Base64;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -139,12 +136,15 @@ public class Task {
     /**
      * Purpose:
      * Sets the bid that has been accepted.
+     * Deletes all other bids in the array
      *
      * @param bid
      */
     public void setBid(Bid bid){
         this.bid = bid;
         this.status = "Accepted";
+        this.bidList = new ArrayList<Bid>();
+        this.bidList.add(bid);
     }
 
     /**

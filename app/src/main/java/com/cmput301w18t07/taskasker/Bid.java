@@ -23,6 +23,7 @@ package com.cmput301w18t07.taskasker;
  */
 public class Bid {
     private User bidder;
+    private String bidderUsername;
     private double bid;
 
     /**
@@ -35,6 +36,7 @@ public class Bid {
     public Bid(User bidder, double bid){
         this.bidder = bidder;
         this.bid = bid;
+        this.bidderUsername = bidder.getUsername();
     }
 
     /**
@@ -45,6 +47,15 @@ public class Bid {
      */
     public User getBidder() {
         return bidder;
+    }
+
+    /**
+     * Return the bidder's Username
+     *
+     * @return Bidder's username
+     */
+    public String getBidderUsername() {
+        return this.bidderUsername;
     }
 
     /**

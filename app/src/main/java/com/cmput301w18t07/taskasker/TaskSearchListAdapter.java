@@ -35,10 +35,10 @@ import static android.content.ContentValues.TAG;
 public class TaskSearchListAdapter extends BaseAdapter{
     private Context mContext;
     private ArrayList<Task> taskArrayList;
-
+    private String userType;
 
     /**
-     * Purpose:
+     * Purpose:1
      * Changes how a task is represented in a list view.
      *
      * @param mContext
@@ -47,7 +47,23 @@ public class TaskSearchListAdapter extends BaseAdapter{
     public TaskSearchListAdapter(Context mContext, ArrayList<Task> taskArrayList) {
         this.mContext = mContext;
         this.taskArrayList = taskArrayList;
+        this.userType = "Requester";
     }
+
+    /**
+     * Purpose:
+     * Changes how a task is represented in a list view.
+     *
+     * @param mContext
+     * @param taskArrayList
+     * @param userType
+     */
+    public TaskSearchListAdapter(Context mContext, ArrayList<Task> taskArrayList, String userType) {
+        this.mContext = mContext;
+        this.taskArrayList = taskArrayList;
+        this.userType = userType;
+    }
+
 
 
     /**
@@ -96,7 +112,18 @@ public class TaskSearchListAdapter extends BaseAdapter{
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(mContext, R.layout.search_task_list_item, null);
+        View v;
+        TextView taskMyBid = null;
+        //Toast.makeText(mContext, userType, Toast.LENGTH_SHORT).show();
+        if (userType.equals("Provider") || userType.equals("Requester")) {
+            //Toast.makeText(mContext, "Search Layout", Toast.LENGTH_SHORT).show();
+            v = View.inflate(mContext, R.layout.search_task_list_item, null);
+        }
+        else{
+            //Toast.makeText(mContext, "Bid Layout", Toast.LENGTH_SHORT).show();
+            v = View.inflate(mContext, R.layout.bidded_task_list_item, null);
+            taskMyBid = v.findViewById(R.id.textMyBid);
+        }
         TextView taskTitle = v.findViewById(R.id.textTitle);
         TextView taskStatus = v.findViewById(R.id.textStatus);
         TextView taskRequester = v.findViewById(R.id.textRequester);
@@ -107,7 +134,26 @@ public class TaskSearchListAdapter extends BaseAdapter{
         try {
             taskTitle.setText(taskArrayList.get(position).getName());
             taskStatus.setText(taskArrayList.get(position).getStatus());
-            taskRequester.setText(taskArrayList.get(position).getRequester().getUsername());
+            if (userType.equals("Provider")) {
+                taskRequester.setText(taskArrayList.get(position).getTaker().getUsername());
+            }
+            else if (userType.equals("Requester")) {
+                taskRequester.setText(taskArrayList.get(position).getRequester().getUsername());
+
+            }
+            else {
+                taskRequester.setText(taskArrayList.get(position).getRequester().getUsername());
+                if (taskMyBid  != null) {
+
+                    for (Bid b: taskArrayList.get(position).getBidList()){
+                        if (b.getBidderUsername().equals(userType)){
+                            taskMyBid.setText("$" + String.format("%.2f", b.getBid()));
+                            break;
+                        }
+                    }
+                }
+            }
+
             double lBid = taskArrayList.get(position).getLowestBid();
             if (lBid == 0){
                 taskLowestBid.setText("No Bids");

@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     // add adapter to show each with its task requester username, title, status, lowest bid so far, and my bid.
                     acceptedTaskList.clear();
                     acceptedTaskList = controller.getTaskByBidder(user.getUsername());
-                    Toast.makeText(getApplicationContext(), user.getUsername(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), user.getUsername(), Toast.LENGTH_SHORT).show();
                     TaskSearchListAdapter taskBidAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, user.getUsername());
                     acceptedTaskListView.setAdapter(taskBidAdapter);
                 }
@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 int taskID = task.getTaskID();
                 Intent intent = new Intent(activity, MyTaskDetailsActivity.class);
                 intent.putExtra("task ID", taskID);
+                intent.putExtra("username", user.getUsername());
                 //startActivity(intent);
                 startActivityForResult(intent, 11);
 
@@ -170,7 +171,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Purpose:
+     * When main activity is resumed update the task lists.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -192,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                 //add adapter to show each with its task requester username, title, status, lowest bid so far, and my bid.
                 acceptedTaskList.clear();
                 acceptedTaskList = controller.getTaskByBidder(user.getUsername());
-                Toast.makeText(getApplicationContext(), user.getUsername(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), user.getUsername(), Toast.LENGTH_SHORT).show();
                 TaskSearchListAdapter taskBidAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, user.getUsername());
                 acceptedTaskListView.setAdapter(taskBidAdapter);
             }

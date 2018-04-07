@@ -115,6 +115,8 @@ public class TaskSearchListAdapter extends BaseAdapter{
         View v;
         TextView taskMyBid = null;
         //Toast.makeText(mContext, userType, Toast.LENGTH_SHORT).show();
+
+        // Change the layout based on the list.
         if (userType.equals("Provider") || userType.equals("Requester")) {
             //Toast.makeText(mContext, "Search Layout", Toast.LENGTH_SHORT).show();
             v = View.inflate(mContext, R.layout.search_task_list_item, null);
@@ -147,8 +149,8 @@ public class TaskSearchListAdapter extends BaseAdapter{
 
                     for (Bid b: taskArrayList.get(position).getBidList()){
                         if (b.getBidderUsername().equals(userType)){
+                            //if taskMyBid.getText().
                             taskMyBid.setText("$" + String.format("%.2f", b.getBid()));
-                            break;
                         }
                     }
                 }
@@ -200,11 +202,6 @@ public class TaskSearchListAdapter extends BaseAdapter{
                     intent.putExtra("username", task.getRequester().getUsername());
                     mContext.startActivity(intent);
                 }
-
-                //Intent intent = new Intent(mContext, TaskDetailsActivity.class);
-                //intent.putExtra("task ID", task.getTaskID());
-                //intent.putExtra("username", task.getRequester().getUsername());
-                //mContext.startActivity(intent);
             }
         });
 

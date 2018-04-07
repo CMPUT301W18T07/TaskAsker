@@ -93,7 +93,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 String lastNameText = lastName.getText().toString();
                 String emailText = email.getText().toString();
                 String phoneNumber = phone.getText().toString();
-                //TODO add check for changed profile
                 try {
                     User newUser = new User(username, emailText, phoneNumber, firstNameText, lastNameText);
                     controller.deleteUserByUsername(username);

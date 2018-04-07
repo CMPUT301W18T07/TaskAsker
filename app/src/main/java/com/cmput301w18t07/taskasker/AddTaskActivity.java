@@ -173,6 +173,15 @@ public class AddTaskActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Purpose:
+     * After inserting a photo checks the size and sets it to the task.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
 

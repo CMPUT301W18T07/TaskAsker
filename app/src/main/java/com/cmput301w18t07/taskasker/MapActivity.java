@@ -20,9 +20,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
- * Created by brend on 2018-04-05.
+ * Purpose:
+ * Brings up a map to choose a location
+ *
+ * Design Rationale:
+ * Needed to show a map.
+ *
+ * @author Brendan
+ * @version 1.5
  */
-
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
 

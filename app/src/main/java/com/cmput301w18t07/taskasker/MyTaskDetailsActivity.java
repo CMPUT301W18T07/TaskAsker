@@ -89,7 +89,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
 
         final ImageView imageView = findViewById(R.id.imageView);
 
-        if(imageFolder.get(arrayIndex) == null){
+        if(imageFolder.isEmpty()){
             Toast.makeText(getApplicationContext(), "No Picture Found", Toast.LENGTH_LONG).show();
         }else{
             imageView.setImageBitmap(imageFolder.get(0));

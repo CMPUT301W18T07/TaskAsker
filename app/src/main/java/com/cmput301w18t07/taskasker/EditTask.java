@@ -85,7 +85,6 @@ public class EditTask extends AppCompatActivity {
                     String descriptionText = description.getText().toString();
                     ArrayList<String> photoFolder = task.getImageFolder();
 
-                    //TODO add check for changed profile
                     try {
                         Task taskEdit = new Task(titleText, descriptionText, task.getRequester());
 

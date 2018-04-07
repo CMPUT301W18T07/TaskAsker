@@ -15,11 +15,27 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+/**
+ * Purpose:
+ * Accept a bid on a given task
+ *
+ * Design Rationale:
+ * Way to accept bids on a task.
+ *
+ * @author Thomas
+ * @version 1.5
+ * @see Bid
+ */
 public class AcceptBidActivity extends AppCompatActivity {
 
     private ListView bidListView;
 
-
+    /**
+     * Purpose:
+     * Sets the view when Accept Bid activity is started.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

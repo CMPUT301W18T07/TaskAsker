@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Purpose:
  * Activity that allows placing of a bid on a task
@@ -92,6 +94,12 @@ public class BidOnTaskActivity extends AppCompatActivity {
 
                 double bid = Double.parseDouble(bidEditText.getText().toString());
 
+                ArrayList<Bid> bidList = task.getBidList();
+                for (Bid b: bidList){
+                    if (b.getBidder().equals(user.getUsername())){
+                        bidList.remove(b);
+                    }
+                }
                 Bid newBid = new Bid(user, bid);
                 //Toast.makeText(getApplicationContext(), Double.toString(newBid.getBid()), Toast.LENGTH_LONG).show();
                 task.addBid(newBid);

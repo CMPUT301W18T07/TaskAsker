@@ -340,17 +340,20 @@ public class Task {
         this.takerUsername = takerUsername;
     }
 
-
+    /**
+     * Purpose:
+     * Gets an image
+     *
+     * @return inputBitmap
+     */
     public String getSingleImage(){
        return this.inputBitmap;
     }
 
-    public ArrayList<String> getImageFolder(){return this.base64Folder;}
     /**
      * Gets a list of Images converted from Base64
      *
      * @return imageFolder
      */
-
-
+    public ArrayList<String> getImageFolder(){return this.base64Folder;}
 }

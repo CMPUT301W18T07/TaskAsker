@@ -23,6 +23,17 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+/**
+ * Purpose:
+ * Search through the tasks
+ *
+ * Design Rationale:
+ * Initially brings up all tasks and then can specify keyword to limit search.
+ *
+ * @author Dylan
+ * @version 1.5
+ * @see Bid
+ */
 public class SearchActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
@@ -34,7 +45,12 @@ public class SearchActivity extends AppCompatActivity {
     private SearchActivity activity = this;
     private ProgressBar progressBar;
 
-
+    /**
+     * Purpose:
+     * Sets the view when Search activity is started.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +90,10 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Purpose:
+     * When the search is resumed reset the task list to all open tasks
+     */
     @Override
     protected void onResume() {
         super.onResume();

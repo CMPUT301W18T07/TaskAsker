@@ -13,7 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="TextView"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:text="@string/title" />
@@ -23,7 +23,7 @@
         android:layout_width="327dp"
         android:layout_height="86dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:text="@string/description"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,33 +37,33 @@
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginStart="32dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="@string/status"
-        android:textSize="24sp"
+        android:text="Status"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/statusText"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/lowestbidText"
-        android:layout_width="127dp"
-        android:layout_height="32dp"
+        android:layout_width="95dp"
+        android:layout_height="24dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="@string/lowestbid"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statusText" />
 
     <TextView
         android:id="@+id/lowestbid"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="50dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="0.00"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/lowestbidText"
         app:layout_constraintTop_toBottomOf="@+id/status" />
 
@@ -74,7 +74,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="@string/status"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -85,8 +85,8 @@
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:text="@string/description"
-        android:textSize="24sp"
+        android:text="Description:"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lowestbidText" />
@@ -141,26 +141,30 @@
 
     <Button
         android:id="@+id/nextPhoto"
-        android:layout_width="wrap_content"
+        android:layout_width="42dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Next"
+        android:text=">"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.109" />
 
     <Button
         android:id="@+id/lastPhoto"
-        android:layout_width="wrap_content"
+        android:layout_width="42dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Last"
+        android:text="<"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.109" />

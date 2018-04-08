@@ -80,6 +80,9 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         final Button lastPhoto = findViewById(R.id.lastPhoto);
         final Button nextPhoto = findViewById(R.id.nextPhoto);
 
+        lastPhoto.setText("<");
+        nextPhoto.setText(">");
+
 
         final TextView title = findViewById(R.id.title);
         final TextView status = findViewById(R.id.status);
@@ -95,7 +98,12 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
             imageView.setImageBitmap(imageFolder.get(0));
         }
 
-
+        if (!task.getStatus().equals("Assigned")) {
+            doneButton.setText("View Bids");
+        }
+        else {
+            doneButton.setText("Mark as Done");
+        }
 
 
         title.setText(task.getName());
@@ -133,14 +141,16 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (task.getStatus().equals("Assigned")){
+                if (doneButton.getText().equals("View Bids")){
+                    Intent intent = new Intent(activity, AcceptBidActivity.class);
+                    intent.putExtra("taskID", taskID);
+                    startActivity(intent);
+                }
+                else {
                     task.setStatus("Done");
                     controller.updateTask(task);
                     setResult(RESULT_OK);
                     finish();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Cannot mark task as done if it isn't assigned", Toast.LENGTH_LONG).show();
                 }
             }
         });

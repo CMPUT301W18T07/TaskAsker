@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 /**
  * Purpose:
  * Accept a bid on a given task
@@ -22,12 +24,14 @@ import android.widget.ListView;
  * Design Rationale:
  * Way to accept bids on a task.
  *
- * @author Thomas
+ * @author Thomas, Dylan
  * @version 1.5
  * @see Bid
  */
 public class AcceptBidActivity extends AppCompatActivity {
 
+    private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
+    private SearchController controller = new SearchController(url);
     private ListView bidListView;
 
     /**
@@ -41,7 +45,16 @@ public class AcceptBidActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_bid);
 
+        int taskID = getIntent().getIntExtra("taskID", 0);
+
+
         bidListView = findViewById(R.id.bidListView);
+
+        ArrayList<Bid> bidList = controller.getTaskById(taskID).getBidList();
+
+        BidListAdapter bidAdapter = new BidListAdapter(getApplicationContext(), bidList);
+
+        bidListView.setAdapter(bidAdapter);
 
         bidListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

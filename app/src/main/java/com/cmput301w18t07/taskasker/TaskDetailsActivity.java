@@ -76,6 +76,9 @@ public class TaskDetailsActivity extends AppCompatActivity {
         final Button nextPhoto = findViewById(R.id.nextPhoto);
         final Button lastPhoto = findViewById(R.id.lastPhoto);
 
+        nextPhoto.setText(">");
+        lastPhoto.setText("<");
+
         final TextView title = findViewById(R.id.title);
         final TextView status = findViewById(R.id.status);
         final TextView lowestBid = findViewById(R.id.lowestbid);

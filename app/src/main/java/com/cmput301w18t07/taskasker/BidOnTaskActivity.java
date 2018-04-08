@@ -95,11 +95,14 @@ public class BidOnTaskActivity extends AppCompatActivity {
                 double bid = Double.parseDouble(bidEditText.getText().toString());
 
                 ArrayList<Bid> bidList = task.getBidList();
-                for (Bid b: bidList){
-                    if (b.getBidder().equals(user.getUsername())){
-                        bidList.remove(b);
+                for(int i=0; i<bidList.size(); i++) {
+                    if (bidList.get(i).getBidderUsername().equals(user.getUsername()) &&
+                            bidList.get(i).getBid() != task.getLowestBid()){
+                        task.removeBid(bidList.get(i));
+                        i--;
                     }
                 }
+
                 Bid newBid = new Bid(user, bid);
                 //Toast.makeText(getApplicationContext(), Double.toString(newBid.getBid()), Toast.LENGTH_LONG).show();
                 task.addBid(newBid);

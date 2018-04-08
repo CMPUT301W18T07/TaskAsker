@@ -142,7 +142,7 @@ public class Task {
      */
     public void setBid(Bid bid){
         this.bid = bid;
-        this.status = "Accepted";
+        this.status = "Assigned";
         this.bidList = new ArrayList<Bid>();
         this.bidList.add(bid);
     }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class AcceptBidActivity extends AppCompatActivity {
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
     private ListView bidListView;
+    Task task;
 
     /**
      * Purpose:
@@ -46,7 +48,7 @@ public class AcceptBidActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accept_bid);
 
         int taskID = getIntent().getIntExtra("taskID", 0);
-
+        task = controller.getTaskById(taskID);
 
         bidListView = findViewById(R.id.bidListView);
 
@@ -58,14 +60,22 @@ public class AcceptBidActivity extends AppCompatActivity {
 
         bidListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(AcceptBidActivity.this);
                 View dialogView = getLayoutInflater().inflate(R.layout.accept_bid_dialogbox, null);
                 Button acceptButton = dialogView.findViewById(R.id.acceptButton);
                 Button deleteButton = dialogView.findViewById(R.id.deleteButton);
+
+                final Bid bid = (Bid) parent.getItemAtPosition(position);
+
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        task.setBid(bid);
+                        Toast.makeText(getApplicationContext(), "Bid Accepted", Toast.LENGTH_LONG).show();
+                        controller.updateTask(task);
+                        finish();
                         //TODO: Functionality for accepting Bids
                         //MAKE SURE CHANGE STATUS FIELD
                         //^Done automatically by the setBid(Bid) function of Task
@@ -75,6 +85,10 @@ public class AcceptBidActivity extends AppCompatActivity {
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        task.removeBid(bid);
+                        Toast.makeText(getApplicationContext(), "Bid Declined", Toast.LENGTH_LONG).show();
+                        controller.updateTask(task);
+                        finish();
                         //TODO: Functionality for deleting Bids
                         //MAKE SURE TO CHECK TO SEE IF THERE ARE NO BIDS, IF SO CHANGE THE STATUS
                         //^This is also done automatically by Task when removeBid(Bid) is called -Lucas

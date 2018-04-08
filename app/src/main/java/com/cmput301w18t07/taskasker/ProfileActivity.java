@@ -67,6 +67,8 @@ public class ProfileActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
         username = getIntent().getStringExtra("username");
+        boolean myAccount = getIntent().getBooleanExtra("Check", true);
+
         user = controller.getUserByUsername(username);
         Gson gson = new Gson();
         //user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
@@ -74,6 +76,16 @@ public class ProfileActivity extends AppCompatActivity {
         final Button editButton = findViewById(R.id.editButton);
         final Button backButton = findViewById(R.id.backButton);
         final Button logOutButton = findViewById(R.id.logOutButton);
+
+        if (myAccount) {
+            editButton.setVisibility(View.VISIBLE);
+            logOutButton.setVisibility(View.VISIBLE);
+        }
+        else {
+            editButton.setVisibility(View.INVISIBLE);
+            logOutButton.setVisibility(View.INVISIBLE);
+        }
+
 
         userNameTextView.setText(username);
         firstName.setText(user.getFirstName());

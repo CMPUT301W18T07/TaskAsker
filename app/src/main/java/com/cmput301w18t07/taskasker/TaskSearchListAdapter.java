@@ -36,6 +36,7 @@ public class TaskSearchListAdapter extends BaseAdapter{
     private Context mContext;
     private ArrayList<Task> taskArrayList;
     private String userType;
+    private String userName;
 
     /**
      * Purpose:1
@@ -58,10 +59,11 @@ public class TaskSearchListAdapter extends BaseAdapter{
      * @param taskArrayList
      * @param userType
      */
-    public TaskSearchListAdapter(Context mContext, ArrayList<Task> taskArrayList, String userType) {
+    public TaskSearchListAdapter(Context mContext, ArrayList<Task> taskArrayList, String userType, String userName) {
         this.mContext = mContext;
         this.taskArrayList = taskArrayList;
         this.userType = userType;
+        this.userName = userName;
     }
 
 
@@ -128,7 +130,7 @@ public class TaskSearchListAdapter extends BaseAdapter{
         }
         TextView taskTitle = v.findViewById(R.id.textTitle);
         TextView taskStatus = v.findViewById(R.id.textStatus);
-        TextView taskRequester = v.findViewById(R.id.textRequester);
+        final TextView taskRequester = v.findViewById(R.id.textRequester);
         TextView taskLowestBid = v.findViewById(R.id.textBid);
 
         final Task task = taskArrayList.get(position);
@@ -148,7 +150,7 @@ public class TaskSearchListAdapter extends BaseAdapter{
                 if (taskMyBid  != null) {
 
                     for (Bid b: taskArrayList.get(position).getBidList()){
-                        if (b.getBidderUsername().equals(userType)){
+                        if (b.getBidderUsername().equals(userName)){
                             //if taskMyBid.getText().
                             taskMyBid.setText("$" + String.format("%.2f", b.getBid()));
                         }
@@ -176,6 +178,13 @@ public class TaskSearchListAdapter extends BaseAdapter{
                 }
                 else {
                     Intent intent = new Intent(mContext, ProfileActivity.class);
+                    if (task.getRequester().getUsername().equals(userName)) {
+                        intent.putExtra("Check", true);
+                    }
+                    else {
+                        intent .putExtra("Check", false);
+                    }
+
                     intent.putExtra("username", task.getRequester().getUsername());
                     mContext.startActivity(intent);
                 }
@@ -195,6 +204,12 @@ public class TaskSearchListAdapter extends BaseAdapter{
 
                 if (task.getRequester() == null) {
                     Toast.makeText(mContext, "Username Not Defined", Toast.LENGTH_SHORT).show();
+                }
+                else if (task.getRequester().getUsername().equals(userName)) {
+                    Intent intent = new Intent(mContext, MyTaskDetailsActivity.class);
+                    intent.putExtra("task ID", task.getTaskID());
+                    intent.putExtra("username", task.getRequester().getUsername());
+                    mContext.startActivity(intent);
                 }
                 else {
                     Intent intent = new Intent(mContext, TaskDetailsActivity.class);

@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     // add adapter to show each task with its task requester username, title, status, and my accepted bid
                     acceptedTaskList.clear();
                     acceptedTaskList = controller.getTaskByTaker(user.getUsername());
-                    TaskSearchListAdapter taskAcceptedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Requester");
+                    TaskSearchListAdapter taskAcceptedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Requester", user.getUsername());
                     acceptedTaskListView.setAdapter(taskAcceptedAdapter);
                 }
                 else if (item.equals("Tasks I've Bidded On")){
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     acceptedTaskList.clear();
                     acceptedTaskList = controller.getTaskByBidder(user.getUsername());
                     //Toast.makeText(getApplicationContext(), user.getUsername(), Toast.LENGTH_SHORT).show();
-                    TaskSearchListAdapter taskBidAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, user.getUsername());
+                    TaskSearchListAdapter taskBidAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Bidder", user.getUsername());
                     acceptedTaskListView.setAdapter(taskBidAdapter);
                 }
                 else if (item.equals("My Tasks With Status Bidded")){
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     //add adapter to show each task with its task provider username, title, status, and accepted bid
                     acceptedTaskList.clear();
                     acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Assigned");
-                    TaskSearchListAdapter acceptedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Provider");
+                    TaskSearchListAdapter acceptedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Provider", user.getUsername());
                     acceptedTaskListView.setAdapter(acceptedAdapter);
                 }
             }
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 //add adapter to show each task with its task requester username, title, status, and my accepted bid
                 acceptedTaskList.clear();
                 acceptedTaskList = controller.getTaskByTaker(user.getUsername());
-                TaskSearchListAdapter taskAcceptedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Requester");
+                TaskSearchListAdapter taskAcceptedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Requester", user.getUsername());
                 acceptedTaskListView.setAdapter(taskAcceptedAdapter);
             }
             else if (item.equals("Tasks I've Bidded On")){
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 acceptedTaskList.clear();
                 acceptedTaskList = controller.getTaskByBidder(user.getUsername());
                 //Toast.makeText(getApplicationContext(), user.getUsername(), Toast.LENGTH_SHORT).show();
-                TaskSearchListAdapter taskBidAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, user.getUsername());
+                TaskSearchListAdapter taskBidAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Bidder", user.getUsername());
                 acceptedTaskListView.setAdapter(taskBidAdapter);
             }
             else if (item.equals("My Tasks With Status Bidded")){
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                 //add adapter to show each task with its task provider username, title, status, and accepted bid
                 acceptedTaskList.clear();
                 acceptedTaskList = controller.getTaskByRequester(user.getUsername(),"Assigned");
-                TaskSearchListAdapter acceptedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Provider");
+                TaskSearchListAdapter acceptedAdapter = new TaskSearchListAdapter(getApplicationContext(), acceptedTaskList, "Provider", user.getUsername());
                 acceptedTaskListView.setAdapter(acceptedAdapter);
             }
 
@@ -259,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         //intent.putExtra("user",gson.toJson(user));
         intent.putExtra("username",user.getUsername());
+        intent.putExtra("Check", true);
         startActivity(intent);
     }
 

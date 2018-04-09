@@ -99,8 +99,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
         }
 
 
-
-
         title.setText(task.getName());
         status.setText(task.getStatus());
         description.setText(task.getDescription());
@@ -113,18 +111,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
         else {
             lowestBid.setText("$" + String.format("%.2f", lBid));
         }
-
-        /*Bid low;
-        try{
-            low = task.getBid();
-            lowestBid.setVisibility(View.VISIBLE);
-            lowestBidText.setVisibility(View.VISIBLE);
-            lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
-        } catch(Exception e){
-            lowestBid.setVisibility(View.GONE);
-            lowestBidText.setVisibility(View.GONE);
-        }
-        */
 
         nextPhoto.setOnClickListener(new View.OnClickListener() {
             @Override

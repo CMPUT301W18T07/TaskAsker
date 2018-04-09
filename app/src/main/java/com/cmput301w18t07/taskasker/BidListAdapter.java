@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 /**
  * Purpose:
- * Represents a task object.
+ * Represents a bid object.
  *
  * Design Rationale:
  * Needed to represent a task with its title and status
@@ -34,7 +34,7 @@ public class BidListAdapter extends BaseAdapter{
 
     /**
      * Purpose:
-     * Changes how a task is represented in a list view.
+     * Changes how a bid is represented in a list view.
      *
      * @param mContext
      * @param bidArrayList
@@ -49,7 +49,7 @@ public class BidListAdapter extends BaseAdapter{
      * Purpose:
      * gets the size of the task list
      *
-     * @return int of how long the task list is
+     * @return int of how long the bid list is
      */
     @Override
     public int getCount() {
@@ -60,8 +60,8 @@ public class BidListAdapter extends BaseAdapter{
      * Purpose:
      * Gets the position of an object in the list view
      *
-     * @param position int of what position the sub is at
-     * @return subscription object at specified position
+     * @param position int of what position the bid is at
+     * @return bid object at specified position
      */
     @Override
     public Object getItem(int position) {
@@ -82,7 +82,7 @@ public class BidListAdapter extends BaseAdapter{
 
     /**
      * Purpose:
-     * Gets the view of task list and add the new layout to it.
+     * Gets the view of bid list and add the new layout to it.
      *
      * @param position
      * @param convertView

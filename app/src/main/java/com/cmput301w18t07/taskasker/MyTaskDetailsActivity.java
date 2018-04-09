@@ -193,6 +193,14 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Purpose:
+     * After accept bid activity change the details of the task.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

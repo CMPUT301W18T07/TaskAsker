@@ -63,8 +63,8 @@ public class TaskListAdapter extends BaseAdapter{
      * Purpose:
      * Gets the position of an object in the list view
      *
-     * @param position int of what position the sub is at
-     * @return subscription object at specified position
+     * @param position int of what position the task is at
+     * @return task object at specified position
      */
     @Override
     public Object getItem(int position) {
@@ -90,7 +90,7 @@ public class TaskListAdapter extends BaseAdapter{
      * @param position
      * @param convertView
      * @param parent
-     * @return new view with sub list item layout of the list view
+     * @return new view with tasl list item layout of the list view
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

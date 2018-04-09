@@ -10,7 +10,7 @@
 
 package com.cmput301w18t07.taskasker;
 
-import android.content.ContentResolver;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -20,7 +20,6 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,9 +71,6 @@ public class AddTaskActivity extends AppCompatActivity {
     private ProgressBar newProgress;
 
 
-
-
-
     /**
      * Purpose:
      * Sets the view when Add task activity is started.
@@ -86,16 +82,11 @@ public class AddTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-
         title = findViewById(R.id.titleEditText);
         description = findViewById(R.id.descriptionEditText);
         username = getIntent().getStringExtra("username");
         newProgress = findViewById(R.id.ProgressBar1);
         newProgress.setVisibility(View.GONE);
-
-        //user = controller.getUserByUsername(username);
-        //Gson gson = new Gson();
-        //user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
         final Button cancelButton = findViewById(R.id.cancelTaskButton);
         final Button addTaskButton = findViewById(R.id.addTaskButton);
@@ -221,13 +212,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
             String newText = "Add Another Photo";
             addPhotoButton.setText(newText);
-
-
         }
-
-
     }
-
-
-
 }

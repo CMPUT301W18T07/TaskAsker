@@ -116,6 +116,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Purpose:
+     * When going back to login make sure progress bar is gone
+     */
     @Override
     protected void onResume() {
         super.onResume();

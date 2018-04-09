@@ -39,6 +39,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     private GoogleMap gMap;
 
+    /**
+     * Purpose:
+     * Sets the initial view for the activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -48,6 +54,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     }
 
+    /**
+     * Purpose:
+     * Sets the marker on the map
+     *
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
@@ -59,6 +71,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         gMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
+    /**
+     * Purpose:
+     * Get the GPS coordinates
+     *
+     * @return
+     */
     private double[] getGPS(){
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         List<String> providers = locationManager.getProviders(true);

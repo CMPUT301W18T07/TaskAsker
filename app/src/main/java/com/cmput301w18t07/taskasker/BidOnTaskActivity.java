@@ -59,8 +59,6 @@ public class BidOnTaskActivity extends AppCompatActivity {
         final EditText bidEditText = findViewById(R.id.bidEditText);
 
         title.setText(task.getName());
-        //lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
-        //lowestBid.setText("TEST");
 
         double lBid = task.getLowestBid();
         if (lBid == 0){
@@ -69,17 +67,6 @@ public class BidOnTaskActivity extends AppCompatActivity {
         else {
             lowestBid.setText("$" + String.format("%.2f", lBid));
         }
-
-        //Bid low;
-        //try{
-        //    low = task.getBid();
-        //    lowestBid.setVisibility(View.VISIBLE);
-        //    lowestBidText.setVisibility(View.VISIBLE);
-        //    lowestBidText.setText("$" + String.format("%.2f", task.getLowestBid()));
-        //} catch(Exception e){
-            //lowestBid.setVisibility(View.GONE);
-            //lowestBidText.setVisibility(View.GONE);
-        //}
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,13 +100,11 @@ public class BidOnTaskActivity extends AppCompatActivity {
                 }
 
                 Bid newBid = new Bid(user, bid);
-                //Toast.makeText(getApplicationContext(), Double.toString(newBid.getBid()), Toast.LENGTH_LONG).show();
                 task.addBid(newBid);
 
                 Toast.makeText(getApplicationContext(), "Bid placed on task: "+ task.getName(), Toast.LENGTH_LONG).show();
 
                 if (task.getLowestBid() == 0 || bid < task.getLowestBid()) {
-                    //Toast.makeText(getApplicationContext(), "Lowest Bid Added", Toast.LENGTH_LONG).show();
                     task.setLowestBid(bid);
                     try {
                         Thread.sleep(1000);

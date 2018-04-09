@@ -67,8 +67,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         username = getIntent().getStringExtra("username");
         user = controller.getUserByUsername(username);
-        //Gson gson = new Gson();
-        //user = gson.fromJson(getIntent().getStringExtra("user"), User.class);
 
         final Button cancelButton = findViewById(R.id.cancelButton);
         final Button confirmButton = findViewById(R.id.confirmButton);

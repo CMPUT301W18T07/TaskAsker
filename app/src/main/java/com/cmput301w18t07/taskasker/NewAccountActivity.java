@@ -102,7 +102,6 @@ public class NewAccountActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Todo: Exit back to login
                 setResult(RESULT_CANCELED);
                 finish();
             }

@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * Design Rationale:
  * Way to accept bids on a task.
  *
- * @author Thomas, Dylan
+ * @author Thomas, Dylan, Lucas
  * @version 1.5
  * @see Bid
  */
@@ -71,15 +71,10 @@ public class AcceptBidActivity extends AppCompatActivity {
                 acceptButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         task.setBid(bid);
                         Toast.makeText(getApplicationContext(), "Bid Accepted", Toast.LENGTH_LONG).show();
                         controller.updateTask(task);
                         finish();
-                        //TODO: Functionality for accepting Bids
-                        //MAKE SURE CHANGE STATUS FIELD
-                        //^Done automatically by the setBid(Bid) function of Task
-                        //It also deletes the rest of the bids in the Task's bidList -Lucas
                     }
                 });
                 deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -89,9 +84,6 @@ public class AcceptBidActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Bid Declined", Toast.LENGTH_LONG).show();
                         controller.updateTask(task);
                         finish();
-                        //TODO: Functionality for deleting Bids
-                        //MAKE SURE TO CHECK TO SEE IF THERE ARE NO BIDS, IF SO CHANGE THE STATUS
-                        //^This is also done automatically by Task when removeBid(Bid) is called -Lucas
                     }
                 });
                 dialogBuilder.setView(dialogView);

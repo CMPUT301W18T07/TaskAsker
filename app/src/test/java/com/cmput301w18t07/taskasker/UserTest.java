@@ -308,11 +308,42 @@ public class UserTest {
         thrown = false;
         try{
             user.setPhoneNumber("0000000000");
-            assertNull(user.getPhoneNumber());
+            assertEquals("000-000-0000", user.getPhoneNumber());
         } catch(Exception e){
+            e.printStackTrace();
             thrown = true;
         }
-        assertTrue(thrown);
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user.setPhoneNumber("(000)000-0000");
+            assertEquals("000-000-0000", user.getPhoneNumber());
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user.setPhoneNumber("(000)0000000");
+            assertEquals("000-000-0000", user.getPhoneNumber());
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            user.setPhoneNumber("000-0000000");
+            assertEquals("000-000-0000", user.getPhoneNumber());
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
 
         thrown = false;
         try{

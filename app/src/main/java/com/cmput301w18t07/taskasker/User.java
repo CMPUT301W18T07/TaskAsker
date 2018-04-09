@@ -11,9 +11,7 @@
 package com.cmput301w18t07.taskasker;
 
 import java.util.regex.Pattern;
-import android.util.Patterns;
 
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 /**
@@ -35,8 +33,7 @@ public class User {
     private double rating;
     private int numRatings;
     private final Pattern usernamePattern = Pattern.compile("[A-Za-z0-9][A-Za-z0-9\\-\\_]{0,19}");
-    private final Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{4}");
-    private final Pattern namePattern = Pattern.compile("[A-Za-z][A-Za-z\\'\\-]{0,}");
+    private final Pattern namePattern = Pattern.compile("[A-Za-z][A-Za-z-']*");
 
     /**
      * Purpose:
@@ -70,11 +67,11 @@ public class User {
 
         this.email = new InternetAddress(email, true);
 
-        if(!phoneNumberPattern.matcher(phoneNumber).matches()){
+        phoneNumber = phoneNumber.replaceAll("[^0-9]","");
+        if(phoneNumber.length() != 10){
             throw new Exception("Phone number is of invalid format");
-        }
-        else{
-            this.phoneNumber = phoneNumber;
+        } else{
+            this.phoneNumber = phoneNumber.substring(0,3)+"-"+phoneNumber.substring(3,6)+"-"+phoneNumber.substring(6);
         }
 
         if(!namePattern.matcher(firstName).matches()){
@@ -169,11 +166,11 @@ public class User {
      * @param phoneNumber String of the user's new phone number
      */
     public void setPhoneNumber(String phoneNumber) throws Exception {
-        if(!phoneNumberPattern.matcher(phoneNumber).matches()){
+        phoneNumber = phoneNumber.replaceAll("[^0-9]","");
+        if(phoneNumber.length() != 10){
             throw new Exception("Phone number is of invalid format");
-        }
-        else{
-            this.phoneNumber = phoneNumber;
+        } else{
+            this.phoneNumber = phoneNumber.substring(0,3)+"-"+phoneNumber.substring(3,6)+"-"+phoneNumber.substring(6);
         }
     }
 

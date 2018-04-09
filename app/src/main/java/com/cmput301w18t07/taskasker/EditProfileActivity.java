@@ -95,6 +95,11 @@ public class EditProfileActivity extends AppCompatActivity {
                     User newUser = new User(username, emailText, phoneNumber, firstNameText, lastNameText);
                     controller.deleteUserByUsername(username);
                     controller.saveUser(newUser);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     finish();
 
                 } catch (Exception e) {

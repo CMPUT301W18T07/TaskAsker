@@ -249,4 +249,18 @@ public class IntentTesting {
         onView(withId(R.id.description)).check(matches(isDisplayed()));
         onView(withId(R.id.imageView)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void addBidTest(){
+        createUser(true);
+        onView(withId(R.id.imageButton5)).perform(click());
+        ActivityRule = new ActivityTestRule<>(SearchActivity.class);
+        onData(anything()).inAdapterView(withId(R.id.SearchView)).atPosition(0).perform(click());
+        ActivityRule = new ActivityTestRule<>(TaskDetailsActivity.class);
+        onView(withId(R.id.bidButton)).perform(click());
+        ActivityRule = new ActivityTestRule<>(BidOnTaskActivity.class);
+        onView(withId(R.id.bidEditText)).perform(clearText(), typeText("20"));
+        closeSoftKeyboard();
+        onView(withId(R.id.submitButton)).perform(click());
+    }
 }

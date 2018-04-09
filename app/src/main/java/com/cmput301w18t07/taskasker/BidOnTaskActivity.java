@@ -115,6 +115,12 @@ public class BidOnTaskActivity extends AppCompatActivity {
 
                 controller.updateTask(task);
 
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 finish();
             }
         });

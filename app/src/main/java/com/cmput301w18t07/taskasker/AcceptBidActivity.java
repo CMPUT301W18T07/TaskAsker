@@ -80,6 +80,13 @@ public class AcceptBidActivity extends AppCompatActivity {
                         Intent resultIntent = new Intent();
                         resultIntent.putExtra("task ID", task.getTaskID());
                         setResult(RESULT_OK, resultIntent);
+
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
                         finish();
                     }
                 });

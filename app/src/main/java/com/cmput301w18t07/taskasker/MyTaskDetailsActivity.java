@@ -39,10 +39,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
-    private EditText username;
-    private TextView errorMessage;
     private MyTaskDetailsActivity activity = this;
-    private User check = null;
     Task task;
     int taskID;
     private ConnectivityManager cm;
@@ -53,7 +50,6 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
     private TextView status;
     private TextView lowestBid;
     private TextView description;
-    private TextView output;
     private Button doneButton;
 
 
@@ -95,7 +91,6 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         status = findViewById(R.id.status);
         lowestBid = findViewById(R.id.lowestbid);
         description = findViewById(R.id.description);
-        output = findViewById(R.id.output);
 
         final ImageView imageView = findViewById(R.id.imageView);
 

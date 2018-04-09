@@ -42,10 +42,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
-    private EditText username;
-    private TextView errorMessage;
     private TaskDetailsActivity activity = this;
-    private User check = null;
     private ConnectivityManager cm;
     private ImageView imageView;
     private ArrayList<Bitmap> imageFolder = new ArrayList<>();

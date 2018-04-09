@@ -34,10 +34,6 @@ public class EditTask extends AppCompatActivity {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
-    private EditText username;
-    private TextView errorMessage;
-    private EditTask activity = this;
-    private User check = null;
     private ConnectivityManager cm;
     private ArrayList<Bitmap> imageFolder;
 

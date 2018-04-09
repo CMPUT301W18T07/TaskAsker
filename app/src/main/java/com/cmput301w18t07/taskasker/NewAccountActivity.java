@@ -42,9 +42,7 @@ public class NewAccountActivity extends AppCompatActivity {
     private EditText username;
     private EditText email;
     private EditText phone;
-    private SearchController sc = new SearchController(url);
     private User check = null;
-    private User user;
 
 
     /**
@@ -58,14 +56,14 @@ public class NewAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
 
-        firstName = (EditText) findViewById(R.id.firstNameEditText);
-        lastName = (EditText) findViewById(R.id.lastNameEditText);
-        username = (EditText) findViewById(R.id.usernameEditText);
-        email = (EditText) findViewById(R.id.emailEditText);
-        phone = (EditText) findViewById(R.id.phoneEditText);
+        firstName = findViewById(R.id.firstNameEditText);
+        lastName = findViewById(R.id.lastNameEditText);
+        username = findViewById(R.id.usernameEditText);
+        email = findViewById(R.id.emailEditText);
+        phone = findViewById(R.id.phoneEditText);
 
-        Button signupButton = (Button) findViewById(R.id.signupButton);
-        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        Button signupButton = findViewById(R.id.signupButton);
+        Button cancelButton = findViewById(R.id.cancelButton);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +82,7 @@ public class NewAccountActivity extends AppCompatActivity {
                 if (check == null) {
                     try {
                         User user = new User(usernameText, emailText, phoneNumber, firstNameText, lastNameText);
-                        sc.saveUser(user);
+                        controller.saveUser(user);
                         Intent intent = new Intent(activity, LoginActivity.class);
                         intent.putExtra("username", user.getUsername());
                         setResult(RESULT_OK, intent);

@@ -44,20 +44,16 @@ import java.util.ArrayList;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Task> AcceptedTaskList;
-    private ArrayList<Task> RequestedTaskList;
     private ListView acceptedTaskListView;
     private ListView requestedTaskListView;
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
     private MainActivity activity = this;
-    private User check = null;
     private User user;
     private ArrayList<Task> acceptedTaskList;
     private ArrayList<Task> requestedTaskList;
     private TaskListAdapter requestedAdapter;
     private TaskListAdapter acceptedAdapter;
-    private TextView listTasks;
     private ProgressBar progressBar;
     private Spinner spinner;
 

@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
     private EditText username;
-    private TextView errorMessage;
     private LoginActivity activity = this;
     private Button loginButton;
     private Button createNewAccount;
@@ -65,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         final NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
-        errorMessage = findViewById(R.id.noUserFound);
         username = findViewById(R.id.usernameEditText);
         loginButton = findViewById(R.id.loginButton);
         createNewAccount = findViewById(R.id.createAccountButton);

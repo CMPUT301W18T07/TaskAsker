@@ -35,8 +35,6 @@ public class Task {
     private User requester;
     private User taker;
     private ArrayList<Bid> bidList;
-    private String requesterUsername;
-    private String takerUsername;
     private Location location;
     private ArrayList<ContactsContract.CommonDataKinds.Photo> photoList;
     private double lowestBid;
@@ -84,7 +82,6 @@ public class Task {
             this.description = description;
         }
 
-        this.requesterUsername = req.getUsername();
         this.requester = req;
         this.status = "Requested";
         this.time = new Date();
@@ -100,7 +97,6 @@ public class Task {
      */
     public void setTaker(User user){
         this.taker = user;
-        this.takerUsername = user.getUsername();
         this.status = "Assigned";
     }
 
@@ -122,7 +118,7 @@ public class Task {
      */
     public void setRequester(User user){
         this.requester = user;
-        this.requesterUsername = user.getUsername();
+
     }
 
     /**
@@ -314,25 +310,6 @@ public class Task {
         return status;
     }
 
-    /**
-     * Purpose:
-     * Sets the requester username of the task
-     *
-     * @param requesterUsername String of the task requester's username
-     */
-    public void setRequesterUsername(String requesterUsername) {
-        this.requesterUsername = requesterUsername;
-    }
-
-    /**
-     * Purpose:
-     * Sets the taker username of the task
-     *
-     * @param takerUsername String object of the task taker's username
-     */
-    public void setTakerUsername(String takerUsername) {
-        this.takerUsername = takerUsername;
-    }
 
     /**
      * Purpose:

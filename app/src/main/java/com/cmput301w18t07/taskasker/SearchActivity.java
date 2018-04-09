@@ -41,8 +41,6 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<Task> openTaskList;
     private TaskSearchListAdapter taskAdapter;
     private ListView taskListView;
-    private TextView requesterTextView;
-    private SearchActivity activity = this;
     private ProgressBar progressBar;
     private String myUserName;
     private EditText keywords;
@@ -61,7 +59,6 @@ public class SearchActivity extends AppCompatActivity {
         myUserName = getIntent().getStringExtra("username");
 
         taskListView = findViewById(R.id.SearchView);
-        requesterTextView = findViewById(R.id.textRequester);
         progressBar = findViewById(R.id.ProgressBar1);
         progressBar.setVisibility(View.GONE);
 

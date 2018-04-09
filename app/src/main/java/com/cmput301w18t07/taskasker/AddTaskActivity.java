@@ -11,15 +11,18 @@
 package com.cmput301w18t07.taskasker;
 
 
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,13 +31,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 import java.util.ArrayList;
 
 
@@ -50,7 +49,7 @@ import java.util.ArrayList;
  * @version 1.5
  * @see Task
  */
-public class AddTaskActivity extends AppCompatActivity {
+public class AddTaskActivity extends AppCompatActivity implements LocationListener {
 
     private String url = "http://cmput301.softwareprocess.es:8080/cmput301w18t07";
     private SearchController controller = new SearchController(url);
@@ -69,6 +68,8 @@ public class AddTaskActivity extends AppCompatActivity {
     private int arrayIndex = 0;
     private Button addPhotoButton;
     private ProgressBar newProgress;
+    private LocationManager locationManager;
+    private Location myLocation;
 
 
     /**
@@ -88,7 +89,15 @@ public class AddTaskActivity extends AppCompatActivity {
         newProgress = findViewById(R.id.ProgressBar1);
         newProgress.setVisibility(View.GONE);
 
-        final Button cancelButton = findViewById(R.id.cancelTaskButton);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            myLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+    final Button cancelButton = findViewById(R.id.cancelTaskButton);
         final Button addTaskButton = findViewById(R.id.addTaskButton);
         addPhotoButton = findViewById(R.id.addPhotoButton);
         final Button addLocationButton = findViewById(R.id.addLocation);
@@ -152,6 +161,9 @@ public class AddTaskActivity extends AppCompatActivity {
                 }else{
                     //Toast.makeText(getApplicationContext(), "No Images Added", Toast.LENGTH_LONG).show();
                     newProgress.setVisibility(View.GONE);
+                }
+                if (myLocation != null) {
+                    task.setLocation(myLocation);
                 }
                 if (task != null) {
 
@@ -232,5 +244,25 @@ public class AddTaskActivity extends AppCompatActivity {
             String newText = "Add Another Photo";
             addPhotoButton.setText(newText);
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.myLocation = location;
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude","disable");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude","enable");
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude","status");
     }
 }

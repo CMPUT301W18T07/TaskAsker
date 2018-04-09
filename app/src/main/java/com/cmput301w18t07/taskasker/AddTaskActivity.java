@@ -125,6 +125,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 try {
                     task = new Task(title.getText().toString(), description.getText().toString(), controller.getUserByUsername(username));
+                    task.setTaskID(controller.getMaxTaskId());
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -132,7 +133,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 if(bitmapList.size() != 0) {
                     if (task != null) {
                         try {
-
                             for (int i = 0; i < arrayIndex; i++) {
                                 Bitmap bm = bitmapList.get(i);
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -154,7 +154,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     newProgress.setVisibility(View.GONE);
                 }
                 if (task != null) {
-                    task.setTaskID(controller.getMaxTaskId());
+
                     controller.saveTask(task);
                     setResult(RESULT_OK);
 

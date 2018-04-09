@@ -92,7 +92,9 @@ public class BidOnTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                double bid = Double.parseDouble(bidEditText.getText().toString());
+                String bidText = bidEditText.getText().toString();
+                bidText = bidText.replaceAll("[^0-9.,]","");
+                double bid = Double.parseDouble(bidText);
 
                 ArrayList<Bid> bidList = task.getBidList();
                 for(int i=0; i<bidList.size(); i++) {

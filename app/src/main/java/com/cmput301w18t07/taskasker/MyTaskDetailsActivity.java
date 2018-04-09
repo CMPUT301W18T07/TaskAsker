@@ -112,10 +112,17 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
             doneButton.setText("Mark as Done");
         }
 
+        double lBid = task.getLowestBid();
+        if (lBid == 0){
+            lowestBid.setText("No Bids");
+        }
+        else {
+            lowestBid.setText("$" + String.format("%.2f", lBid));
+        }
+
 
         title.setText(task.getName());
         status.setText(task.getStatus());
-        lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
         description.setText(task.getDescription());
 
         nextPhoto.setOnClickListener(new View.OnClickListener() {

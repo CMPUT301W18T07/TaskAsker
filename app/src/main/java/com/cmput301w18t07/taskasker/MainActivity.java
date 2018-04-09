@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
         try {
+            requestedTaskList.clear();
             requestedTaskList = controller.getTaskByRequester(user.getUsername());
 
             String item = spinner.getSelectedItem().toString();

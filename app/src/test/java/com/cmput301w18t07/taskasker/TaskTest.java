@@ -29,6 +29,8 @@ public class TaskTest {
     private User secondUser;
     private Bid firstBid;
     private Bid secondBid;
+    private String basicName = "a";
+    private String basicDescription = "a";
 
     public TaskTest(){
         try{
@@ -48,7 +50,7 @@ public class TaskTest {
         assertNotNull(task);
         boolean thrown = false;
         try{
-            Task newTask = new Task("","",firstUser);
+            Task newTask = new Task(basicName,basicDescription,firstUser);
             assertNotNull(newTask);
         } catch(Exception e){
             e.printStackTrace();
@@ -58,17 +60,7 @@ public class TaskTest {
 
         thrown = false;
         try{
-            Task newTask = new Task("aaaaaaaaaa", "", firstUser);
-            assertNotNull(newTask);
-        } catch(Exception e){
-            e.printStackTrace();
-            thrown = true;
-        }
-        assertFalse(thrown);
-
-        thrown = false;
-        try{
-            Task newTask = new Task("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "", firstUser);
+            Task newTask = new Task("", basicDescription, firstUser);
             assertNotNull(newTask);
         } catch(Exception e){
             thrown = true;
@@ -77,7 +69,35 @@ public class TaskTest {
 
         thrown = false;
         try{
-            Task newTask = new Task("", "aaaaaaaaaa", firstUser);
+            Task newTask = new Task("aaaaaaaaaa", basicDescription, firstUser);
+            assertNotNull(newTask);
+        } catch(Exception e){
+            e.printStackTrace();
+            thrown = true;
+        }
+        assertFalse(thrown);
+
+        thrown = false;
+        try{
+            Task newTask = new Task("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", basicDescription, firstUser);
+            assertNotNull(newTask);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            Task newTask = new Task(basicName, "", firstUser);
+            assertNotNull(newTask);
+        } catch(Exception e){
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try{
+            Task newTask = new Task(basicName, "aaaaaaaaaa", firstUser);
             assertNotNull(newTask);
         }catch(Exception e){
             e.printStackTrace();
@@ -91,7 +111,7 @@ public class TaskTest {
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
         thrown = false;
         try{
-            Task newTask = new Task("", tooLong, firstUser);
+            Task newTask = new Task(basicName, tooLong, firstUser);
             assertNotNull(newTask);
         }catch(Exception e){
             thrown = true;
@@ -103,7 +123,7 @@ public class TaskTest {
     public void changeTakerTest(){
         Task task = new Task("");
         try{
-            task = new Task("","",firstUser);
+            task = new Task(basicName,basicDescription,firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);
@@ -117,7 +137,7 @@ public class TaskTest {
     public void changeRequesterTest(){
         Task task = new Task("");
         try{
-            task = new Task("","",firstUser);
+            task = new Task(basicName,basicDescription,firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);
@@ -132,7 +152,7 @@ public class TaskTest {
     public void changeTaskIDTest(){
         Task task = new Task("");
         try{
-            task = new Task("","",firstUser);
+            task = new Task(basicName,basicDescription,firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);
@@ -142,10 +162,11 @@ public class TaskTest {
         assertEquals(1, task.getTaskID());
     }
 
+    @Test
     public void changeStatusTest(){
         Task task = new Task("");
         try{
-            task = new Task("","",firstUser);
+            task = new Task(basicName,basicDescription,firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);
@@ -159,16 +180,17 @@ public class TaskTest {
         assertEquals("", task.getStatus());
     }
 
+    @Test
     public void bidListTesting(){
         Task task = new Task("");
         try{
-            task = new Task("","",firstUser);
+            task = new Task(basicName,basicDescription,firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);
         }
-        ArrayList<Bid> list = new ArrayList<Bid>();
-        assertNull(task.getBidList());
+        ArrayList<Bid> list = new ArrayList<>();
+        assertEquals(list, task.getBidList());
         task.addBid(firstBid);
         list.add(firstBid);
         assertEquals(list, task.getBidList());
@@ -181,22 +203,21 @@ public class TaskTest {
         task.removeBid(secondBid);
         list.remove(secondBid);
         assertEquals(list, task.getBidList());
-        assertNull(task.getBidList());
     }
 
     @Test
     public void getNameTest(){
         Task task = new Task("");
         try{
-            task = new Task("", "", firstUser);
+            task = new Task(basicName, basicDescription, firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);
         }
-        assertEquals("", task.getName());
+        assertEquals(basicName, task.getName());
 
         try{
-            task = new Task("Primary", "", firstUser);
+            task = new Task("Primary", basicDescription, firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);
@@ -208,15 +229,15 @@ public class TaskTest {
     public void getDescriptionTest(){
         Task task = new Task("");
         try{
-            task = new Task("","",firstUser);
+            task = new Task(basicName,basicDescription,firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);
         }
-        assertEquals("",task.getDescription());
+        assertEquals(basicDescription,task.getDescription());
 
         try{
-            task = new Task("","First Task",firstUser);
+            task = new Task(basicName,"First Task",firstUser);
         } catch(Exception e){
             e.printStackTrace();
             assertTrue(false);

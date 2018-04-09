@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -154,10 +153,14 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (doneButton.getText().equals("View Bids")){
-                    Intent intent = new Intent(activity, AcceptBidActivity.class);
-                    intent.putExtra("taskID", taskID);
-                    startActivityForResult(intent, 82);
-                    //startActivity(intent);
+                    if (task.getBidList().size() != 0) {
+                        Intent intent = new Intent(activity, AcceptBidActivity.class);
+                        intent.putExtra("taskID", taskID);
+                        startActivityForResult(intent, 82);
+                        //startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No bids found", Toast.LENGTH_LONG).show();
+                    }
                 }
                 else {
                     controller.deleteTaskById(taskID);

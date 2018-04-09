@@ -96,7 +96,7 @@ public class AddTaskActivity extends AppCompatActivity {
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "LOCATION FEATUR COMING SOON", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "LOCATION FEATURE COMING SOON", Toast.LENGTH_LONG).show();
             }
         });
 

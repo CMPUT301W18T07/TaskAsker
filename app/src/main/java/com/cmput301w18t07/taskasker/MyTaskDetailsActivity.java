@@ -94,9 +94,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
 
         final ImageView imageView = findViewById(R.id.imageView);
 
-        if(imageFolder.isEmpty()){
-            Toast.makeText(getApplicationContext(), "No Picture Found", Toast.LENGTH_LONG).show();
-        }else{
+        if(!imageFolder.isEmpty()){
             imageView.setImageBitmap(imageFolder.get(0));
         }
 

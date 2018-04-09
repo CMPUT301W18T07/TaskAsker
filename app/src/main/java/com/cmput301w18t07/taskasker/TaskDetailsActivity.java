@@ -92,9 +92,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
             imageFolder.add(i, bm);
         }
 
-        if(imageFolder.isEmpty()){
-            Toast.makeText(getApplicationContext(), "No Picture Found", Toast.LENGTH_LONG).show();
-        }else{
+        if(!imageFolder.isEmpty()){
             imageView.setImageBitmap(imageFolder.get(0));
         }
 

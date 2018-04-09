@@ -44,10 +44,17 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
     private MyTaskDetailsActivity activity = this;
     private User check = null;
     Task task;
+    int taskID;
     private ConnectivityManager cm;
     private ArrayList<Bitmap> imageFolder = new ArrayList<>();
     private ArrayList<String> base64Folder = new ArrayList<>();
     private int arrayIndex = 0;
+    private TextView title;
+    private TextView status;
+    private TextView lowestBid;
+    private TextView description;
+    private TextView output;
+    private Button doneButton;
 
 
     /**
@@ -61,7 +68,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_my_task_details);
 
-        final int taskID = getIntent().getIntExtra("task ID", 0);
+        taskID = getIntent().getIntExtra("task ID", 0);
 
         task = controller.getTaskById(taskID);
         //final int index = getIntent().getIntExtra("Index", -1);
@@ -74,7 +81,7 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
             imageFolder.add(i, bm);
         }
 
-        final Button doneButton = findViewById(R.id.doneTaskButton);
+        doneButton = findViewById(R.id.doneTaskButton);
         final Button deleteButton = findViewById(R.id.deleteTaskButton);
         final Button editButton = findViewById(R.id.editTaskButton);
         final Button lastPhoto = findViewById(R.id.lastPhoto);
@@ -84,11 +91,11 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
         nextPhoto.setText(">");
 
 
-        final TextView title = findViewById(R.id.title);
-        final TextView status = findViewById(R.id.status);
-        final TextView lowestBid = findViewById(R.id.lowestbid);
-        final TextView description = findViewById(R.id.description);
-        final TextView output = findViewById(R.id.output);
+        title = findViewById(R.id.title);
+        status = findViewById(R.id.status);
+        lowestBid = findViewById(R.id.lowestbid);
+        description = findViewById(R.id.description);
+        output = findViewById(R.id.output);
 
         final ImageView imageView = findViewById(R.id.imageView);
 
@@ -149,14 +156,15 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
                 if (doneButton.getText().equals("View Bids")){
                     Intent intent = new Intent(activity, AcceptBidActivity.class);
                     intent.putExtra("taskID", taskID);
-                    startActivity(intent);
+                    startActivityForResult(intent, 82);
+                    //startActivity(intent);
                 }
                 else {
                     controller.deleteTaskById(taskID);
                     //task.setStatus("Done");
                     //controller.updateTask(task);
-                    //setResult(RESULT_OK);
-                    //finish();
+                    setResult(RESULT_OK);
+                    finish();
                 }
             }
         });
@@ -180,7 +188,28 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
             finish();
             }
         });
+    }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 82) {
+            if (resultCode == RESULT_OK) {
+                //data.getIntExtra("task ID", 0);
+                try {
+                    task = controller.getTaskById(taskID);
+                    title.setText(task.getName());
+                    status.setText(task.getStatus());
+                    lowestBid.setText("$" + String.format("%.2f", task.getLowestBid()));
+                    description.setText(task.getDescription());
+                    doneButton = findViewById(R.id.doneTaskButton);
+                    doneButton.setText("Mark as Done");
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -138,12 +138,13 @@ public class TaskSearchListAdapter extends BaseAdapter{
         try {
             taskTitle.setText(taskArrayList.get(position).getName());
             taskStatus.setText(taskArrayList.get(position).getStatus());
-            if (userType.equals("Provider")) {
+            taskLowestBid.setText("$" + String.format("%.2f", taskArrayList.get(position).getLowestBid()));
+
+            if (userType.equalsIgnoreCase("Provider")) {
                 taskRequester.setText(taskArrayList.get(position).getTaker().getUsername());
             }
             else if (userType.equals("Requester")) {
                 taskRequester.setText(taskArrayList.get(position).getRequester().getUsername());
-
             }
             else {
                 taskRequester.setText(taskArrayList.get(position).getRequester().getUsername());
@@ -165,8 +166,11 @@ public class TaskSearchListAdapter extends BaseAdapter{
             else {
                 taskLowestBid.setText("$" + String.format("%.2f", lBid));
             }
+
+
         } catch(Exception e) {
             e.printStackTrace();
+            Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         taskRequester.setOnClickListener(new View.OnClickListener() {

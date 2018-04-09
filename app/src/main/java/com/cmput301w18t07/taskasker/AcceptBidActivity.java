@@ -7,6 +7,7 @@
 
 package com.cmput301w18t07.taskasker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -73,8 +74,12 @@ public class AcceptBidActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         task.setBid(bid);
                         task.setLowestBid(bid.getBid());
+                        task.setTaker(bid.getBidder());
                         Toast.makeText(getApplicationContext(), "Bid Accepted", Toast.LENGTH_LONG).show();
                         controller.updateTask(task);
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("task ID", task.getTaskID());
+                        setResult(RESULT_OK, resultIntent);
                         finish();
                     }
                 });
@@ -84,6 +89,9 @@ public class AcceptBidActivity extends AppCompatActivity {
                         task.removeBid(bid);
                         Toast.makeText(getApplicationContext(), "Bid Declined", Toast.LENGTH_LONG).show();
                         controller.updateTask(task);
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("task ID", task.getTaskID());
+                        setResult(RESULT_CANCELED, resultIntent);
                         finish();
                     }
                 });

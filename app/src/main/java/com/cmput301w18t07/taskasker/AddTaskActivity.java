@@ -159,7 +159,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "No Images Added", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "No Images Added", Toast.LENGTH_LONG).show();
                     newProgress.setVisibility(View.GONE);
                 }
                 if (task != null) {

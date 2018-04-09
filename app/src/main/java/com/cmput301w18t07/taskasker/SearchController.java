@@ -113,7 +113,7 @@ public class SearchController {
      */
     public ArrayList<Task> getTaskByRequester(String username, String status){
         String response = this.getRequest(this.url+"/task/"+"_search?q=requesterUsername:"+username);
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        ArrayList<Task> taskList = new ArrayList();
         try{
             JSONObject reader = new JSONObject(response);
             JSONObject hits = reader.getJSONObject("hits");
@@ -123,11 +123,13 @@ public class SearchController {
                 String jsonString = jsonTask.getJSONObject("_source").toString();
                 taskList.add(gson.fromJson(jsonString,Task.class));
             }
-            for (Task t : taskList){
-                if (!status.equals(t.getStatus())){
-                    taskList.remove(t);
+            for(int i=0; i<taskList.size(); i++) {
+                if (!taskList.get(i).getStatus().equals(status)) {
+                    taskList.remove(taskList.get(i));
+                    i--;
                 }
             }
+
         } catch(Exception e) {
             e.printStackTrace();
         }

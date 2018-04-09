@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, NewAccountActivity.class);
+                progressBar.setVisibility(View.GONE);
                 startActivityForResult(intent, 1);
             }
         });

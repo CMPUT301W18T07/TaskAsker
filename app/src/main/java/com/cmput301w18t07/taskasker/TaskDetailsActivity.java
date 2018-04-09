@@ -132,13 +132,16 @@ public class TaskDetailsActivity extends AppCompatActivity {
         nextPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(arrayIndex < imageFolder.size() - 1){
-                    arrayIndex++;
-                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
-                }else{
-                    arrayIndex = 0;
-                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                if(imageFolder.size() != 0){
+                    if(arrayIndex < imageFolder.size() - 1){
+                        arrayIndex++;
+                        imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                    }else{
+                        arrayIndex = 0;
+                        imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                    }
                 }
+
 
             }
         });
@@ -146,13 +149,16 @@ public class TaskDetailsActivity extends AppCompatActivity {
         lastPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(arrayIndex > 0){
-                    arrayIndex--;
-                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
-                }else{
-                    arrayIndex = imageFolder.size() - 1;
-                    imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                if(imageFolder.size() != 0){
+                    if(arrayIndex > 0){
+                        arrayIndex--;
+                        imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                    }else{
+                        arrayIndex = imageFolder.size() - 1;
+                        imageView.setImageBitmap(imageFolder.get(arrayIndex));
+                    }
                 }
+
             }
         });
 

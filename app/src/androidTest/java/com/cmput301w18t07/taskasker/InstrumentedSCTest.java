@@ -291,6 +291,63 @@ public class InstrumentedSCTest {
         assertEquals(biddedTasks.get(0).getName(),"Test task 2");
         assertEquals(biddedTasks.get(1).getName(),"Test task 3");
     }
+    @Test //FOR TYLER - CLICK THE GREEN ARROW NEAR THE LINE NUMBER 295 TO RUN THE TEST
+    public void addDemoStuff(){
+        SearchController controller = new SearchController(url);
+        controller.deleteAllTasks();
+        sleep2();
+        controller.deleteAllUsers();
+        sleep2();
+        try {
+            User user1 = new User("Bill", "bill@gmail.ca", "780-222-1313", "Bill", "Jefferson");
+            User user2 = new User("Jim", "jim@gmail.ca", "780-111-1313", "Jim", "Jimmerson");
+            User user3 = new User("Annie", "annie@gmail.ca", "780-333-1313", "Annie", "Annieson");
+            Task task1 = new Task("Wash my windows", "I have lots of windows that need washing.", user1);
+            Task task2 = new Task("Mow my lawn", "I have lots of lawn that needs mowing.", user1);
+            Task task3 = new Task("Walk my cats", "I have lots of cats that need walking.", user2);
+            Task task4 = new Task("Paint my house", "I have lots of walls that need painting.", user2);
+            Task task5 = new Task("Shovel my walk", "I have lots of snow that needs clearing.", user3);
+            Bid bid1 = new Bid(user1, 12);
+            Bid bid2 = new Bid(user1, 25);
+            Bid bid3 = new Bid(user1, 64);
+            Bid bid4 = new Bid(user2, 34);
+            Bid bid5 = new Bid(user2, 15);
+            Bid bid6 = new Bid(user2, 10);
+            Bid bid7 = new Bid(user3, 77);
+            Bid bid8 = new Bid(user3, 105);
+            task1.addBid(bid4);
+            task1.addBid(bid5);
+            task1.addBid(bid7);
+            task2.addBid(bid8);
+            task2.addBid(bid5);
+            task3.addBid(bid1);
+            task3.addBid(bid2);
+            task3.addBid(bid7);
+            task4.addBid(bid2);
+            task4.addBid(bid8);
+            task5.addBid(bid3);
+            task5.addBid(bid5);
+            task5.addBid(bid6);
+            controller.saveUser(user1);
+            sleep2();
+            controller.saveUser(user2);
+            sleep2();
+            controller.saveUser(user3);
+            sleep2();
+            controller.saveTask(task1);
+            sleep2();
+            controller.saveTask(task2);
+            sleep2();
+            controller.saveTask(task3);
+            sleep2();
+            controller.saveTask(task4);
+            sleep2();
+            controller.saveTask(task5);
+            sleep2();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
     /*Helper function*/
     private void sleep2(){
         try {

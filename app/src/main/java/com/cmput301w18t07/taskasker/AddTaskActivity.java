@@ -105,9 +105,7 @@ public class AddTaskActivity extends AppCompatActivity implements LocationListen
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddTaskActivity.this, MapActivity.class );
-                startActivity(intent);
-
+                Toast.makeText(getApplicationContext(), "Current Location Added", Toast.LENGTH_SHORT).show();
             }
         });
 

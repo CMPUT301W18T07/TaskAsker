@@ -310,7 +310,9 @@ public class Task {
      *
      * @return String of the task's status
      */
-    public String getStatus() { return status; }
+    public String getStatus() {
+        return status;
+    }
 
     /**
      * Purpose:
@@ -350,5 +352,15 @@ public class Task {
      */
     public ArrayList<String> getImageFolder(){
         return this.base64Folder;
+    }
+
+    /**
+     * Purpose:
+     * To set the location of the task
+     *
+     * @param location The location object for the task
+     */
+    public void setLocation(Location location){
+        this.location = location;
     }
 }

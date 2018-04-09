@@ -9,6 +9,8 @@ package com.cmput301w18t07.taskasker;
 
 import org.junit.Test;
 
+import android.location.Location;
+
 import java.util.ArrayList;
 
 import static junit.framework.Assert.*;
@@ -243,5 +245,21 @@ public class TaskTest {
             assertTrue(false);
         }
         assertEquals("First Task",task.getDescription());
+    }
+
+    @Test
+    public void changeLocationTest(){
+        Task task = new Task("");
+        try{
+            task = new Task(basicName,basicDescription,firstUser);
+        } catch(Exception e){
+            e.printStackTrace();
+            assertTrue(false);
+        }
+        assertNull(task.getLocation());
+
+        Location loc = new Location("here");
+        task.setLocation(loc);
+        assertEquals(loc, task.getLocation());
     }
 }

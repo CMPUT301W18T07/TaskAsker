@@ -205,7 +205,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
                 }else{
-                    Toast.makeText(getApplicationContext(), Long.toString(imageSize), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Added Photo", Toast.LENGTH_LONG).show();
                 }
 
             } catch (IOException e){

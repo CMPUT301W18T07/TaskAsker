@@ -10,6 +10,7 @@
 
 package com.cmput301w18t07.taskasker;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -275,6 +276,44 @@ public class SearchController {
             e.printStackTrace();
         }
         return responseUser;
+    }
+
+    /**
+     * Return all tasks that are within a maxDistance of a location
+     * (that are open)
+     * @param location
+     * @param maxDistance
+     * @return
+     */
+    public ArrayList<Task> getTasksByLocation(Location location, int maxDistance){
+        String query = "{\"query\":{\"bool\":{\"must_not\":{\"match\":{\"status\":\"Assigned\"}}}}}";
+        String response = this.getRequest(this.url+"/task/"+"_search",query);
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        try{
+            JSONObject reader = new JSONObject(response);
+            JSONObject hits = reader.getJSONObject("hits");
+            JSONArray hitArray = hits.getJSONArray("hits");
+            for(int i = 0; i < hitArray.length(); i++){
+                JSONObject jsonTask = hitArray.getJSONObject(i);
+                String jsonString = jsonTask.getJSONObject("_source").toString();
+                taskList.add(gson.fromJson(jsonString,Task.class));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        for(int i = 0; i < taskList.size(); i++){
+            try {
+                if (taskList.get(i).getLocation() != null) {
+                    if (location.distanceTo(taskList.get(i).getLocation()) > maxDistance) {
+                        taskList.remove(i);
+                        i--;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return taskList;
     }
 
     /**

@@ -45,6 +45,7 @@ public class SearchActivity extends AppCompatActivity {
     private SearchActivity activity = this;
     private ProgressBar progressBar;
     private String myUserName;
+    private EditText keywords;
 
     /**
      * Purpose:
@@ -78,7 +79,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         Button searchButton = findViewById(R.id.searchButton);
-        final EditText keywords = findViewById(R.id.searchKeywords);
+        keywords = findViewById(R.id.searchKeywords);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +101,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        keywords.setText("");
         try {
             openTaskList.clear();
             Thread.sleep(500);

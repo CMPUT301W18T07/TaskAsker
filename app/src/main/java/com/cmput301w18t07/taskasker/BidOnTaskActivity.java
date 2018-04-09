@@ -91,10 +91,17 @@ public class BidOnTaskActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String bidText = bidEditText.getText().toString();
-                bidText = bidText.replaceAll("[^0-9.,]","");
-                double bid = Double.parseDouble(bidText);
+                double bid;
+                try {
+                    String bidText = bidEditText.getText().toString();
+                    bidText = bidText.replaceAll("[^0-9.,]", "");
+                    bid = Double.parseDouble(bidText);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Bid must be a monetary value", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 ArrayList<Bid> bidList = task.getBidList();
                 for(int i=0; i<bidList.size(); i++) {

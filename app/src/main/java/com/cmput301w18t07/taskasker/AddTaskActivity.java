@@ -166,7 +166,6 @@ public class AddTaskActivity extends AppCompatActivity implements LocationListen
                     task.setLocation(myLocation);
                 }
                 if (task != null) {
-
                     controller.saveTask(task);
                     setResult(RESULT_OK);
 

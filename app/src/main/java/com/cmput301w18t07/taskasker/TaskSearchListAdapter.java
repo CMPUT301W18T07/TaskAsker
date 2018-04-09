@@ -207,7 +207,7 @@ public class TaskSearchListAdapter extends BaseAdapter{
                 //String username = task.getRequester().getUsername();
 
                 if (task.getRequester() == null) {
-                    Toast.makeText(mContext, "Username Not Defined", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "Task does not have a requester", Toast.LENGTH_SHORT).show();
                 }
                 else if (task.getRequester().getUsername().equals(userName)) {
                     Intent intent = new Intent(mContext, MyTaskDetailsActivity.class);

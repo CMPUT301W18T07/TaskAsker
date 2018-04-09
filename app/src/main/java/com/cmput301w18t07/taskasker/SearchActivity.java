@@ -44,6 +44,7 @@ public class SearchActivity extends AppCompatActivity {
     private TextView requesterTextView;
     private SearchActivity activity = this;
     private ProgressBar progressBar;
+    private String myUserName;
 
     /**
      * Purpose:
@@ -55,6 +56,8 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        myUserName = getIntent().getStringExtra("username");
 
         taskListView = findViewById(R.id.SearchView);
         requesterTextView = findViewById(R.id.textRequester);
@@ -69,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        taskAdapter = new TaskSearchListAdapter(getApplicationContext(), openTaskList);
+        taskAdapter = new TaskSearchListAdapter(getApplicationContext(), openTaskList, "Requester", myUserName);
 
         taskListView.setAdapter(taskAdapter);
 

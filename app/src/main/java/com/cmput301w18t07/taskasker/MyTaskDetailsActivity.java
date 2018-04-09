@@ -152,10 +152,11 @@ public class MyTaskDetailsActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else {
-                    task.setStatus("Done");
-                    controller.updateTask(task);
-                    setResult(RESULT_OK);
-                    finish();
+                    controller.deleteTaskById(taskID);
+                    //task.setStatus("Done");
+                    //controller.updateTask(task);
+                    //setResult(RESULT_OK);
+                    //finish();
                 }
             }
         });

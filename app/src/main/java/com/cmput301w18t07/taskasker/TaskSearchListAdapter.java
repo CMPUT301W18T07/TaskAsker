@@ -214,7 +214,7 @@ public class TaskSearchListAdapter extends BaseAdapter{
                 else {
                     Intent intent = new Intent(mContext, TaskDetailsActivity.class);
                     intent.putExtra("task ID", task.getTaskID());
-                    intent.putExtra("username", task.getRequester().getUsername());
+                    intent.putExtra("username", userName);
                     mContext.startActivity(intent);
                 }
             }

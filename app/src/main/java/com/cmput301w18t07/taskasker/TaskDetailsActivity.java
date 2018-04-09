@@ -107,7 +107,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         title.setText(task.getName());
         status.setText(task.getStatus());
         description.setText(task.getDescription());
-        String bidString = Double.toString(task.getLowestBid());
+        //String bidString = Double.toString(task.getLowestBid());
         //Toast.makeText(activity, bidString, Toast.LENGTH_SHORT).show();
         double lBid = task.getLowestBid();
         if (lBid == 0){

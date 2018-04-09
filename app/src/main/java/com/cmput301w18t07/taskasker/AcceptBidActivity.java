@@ -72,6 +72,7 @@ public class AcceptBidActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         task.setBid(bid);
+                        task.setLowestBid(bid.getBid());
                         Toast.makeText(getApplicationContext(), "Bid Accepted", Toast.LENGTH_LONG).show();
                         controller.updateTask(task);
                         finish();

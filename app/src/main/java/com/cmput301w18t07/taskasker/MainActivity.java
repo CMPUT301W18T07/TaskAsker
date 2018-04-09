@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
     public void searchTaskClick(View view) {
         progressBar.setVisibility(View.VISIBLE);
         Intent intent = new Intent(activity, SearchActivity.class);
-        //intent.putExtra("username", user.getUsername());
+        intent.putExtra("username", user.getUsername());
         //startActivity(intent);
         startActivity(intent);
     }

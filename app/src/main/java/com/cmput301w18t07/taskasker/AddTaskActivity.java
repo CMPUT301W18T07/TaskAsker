@@ -185,11 +185,24 @@ public class AddTaskActivity extends AppCompatActivity {
             try{
                 outBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),resultUri);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                outBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                outBitmap.compress(Bitmap.CompressFormat.WEBP, 100, baos);
                 byte[] b = baos.toByteArray();
                 long imageSize = b.length;
                 if (imageSize > 65536){
-                    toLarge = true;
+                    for(int i = 100; i > 30; i--){
+                       // ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                        outBitmap.compress(Bitmap.CompressFormat.WEBP, i, baos);
+                        byte[] bt = baos.toByteArray();
+                        imageSize = bt.length;
+                        if(imageSize < 65536){
+                            break;
+                        }
+                    }
+                    if(imageSize > 65536){
+                        toLarge = true;
+                    }
+
+
                 }else{
                     Toast.makeText(getApplicationContext(), Long.toString(imageSize), Toast.LENGTH_LONG).show();
                 }

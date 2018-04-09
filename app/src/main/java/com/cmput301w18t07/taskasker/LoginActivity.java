@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "No User Found", Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.INVISIBLE);
                         //errorMessage.setVisibility(View.VISIBLE);
                         //wait(1000);
                         //errorMessage.setVisibility(View.INVISIBLE);
@@ -117,6 +118,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        progressBar.setVisibility(View.GONE);
+    }
 
     /**
      * Purpose:

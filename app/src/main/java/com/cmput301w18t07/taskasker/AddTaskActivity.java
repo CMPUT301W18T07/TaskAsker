@@ -96,9 +96,7 @@ public class AddTaskActivity extends AppCompatActivity {
         addLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddTaskActivity.this, MapActivity.class );
-                startActivity(intent);
-
+                Toast.makeText(getApplicationContext(), "LOCATION FEATUR COMING SOON", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -136,7 +134,7 @@ public class AddTaskActivity extends AppCompatActivity {
                             for (int i = 0; i < arrayIndex; i++) {
                                 Bitmap bm = bitmapList.get(i);
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                bm.compress(Bitmap.CompressFormat.WEBP, 100, baos);
                                 byte[] b = baos.toByteArray();
                                 String base64Image = Base64.encodeToString(b, Base64.DEFAULT);
                                 base64Array.add(i, base64Image);
@@ -145,12 +143,10 @@ public class AddTaskActivity extends AppCompatActivity {
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                         }
 
                     }
                 }else{
-                    //Toast.makeText(getApplicationContext(), "No Images Added", Toast.LENGTH_LONG).show();
                     newProgress.setVisibility(View.GONE);
                 }
                 if (task != null) {
@@ -196,7 +192,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 long imageSize = b.length;
                 if (imageSize > 65536){
                     for(int i = 100; i > 30; i--){
-                       // ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         outBitmap.compress(Bitmap.CompressFormat.WEBP, i, baos);
                         byte[] bt = baos.toByteArray();
                         imageSize = bt.length;
@@ -225,7 +220,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     targetImage.setImageBitmap(outBitmap);
                     arrayIndex++;
                 }else{
-                    Toast.makeText(getApplicationContext(), "Image Size Too Large. Max Size is 64kB", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Image Size Too Large", Toast.LENGTH_LONG).show();
                 }
             }
 

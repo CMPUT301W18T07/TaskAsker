@@ -206,7 +206,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     targetImage.setImageBitmap(outBitmap);
                     arrayIndex++;
                 }else{
-                    Toast.makeText(getApplicationContext(), "Image Size To Large. Max Size is 64kb", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Image Size Too Large. Max Size is 64kB", Toast.LENGTH_LONG).show();
                 }
             }
 

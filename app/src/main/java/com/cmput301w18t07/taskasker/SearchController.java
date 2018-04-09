@@ -220,6 +220,7 @@ public class SearchController {
             }
             if(taskContains == false){
                 taskList.remove(i);
+                i--;
             }
         }
         return taskList;

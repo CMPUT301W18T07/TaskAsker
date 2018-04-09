@@ -7,8 +7,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+
 import static android.os.SystemClock.sleep;
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -18,6 +21,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.Assert.*;
+import static org.hamcrest.Matchers.anything;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -216,5 +220,33 @@ public class IntentTesting {
         ActivityRule = new ActivityTestRule<>(MainActivity.class);
 
         checkMain();
+    }
+
+    @Test
+    public void clickNewTaskTest(){
+        createUser(true);
+
+        onView(withId(R.id.imageButton3)).perform(click());
+        ActivityRule = new ActivityTestRule<>(AddTaskActivity.class);
+
+        onView(withId(R.id.titleEditText)).perform(clearText(), typeText("Test"));
+        onView(withId(R.id.descriptionEditText)).perform(clearText(), typeText("A Test"));
+        closeSoftKeyboard();
+        onView(withId(R.id.addTaskButton)).perform(click());
+        ActivityRule = new ActivityTestRule<>(MainActivity.class);
+
+        checkMain();
+        onData(anything()).inAdapterView(withId(R.id.requestedListView)).atPosition(0).perform(click());
+        ActivityRule = new ActivityTestRule<>(MyTaskDetailsActivity.class);
+
+        onView(withId(R.id.deleteTaskButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.editTaskButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.lastPhoto)).check(matches(isDisplayed()));
+        onView(withId(R.id.nextPhoto)).check(matches(isDisplayed()));
+        onView(withId(R.id.title)).check(matches(isDisplayed()));
+        onView(withId(R.id.status)).check(matches(isDisplayed()));
+        onView(withId(R.id.lowestbid)).check(matches(isDisplayed()));
+        onView(withId(R.id.description)).check(matches(isDisplayed()));
+        onView(withId(R.id.imageView)).check(matches(isDisplayed()));
     }
 }

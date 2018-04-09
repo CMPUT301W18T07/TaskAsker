@@ -91,6 +91,12 @@ public class EditTask extends AppCompatActivity {
 
                         controller.saveTask(taskEdit);
                         setResult(RESULT_OK);
+
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         finish();
 
                     } catch (Exception e) {

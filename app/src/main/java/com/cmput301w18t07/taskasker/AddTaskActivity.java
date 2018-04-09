@@ -158,6 +158,12 @@ public class AddTaskActivity extends AppCompatActivity {
                     controller.saveTask(task);
                     setResult(RESULT_OK);
 
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     finish();
                 }
             }
